@@ -4,7 +4,7 @@
 format: jb-book
 root: intro
 chapters:
-# - file: docs/01/introduction_and_setup
+- file: docs/01/introduction_and_setup
 # - file: docs/02/variables_and_data_types
 # - file: docs/03/exercise_variables_and_data_types
 # - file: docs/04/conditional_branch
