@@ -1,11 +1,52 @@
-# Welcome to your Jupyter Book
+# ゼロから始めるプログラミング
+**広島大学 2022年度 教養教育科目**
 
-This is a small sample book to give you a feel for how book content is
-structured.
-It shows off a few of the major file types, as well as some sample content.
-It does not go in-depth into any particular topic - check out [the Jupyter Book documentation](https://jupyterbook.org) for more information.
+担当教員：相澤宏旭，古居彬
 
-Check out the content pages bundled with this sample book to see more.
+
+## お知らせ
+
+- 本ページを公開しました（2022/09/XX）
+
+## 本講義について
+
+- 本講義は，全学部1年生を対象に開講されます．単位は2単位です．
+- 講義形式はオンデマンドであり，ビデオや教材を用いて各自で学習を進めてください．
+- 演習の回には演習課題を出します．
+
+## 講義教材
 
 ```{tableofcontents}
 ```
+
+## Teamsでの質問対応
+
+- 時間割で指定された時間に，TA・教員がMicrosoft Teamsで質問を受け付けます．
+- すべての質問はこの時間内に行うようにしてください．
+- **この時間以外での質問は基本的に受け付けないので，ご注意ください．**
+- ビデオの視聴や演習課題を後回しにしていると，後になってからわからないことがでてきて，時間内に質問ができない可能性があります．そのようなことがないようにしてください．
+
+
+## 試験
+
+- 期末試験として，Web上で選択式の試験を行い，その点数に基づいて成績を決定します．
+- 試験の詳細は試験日程が近づいたら記載します．
+
+## カレンダー
+
+<iframe src="https://calendar.google.com/calendar/embed?src=f9c1b4db53a6ed281396ac84e9e2ba925b9fa0f7c325a7c62d49d29b4d624049%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+## 開講情報
+
+| 学部 | 講義コード | 曜日・時限 |
+| ---- | ---- | ---- |
+| 文,法昼,経昼 |  30102001 | 月5-8時限 |
+| 教日 |  30102002 | 火3-4時限, 金3-4時限 |
+| 教健,教心 |  30102003 | 火9-10時限, 木9-10時限 |
+| 医,歯,薬 |  30102004 | 火9-10時限, 金9-10時限 |
+| 教造 |  30102005 | 水1-4時限 |
+| 教教 |  30102006 | 水1-2時限, 木9-10時限 |
+| 総総,教数,理,情 |  30102007 | 水5-8時限 |
+| 教初,教国,教音 |  30102008 | 木1-4時限 |
+| 教社 |  30102009 | 木5-8時限 |
+| 法夜,経夜 |  30820001 | 月13-14時限(夜間3-4時限) |
