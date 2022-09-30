@@ -3,7 +3,7 @@
 
 title: ゼロから始めるプログラミング
 author: Hiroaki Aizawa & Akira Furui
-logo: logo.png
+logo: logo_cat.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
