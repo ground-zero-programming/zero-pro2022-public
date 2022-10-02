@@ -1,4 +1,5 @@
 # ゼロから始めるプログラミング
+
 **広島大学 2022年度 教養教育科目**
 
 担当教員：相澤宏旭，古居彬
@@ -6,35 +7,60 @@
 
 ## お知らせ
 
-- 本ページを公開しました（2022/09/XX）
+- 本ページを公開しました（2022/10/02）
 
 ## 本講義について
 
 - 本講義は，全学部1年生を対象に開講されます．単位は2単位です．
-- 講義形式はオンデマンドであり，ビデオや教材を用いて各自で学習を進めてください．
-- 演習の回には演習課題を出します．
+- 講義形式は教材とビデオを用いたオンデマンド形式です．
+  - 各自で教材とビデオを参照しながら学習を進めてください．
+  - 教材もビデオも，本サポートページ上で順次公開します．
+- 内容ごとに講義回と演習回があります．
+  - 演習の回には演習課題を出すので，締め切りまでに解いて提出してください．
+    - 演習課題は成績評価にも関係するので，注意してください．
+- Microsoft Teams上に各クラスのチームが作成されています．
+  - Teamsでは，講義内容に関する質問対応や，課題提出などを行います．
 
-## 講義教材
+## 講義資料
 
-```{tableofcontents}
-```
+| 教材 | ビデオ | 課題提出〆切 | 課題の解答 |
+| ---- | :----: | :----: | :----: |
+| [第1回：イントロダクションと<br>Google Colaboratoryの導入](docs/01/introduction_and_setup.ipynb) | 準備中 | - | - |
+| [第2回：変数とデータ型（講義）](docs/02/variables_and_data_types.ipynb) | 準備中 | - | - |
+| [第3回：変数とデータ型（演習）](docs/03/exercise_variables_and_data_types.ipynb)  | - | 10/20 | 10/21公開 |
+| [第4回：条件分岐（講義）](docs/04/conditional_branch.ipynb) | 準備中 | - | - |
+| [第5回：条件分岐（演習）](docs/05/exercise_conditional_branch.ipynb) | - | 10/27 | 10/28公開 |
+| [第6回：繰り返し処理（講義）](docs/06/loops.ipynb) | 準備中 | - | - |
+| [第7回：繰り返し処理（演習）](docs/07/exercise_loops.ipynb)  | - | 11/3 | 11/4公開 |
+| [第8回：関数とスコープ（講義）](docs/08/functions_and_scope.ipynb) | 準備中 | - | - |
+| [第9回：関数とスコープ（演習）](docs/09/exercise_functions_and_scope.ipynb) |- | 11/10 | 11/11公開 |
+| [第10回：アプリケーションの作成（講義）](docs/10/application.ipynb) | 準備中 | - | - |
+| [第11回：アプリケーションの作成（演習）](docs/11/exercise_application.ipynb)  | - | 11/17 | 11/18公開 |
+| [第12回：データ分析入門（講義）](docs/12/introduction_to_data_analysis.ipynb) | 準備中 | - | - |
+| [第13回：データ分析入門（演習）](docs/13/exercise_introduction_to_data_analysis.ipynb)  | - | 11/24 | 11/25公開 |
+| [第14回：機械学習入門（講義）](docs/14/introduction_to_machine_learning.ipynb) | 準備中 | - | - |
+| [第15回：機械学習入門（演習）](docs/15/exercise_introduction_to_machine_learning.ipynb)  | - | 11/30 | 12/1公開 |
+
+## 講義スケジュール
+
+- 毎週月曜日の8:30（目安）に資料（教材とビデオ）を本サポートページ上に掲載します．
+- 演習課題は，**資料公開日の翌週木曜23:59まで** に提出してください．
+  - 演習課題の解答例は，その翌日に公開します．
+
+<iframe src="https://calendar.google.com/calendar/embed?src=f9c1b4db53a6ed281396ac84e9e2ba925b9fa0f7c325a7c62d49d29b4d624049%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 ## Teamsでの質問対応
 
-- 時間割で指定された時間に，TA・教員がMicrosoft Teamsで質問を受け付けます．
+- 時間割で設定された各クラスの講義日時に，TA・教員がMicrosoft Teamsで質問を受け付けます．
 - すべての質問はこの時間内に行うようにしてください．
 - **この時間以外での質問は基本的に受け付けないので，ご注意ください．**
-- ビデオの視聴や演習課題を後回しにしていると，後になってからわからないことがでてきて，時間内に質問ができない可能性があります．そのようなことがないようにしてください．
 
 
-## 試験
+## 成績評価
 
-- 期末試験として，Web上で選択式の試験を行い，その点数に基づいて成績を決定します．
-- 試験の詳細は試験日程が近づいたら記載します．
+- 毎週の課題提出状況と，期末試験の成績を踏まえて総合的に評価します．
+- 期末試験の詳細は試験日程が近づいたら記載します．
 
-## カレンダー
-
-<iframe src="https://calendar.google.com/calendar/embed?src=f9c1b4db53a6ed281396ac84e9e2ba925b9fa0f7c325a7c62d49d29b4d624049%40group.calendar.google.com&ctz=Asia%2FTokyo" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 
 ## 開講情報
 
