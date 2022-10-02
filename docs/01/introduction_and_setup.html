@@ -50,6 +50,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
     <link rel="prev" title="ゼロから始めるプログラミング" href="../../intro.html" />
@@ -169,6 +171,35 @@ title="Toggle navigation"
         
     </div>
     <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/01/introduction_and_setup.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
 <button onclick="toggleFullScreen()"
   class="headerbtn"
   data-toggle="tooltip"
@@ -273,12 +304,107 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Google Colaboratoryの使い方
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#colaboratory">
+     Colaboratoryの立ち上げ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     ノートブックの作成方法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     ノートブックの保存場所
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     ノートブックのダウンロード
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     ノートブックのアップロード
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   Google Colaboratoryを使った教材の開き方
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   ノートブックの操作
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     セル
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     セルの実行
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       練習
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     簡単な算術計算
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     セルの追加
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     コメント
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -290,6 +416,90 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   Google Colaboratoryの使い方
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#colaboratory">
+     Colaboratoryの立ち上げ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     ノートブックの作成方法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     ノートブックの保存場所
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     ノートブックのダウンロード
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     ノートブックのアップロード
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   Google Colaboratoryを使った教材の開き方
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   ノートブックの操作
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     セル
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     セルの実行
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id10">
+       練習
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     簡単な算術計算
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     セルの追加
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     コメント
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -299,6 +509,300 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="google-colaboratory">
 <h1>第1回：イントロダクションとGoogle Colaboratoryの導入<a class="headerlink" href="#google-colaboratory" title="Permalink to this headline">#</a></h1>
+<p>担当：古居彬</p>
+<section id="id1">
+<h2>Google Colaboratoryの使い方<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p>本講義では，Google Colabolatoryを用いてPyhtonによるプログラミングを学びます．
+Google Colabolatoryとは，その名の通りGoogleが提供するJupyter Notebook環境であり，クラウド上で実行できるため，ブラウザがあれば無料で利用することができます．</p>
+<p>Googleアカウントを持っていない人は，あらかじめ作成しておきましょう．</p>
+<section id="colaboratory">
+<h3>Colaboratoryの立ち上げ<a class="headerlink" href="#colaboratory" title="Permalink to this headline">#</a></h3>
+<p>ブラウザにGoogleアカウントでログインした状態で，以下のURLを開いてください．</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://colab.research.google.com">https://colab.research.google.com</a></p></li>
+</ul>
+<p>以下の画面が出たら，ひとまず「キャンセル」を選択しておいたください．</p>
+<p><img alt="" src="../../_images/colab_0.png" /></p>
+</section>
+<section id="id2">
+<h3>ノートブックの作成方法<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
+<p>空のノートブックを新たに作成するには，Colaboratoryのファイルメニューから「ノートブックを新規作成」を選択してください．</p>
+<p><img alt="" src="../../_images/colab_1.png" /></p>
+<p>以下のように，<code class="docutils literal notranslate"><span class="pre">Untitled0.ipynb</span></code> という名前のノートブックが作成されます．</p>
+<p><img alt="" src="../../_images/colab_2.png" /></p>
+<p>ノートブックの名前を変更するには，上側に表示されたタイトル部分をクリックすればOKです．
+以下の例では，<code class="docutils literal notranslate"><span class="pre">test.ipynb</span></code> という名前に変更しています．</p>
+<p><img alt="" src="../../_images/colab_3.png" /></p>
+</section>
+<section id="id3">
+<h3>ノートブックの保存場所<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>作成したノートブックは，Googleドライブ上に自動的に保存されます．
+具体的には，Googleドライブの <code class="docutils literal notranslate"><span class="pre">マイドライブ</span> <span class="pre">-&gt;</span> <span class="pre">Colab</span> <span class="pre">Notebooks</span></code> というフォルダ内になります．</p>
+<p>Colaboratoryのファイルメニューから「ドライブで探す」をクリックすると，直接上記フォルダを開くことができます．</p>
+</section>
+<section id="id4">
+<h3>ノートブックのダウンロード<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>作成したノートブックは自分のパソコン上にダウンロードすることができます．</p>
+<p>Colaboratoryのファイルメニューで「ノートブックをダウンロード」を選択すればOKです．</p>
+<p><img alt="" src="../../_images/colab_download.png" /></p>
+</section>
+<section id="id5">
+<h3>ノートブックのアップロード<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>自分のパソコン上のノートブックは，Colaboratoryのファイルメニューで「ノートブックをアップロード」を選択することでアップロードして開くことができます．</p>
+<p><img alt="" src="../../_images/colab_upload.png" /></p>
+</section>
+</section>
+<section id="id6">
+<h2>Google Colaboratoryを使った教材の開き方<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>本講義で利用する教材は，サポートページから直接Colaboratoryで開くことができます．</p>
+<p>実際に，このページをColaboratoryで開いてみましょう．</p>
+<p>ページ上方にロケットのようなマークがあるので，それにマウスカーソルを合わせましょう．
+「Colab」というメニューが表示されるので，それをクリックしてください．</p>
+<p><img alt="" src="../../_images/colab_bottun.png" /></p>
+<p>すると，以下のようにGoogle Colaboratory上で本教材が開かれます．</p>
+<p><img alt="" src="../../_images/colab_launch.png" /></p>
+<p>Google Colaboratoryで開いた教材を用いることで，実際に教材中のプログラムを動かしたり，自分でちょっと書き換えたりすることができます．</p>
+<p>なお，上記の手順で開いた教材ですが，ノートブックを操作した結果はGoogle Drive上に保存されません．
+ノートブックの上側にある「ドライブをコピー」というボタンを押せば，自分のGoogle Drive上にノートブックのコピーが作成されます．</p>
+</section>
+<section id="id7">
+<h2>ノートブックの操作<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p>ここからは，実際にGoogle Colaboratory上で本ノートブックを動かしながら進めましょう．</p>
+<section id="id8">
+<h3>セル<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>ノートブックはセルで構成されています．</p>
+<p>主に，以下の二種類のセルを用います．</p>
+<ul class="simple">
+<li><p>コードセル：Pythonのコードが書かれたセルです．コードセルの左側には <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> と表示されています．コードセル内のコードを実行するには，対象のコードセルを選択した状態（一度セル内をクリックすれば簡単に選択できます）で，キーボードのShiftを押しながらEnterを押すか，上側のメニューバーの「▶︎ Run」をクリックします．</p></li>
+<li><p>テキストセル：説明が書かれたセルです．このセル自身はテキストセルです．</p></li>
+</ul>
+<p>本講義では，主にコードセルを実行したり，自分でコードセルの内容を編集したりしながらプログラムを学習していきます．</p>
+</section>
+<section id="id9">
+<h3>セルの実行<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>それでは早速セルを実行してみましょう．</p>
+<p>次のコードセル内にマウスカーソルを移動しクリックすると，コードセルが選択されます．
+その状態でキーボードの <strong>Shiftを押しながらEnterを押す</strong> か，上側のメニューバーの <strong>「▶︎ Run」をクリック</strong> してみてください．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello World!
+</pre></div>
+</div>
+</div>
+</div>
+<p>コードセルの下に，「Hello World!」という文字列表示されたと思います．
+このように，実行したセルの下側にはそのセル内で実行した処理の結果が表示されます．</p>
+<p>また，セルの左端が <code class="docutils literal notranslate"><span class="pre">[1]</span></code>のようになり，番号が表示されているのに気がついたでしょうか．
+この番号は，そのコードセルが何番目に実行されたかを示していて，セルが実行させるたびに1ずつ増えます．</p>
+<p>ちなみに，上記の <code class="docutils literal notranslate"><span class="pre">print()</span></code>は，文字列を画面上に出力するための命令を与えるものです．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;出力したい文字列&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>と書くことで，他の文字列も表示することができます．
+なお，出力したい文字列の前後を シングルクォーテーション（<code class="docutils literal notranslate"><span class="pre">'</span></code>）または ダブルクォーテーション（<code class="docutils literal notranslate"><span class="pre">&quot;</span></code>）で囲うことに注意しましょう．</p>
+<section id="id10">
+<h4>練習<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h4>
+<p>では，少し練習してみましょう．
+次のコードセルを選択して，先ほど実行した例を参考に「Hello Python!」という文字列が出力されるようなコードを書いてみてください．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello Python!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello Python!
+</pre></div>
+</div>
+</div>
+</div>
+<p>うまく動いたでしょうか？
+このようにセルにコードを書いたり，編集したりしながらプログラムを実行していきます．</p>
+</section>
+</section>
+<section id="id11">
+<h3>簡単な算術計算<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>さて，文字列を表示する以外の例として，算術計算もやってみましょう．</p>
+<p>コードセル内に計算式を記入して実行すると，電卓のようにその計算結果が出力されます．
+例えば足し算の例として，以下のセルに <code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">1</span></code> と入力し，実行してみてください．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">1</span> <span class="pre">+</span> <span class="pre">1</span></code> の結果である <code class="docutils literal notranslate"><span class="pre">2</span></code> が出力されたかと思います．</p>
+<p>足し算以外にも一般的な四則演算として引き算 <code class="docutils literal notranslate"><span class="pre">-</span></code>，掛け算 <code class="docutils literal notranslate"><span class="pre">*</span></code>，割り算 <code class="docutils literal notranslate"><span class="pre">/</span></code> などが用意されています．</p>
+<p>それぞれやってみましょう．</p>
+<p>次のセルに <code class="docutils literal notranslate"><span class="pre">45</span> <span class="pre">-</span> <span class="pre">12</span></code> と入力して実行してください．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">45</span> <span class="o">-</span> <span class="mi">12</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のセルに <code class="docutils literal notranslate"><span class="pre">12</span> <span class="pre">*</span> <span class="pre">10</span></code> と入力して実行してください．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">12</span> <span class="o">*</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>120
+</pre></div>
+</div>
+</div>
+</div>
+<p>次のセルに <code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">/</span> <span class="pre">3</span></code> と入力して実行してください．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span> <span class="o">/</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.3333333333333335
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">//</span></code> を使うと余りが切り捨てられ，整数値が得られます．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">17</span> <span class="o">//</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<p>余り（剰余）は <code class="docutils literal notranslate"><span class="pre">%</span></code> で計算できます．例：17を3で割ると2余る</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">17</span> <span class="o">%</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>べき乗の計算は <code class="docutils literal notranslate"><span class="pre">**</span></code> で実行できます．例：<span class="math notranslate nohighlight">\(2^{10} = 1024\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span><span class="o">**</span><span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1024
+</pre></div>
+</div>
+</div>
+</div>
+<p>複数の計算はまとめることができます．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">100</span> <span class="o">/</span> <span class="mf">3.14</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>73.69426751592357
+</pre></div>
+</div>
+</div>
+</div>
+<p>数式の計算と同じように計算には優先順序があり，括弧 <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">)</span></code> を使うことで優先的に計算されます．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">10</span> <span class="o">*</span> <span class="p">(</span><span class="mi">2</span> <span class="o">-</span> <span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-5.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h3>セルの追加<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<p>コードセルを新たに挿入するには，上側のメニューバーの「<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">コード</span></code>」ボタンをクリックします．</p>
+<p><img alt="" src="../../_images/colab_add_cell.png" /></p>
+<p>現在選択されているセルの下にコードセルが新たに追加されます．</p>
+<p>試しに，↓のセルを選択した状態で，「<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">コード</span></code>」ボタンをクリックしてみてください．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># このコードセルを選択した状態で，「+ コード」ボタンをクリックする</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>空のコードセルが追加されたかと思います．</p>
+<p>同様に，テキストセルを追加したい場合は，同じメニューバーの「<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">テキスト</span></code>」をクリックすればOKです．</p>
+</section>
+<section id="id13">
+<h3>コメント<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p>Pythonでは，コード中に <code class="docutils literal notranslate"><span class="pre">#</span></code> が記載してあると，それ以降，その行の終わりまでが <strong>コメント</strong> として扱われます．
+コメントの部分はプログラム実行時には無視されるため，コードに関する補足説明などを記載するときに利用されます．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># このように行頭に `#` を書くことで，その行全体がコメントとなる．</span>
+
+<span class="mi">10</span> <span class="o">/</span> <span class="mi">5</span> <span class="c1"># このように行の途中からコメントを書くこともできる</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 以下のようにコード行にコメントを付け，その部分を無視させることもよく行われる．</span>
+
+<span class="c1"># 10 / 5</span>
+<span class="mi">10</span> <span class="o">/</span> <span class="mi">2</span> <span class="c1"># こちらのみ実行される</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>今後，コード中に補足説明などを示す場合にコメントが登場するので，注意しておきましょう．
+なお，コメントの部分は色も変わるので，実行されるコード部分との違いは比較的分かりやすいかと思います．</p>
+</section>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
