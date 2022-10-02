@@ -397,6 +397,11 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id13">
+     セルの操作
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
      コメント
     </a>
    </li>
@@ -492,6 +497,11 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id13">
+     セルの操作
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
      コメント
     </a>
    </li>
@@ -573,16 +583,19 @@ Google Colabolatoryとは，その名の通りGoogleが提供するJupyter Noteb
 <p>ノートブックはセルで構成されています．</p>
 <p>主に，以下の二種類のセルを用います．</p>
 <ul class="simple">
-<li><p>コードセル：Pythonのコードが書かれたセルです．コードセルの左側には <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> と表示されています．コードセル内のコードを実行するには，対象のコードセルを選択した状態（一度セル内をクリックすれば簡単に選択できます）で，キーボードのShiftを押しながらEnterを押すか，上側のメニューバーの「▶︎ Run」をクリックします．</p></li>
+<li><p>コードセル：Pythonのコードが書かれたセルです．コードセルの左側には <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> という表示があります．そこにマウスカーソルを持っていくと，再生ボタン <code class="docutils literal notranslate"><span class="pre">▶︎</span></code> が表示されます．コードセル内のコードを実行するには，この再生ボタン <code class="docutils literal notranslate"><span class="pre">▶︎</span></code> をクリックするか，対象のセルを選択した状態でキーボードのShiftを押しながらEnterを押します．</p></li>
 <li><p>テキストセル：説明が書かれたセルです．このセル自身はテキストセルです．</p></li>
 </ul>
 <p>本講義では，主にコードセルを実行したり，自分でコードセルの内容を編集したりしながらプログラムを学習していきます．</p>
+<p>なお，教材のセルを実行する際，以下のような警告が出るかもしれません．</p>
+<p><img alt="" src="../../_images/colab_warning.png" /></p>
+<p>その場合は，気にせず「そのまま実行」をクリックしてください．</p>
 </section>
 <section id="id9">
 <h3>セルの実行<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <p>それでは早速セルを実行してみましょう．</p>
 <p>次のコードセル内にマウスカーソルを移動しクリックすると，コードセルが選択されます．
-その状態でキーボードの <strong>Shiftを押しながらEnterを押す</strong> か，上側のメニューバーの <strong>「▶︎ Run」をクリック</strong> してみてください．</p>
+その状態でセル左側の再生ボタン <code class="docutils literal notranslate"><span class="pre">▶︎</span></code> をクリックするか，Shiftを押しながらEnterを押してみてください．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello World!&#39;</span><span class="p">)</span>
@@ -747,6 +760,7 @@ Google Colabolatoryとは，その名の通りGoogleが提供するJupyter Noteb
 </div>
 </div>
 </div>
+<p>せっかくですので，上記数式の中の数字を色々変えてみて，実際に計算結果が変わることを確かめてみてください．</p>
 </section>
 <section id="id12">
 <h3>セルの追加<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
@@ -765,7 +779,12 @@ Google Colabolatoryとは，その名の通りGoogleが提供するJupyter Noteb
 <p>同様に，テキストセルを追加したい場合は，同じメニューバーの「<code class="docutils literal notranslate"><span class="pre">+</span> <span class="pre">テキスト</span></code>」をクリックすればOKです．</p>
 </section>
 <section id="id13">
-<h3>コメント<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<h3>セルの操作<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p>セルを選択すると，セルの右上に色々なボタンが表示されます．</p>
+<p>これらをクリックすることで，セルの移動やコピー，削除などさまざまな操作を行うことができます．</p>
+</section>
+<section id="id14">
+<h3>コメント<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
 <p>Pythonでは，コード中に <code class="docutils literal notranslate"><span class="pre">#</span></code> が記載してあると，それ以降，その行の終わりまでが <strong>コメント</strong> として扱われます．
 コメントの部分はプログラム実行時には無視されるため，コードに関する補足説明などを記載するときに利用されます．</p>
 <div class="cell docutils container">
