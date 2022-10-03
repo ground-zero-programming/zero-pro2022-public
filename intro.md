@@ -25,7 +25,7 @@
 
 | 教材 | ビデオ | 課題提出〆切 | 課題の解答 |
 | ---- | :----: | :----: | :----: |
-| [第1回：イントロダクションと<br>Google Colaboratoryの導入](docs/01/introduction_and_setup.ipynb) | 準備中 | - | - |
+| [第1回：イントロダクションと<br>Google Colaboratoryの導入](docs/01/introduction_and_setup.ipynb) | [Play](https://web.microsoftstream.com/video/69469261-20b5-401d-84b4-d1476dc7e1ca) | - | - |
 | [第2回：変数とデータ型（講義）](docs/02/variables_and_data_types.ipynb) | 準備中 | - | - |
 | [第3回：変数とデータ型（演習）](docs/03/exercise_variables_and_data_types.ipynb)  | - | 10/20 | 10/21公開 |
 | [第4回：条件分岐（講義）](docs/04/conditional_branch.ipynb) | 準備中 | - | - |
