@@ -3,6 +3,7 @@
 
 title: ゼロから始めるプログラミング
 author: Hiroaki Aizawa & Akira Furui
+copyright: "2022 (CC BY 4.0)"
 logo: cat_mov.gif
 
 # Force re-execution of notebooks on each build.

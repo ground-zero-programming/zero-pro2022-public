@@ -3,19 +3,26 @@
 
 format: jb-book
 root: intro
-chapters:
-- file: docs/01/introduction_and_setup
-- file: docs/02/variables_and_data_types
-- file: docs/03/exercise_variables_and_data_types
-- file: docs/04/conditional_branch
-- file: docs/05/exercise_conditional_branch
-- file: docs/06/loops
-- file: docs/07/exercise_loops
-- file: docs/08/functions_and_scope
-- file: docs/09/exercise_functions_and_scope
-- file: docs/10/application
-- file: docs/11/exercise_application
-- file: docs/12/introduction_to_data_analysis
-- file: docs/13/exercise_introduction_to_data_analysis
-- file: docs/14/introduction_to_machine_learning
-- file: docs/15/exercise_introduction_to_machine_learning
+parts:
+  - caption: 講義の教材
+    chapters:
+    - file: docs/01/introduction_and_setup
+    - file: docs/02/variables_and_data_types
+    - file: docs/03/exercise_variables_and_data_types
+    - file: docs/04/conditional_branch
+    - file: docs/05/exercise_conditional_branch
+    - file: docs/06/loops
+    - file: docs/07/exercise_loops
+    - file: docs/08/functions_and_scope
+    - file: docs/09/exercise_functions_and_scope
+    - file: docs/10/application
+    - file: docs/11/exercise_application
+    - file: docs/12/introduction_to_data_analysis
+    - file: docs/13/exercise_introduction_to_data_analysis
+    - file: docs/14/introduction_to_machine_learning
+    - file: docs/15/exercise_introduction_to_machine_learning
+  - caption: 補足情報
+    chapters:   
+    - file: docs/submission/submission.md 
+    - file: docs/advanced_materials.md
+    - file: docs/references.md
