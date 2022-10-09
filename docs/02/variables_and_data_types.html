@@ -1,0 +1,3131 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第2回：変数とデータ型（講義） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="第3回：変数とデータ型（演習）" href="../03/exercise_variables_and_data_types.html" />
+    <link rel="prev" title="第1回：イントロダクションとGoogle Colaboratoryの導入" href="../01/introduction_and_setup.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/02/variables_and_data_types.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/02/variables_and_data_types.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/02/variables_and_data_types.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   変数とは？
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     変数に値を代入する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     代入した値を参照する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     式を計算する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     代入した値を変更する
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   変数の型と名前
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     変数の型の確認方法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     変数名
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   【発展】変数のアドレス
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   数値データ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     代表的な数値データ型
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#int">
+       int型
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#float">
+       float型
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     数値データの演算
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   文字列
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     文字列の演算
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id17">
+       文字列の長さの取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id18">
+       文字列変数に対する足し算と掛け算
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id19">
+       文字列中の文字を参照する
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id20">
+       文字列中の部分文字列を参照する
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id21">
+   リスト
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id22">
+     リストの演算
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id23">
+       リストのインデキシング
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id24">
+       リストのスライシング
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id25">
+       要素の追加
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id26">
+       要素の削除
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id27">
+       要素の挿入
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id28">
+       リストの連結
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id29">
+       【発展】要素の存在確認
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id30">
+   【発展】タプル
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id31">
+   【発展】辞書
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id32">
+     辞書の演算
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id33">
+       値の取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id34">
+       キーの取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id35">
+       値とキーの取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id36">
+       要素の追加
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id37">
+       辞書の追加
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id38">
+   【発展】論理値
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id39">
+   【発展】代入演算子
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id40">
+   【発展】データ型の変換
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intfloat-floatint">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       float
+      </span>
+     </code>
+     型へ，
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       float
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型への変換
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strint-intstr">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       str
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型へ，
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       str
+      </span>
+     </code>
+     型への変換
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id41">
+       意図した例
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id42">
+       意図しない例
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id43">
+       変換方法
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id44">
+     タプル型からリスト型へ，リスト型からタプル型への変換
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id45">
+       タプル型からリスト型への変換
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id46">
+       リスト型からタプル型への変換
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#print">
+   【発展】print文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id47">
+     文字連結によるprint出力
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id48">
+     カンマ（,）によるprint出力
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formatprint">
+     format表記によるprint出力
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-stringprint">
+     f-string表記によるprint出力
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第2回：変数とデータ型（講義）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   変数とは？
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     変数に値を代入する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     代入した値を参照する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     式を計算する
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     代入した値を変更する
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   変数の型と名前
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     変数の型の確認方法
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     変数名
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   【発展】変数のアドレス
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   数値データ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     代表的な数値データ型
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#int">
+       int型
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#float">
+       float型
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     数値データの演算
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   文字列
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     文字列の演算
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id17">
+       文字列の長さの取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id18">
+       文字列変数に対する足し算と掛け算
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id19">
+       文字列中の文字を参照する
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id20">
+       文字列中の部分文字列を参照する
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id21">
+   リスト
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id22">
+     リストの演算
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id23">
+       リストのインデキシング
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id24">
+       リストのスライシング
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id25">
+       要素の追加
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id26">
+       要素の削除
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id27">
+       要素の挿入
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id28">
+       リストの連結
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id29">
+       【発展】要素の存在確認
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id30">
+   【発展】タプル
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id31">
+   【発展】辞書
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id32">
+     辞書の演算
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id33">
+       値の取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id34">
+       キーの取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id35">
+       値とキーの取得
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id36">
+       要素の追加
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id37">
+       辞書の追加
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id38">
+   【発展】論理値
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id39">
+   【発展】代入演算子
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id40">
+   【発展】データ型の変換
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#intfloat-floatint">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       float
+      </span>
+     </code>
+     型へ，
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       float
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型への変換
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#strint-intstr">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       str
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型へ，
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       int
+      </span>
+     </code>
+     型から
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       str
+      </span>
+     </code>
+     型への変換
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id41">
+       意図した例
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id42">
+       意図しない例
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id43">
+       変換方法
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id44">
+     タプル型からリスト型へ，リスト型からタプル型への変換
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id45">
+       タプル型からリスト型への変換
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id46">
+       リスト型からタプル型への変換
+      </a>
+     </li>
+    </ul>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#print">
+   【発展】print文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id47">
+     文字連結によるprint出力
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id48">
+     カンマ（,）によるprint出力
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#formatprint">
+     format表記によるprint出力
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f-stringprint">
+     f-string表記によるprint出力
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第2回：変数とデータ型（講義）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>担当：相澤宏旭</p>
+<section id="id2">
+<h2>内容<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>第2回 変数とデータ型では，プログラミングの基礎である変数の概念と変数の種類に応じたデータ型について学ぶ．変数はPythonだけでなくC言語やJava言語など他のプログラミング言語にもわたる普遍的な仕組みである．変数の理解はデータの保存やデータ同士の演算だけでなく，効率的にデータを扱うために重要である．具体的には，以下の項目について理解し，変数を使いこなせることが本講義の目標である．</p>
+<ul class="simple">
+<li><p>データが格納された変数の概念を理解する．</p></li>
+<li><p>変数の定義，参照，更新方法，定義した変数の型を調べる方法を学ぶ．</p></li>
+<li><p>変数同士の演算について学ぶ．</p></li>
+<li><p>変数のデータ型の変換や発展的なデータ型について学ぶ．</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>変数とは？<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>我々は <strong>プログラミング言語</strong> を介してコンピュータに任意の <strong>演算</strong> を指示することができる．演算とは四則演算や文字列処理などの小さなものであるが，これらの演算を組み合わせることで様々なソフトウェアを作成することができる．講義科目名にもある <strong>プログラミング</strong> とはプログラミング言語を介して何らかの演算をさせることである．プログラミングの第一歩として，第2回目の講義では，演算を実行するために必要なデータを取り扱う <strong>変数（Variable）</strong> について学ぶ．</p>
+<p>変数とは中学の数学で学んだ方程式 <span class="math notranslate nohighlight">\(y=2x+1\)</span> における変数 <span class="math notranslate nohighlight">\(x,y\)</span> と同じようなものである．式上では変数に具体的な数値は格納されていないが，我々は <span class="math notranslate nohighlight">\(x=10\)</span> のように変数 <span class="math notranslate nohighlight">\(x\)</span> に具体的な値 <span class="math notranslate nohighlight">\(10\)</span> を代入したときの <span class="math notranslate nohighlight">\(y\)</span> の値を計算できる．この処理をコンピュータで実行することをイメージされたい．必要な情報は演算 <span class="math notranslate nohighlight">\(y=2x+1\)</span> と変数 <span class="math notranslate nohighlight">\(x,y\)</span> の定義，そして変数への代入 <span class="math notranslate nohighlight">\(x=10\)</span> である．では，この情報と処理をコンピュータにどのように演算として指示をすればいいだろうか？</p>
+<p>以降，Pythonを使ってこの演算を実行する．</p>
+<section id="id4">
+<h3>変数に値を代入する<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>始めに，式を定義する前に，変数 <span class="math notranslate nohighlight">\(x\)</span> に値 <span class="math notranslate nohighlight">\(10\)</span> を代入する処理を学ぶ．この処理には変数 <span class="math notranslate nohighlight">\(x\)</span> の定義と値 <span class="math notranslate nohighlight">\(10\)</span> の代入という処理が含まれる．</p>
+<p>プログラミングにおける変数と代入を理解するためにはコンピュータ上でのデータの管理方法のイメージを掴む必要がある．詳細は省略するが，コンピュータはデータ（ここでは値 <span class="math notranslate nohighlight">\(10\)</span>）を <strong>メモリ</strong> 上で管理している．メモリは図に示すようにコンピュータ上の記憶領域である．また，記憶領域上の位置は <strong>アドレス</strong> とも呼ばれる．コンピュータはメモリに記録された値と演算時に参照するメモリ位置を使って変数を管理している．</p>
+<p><img alt="" src="../../_images/var.png" /></p>
+<p>実際には上図に示すように変数が格納されたメモリのアドレスはコンピュータによって自動的につけられた記号になっている．我々人間が演算に必要なすべてのアドレスを把握し管理するのは困難であるが，プログラミング言語では変数に名前をつけることで我々でもデータの値が格納されたメモリ位置を容易に管理できる（例えば変数名 <code class="docutils literal notranslate"><span class="pre">x</span></code> など）．この仕組みにより，人間が読めるプログラミング言語として任意のデータの <strong>代入</strong> や変数の中身のデータを <strong>参照</strong> できる．</p>
+<p><img alt="" src="../../_images/assign.png" /></p>
+<p>では，話を戻して，上図に示すように変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> に数値データ <code class="docutils literal notranslate"><span class="pre">10</span></code> を代入する一連の手順を確認する．そのために，変数に変数名<code class="docutils literal notranslate"><span class="pre">x</span></code>を定義して，<code class="docutils literal notranslate"><span class="pre">x</span></code>に数値データ<code class="docutils literal notranslate"><span class="pre">10</span></code>を <strong>代入演算子</strong> <code class="docutils literal notranslate"><span class="pre">=</span></code>を使って代入する．代入演算子は名前の通り代入を意味する演算記号である．</p>
+<p>変数の定義，代入，参照を続くコードセルを実行して確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">変数定義のルール</p>
+<p>数学で学ぶ <span class="math notranslate nohighlight">\(=\)</span> は右辺と左辺が <strong>等しい</strong> ことを，プログラミングの <code class="docutils literal notranslate"><span class="pre">=</span></code> は値を変数に <strong>代入する</strong> ことを示す．意味が異なることに注意されたい．</p>
+</div>
+</section>
+<section id="id5">
+<h3>代入した値を参照する<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p><img alt="" src="../../_images/refer.png" /></p>
+<p>続いて，上図のように代入した値を変数名を指定することで出力（= <strong>参照</strong> ）する．上記のセルで代入した<code class="docutils literal notranslate"><span class="pre">10</span></code>が出力されれば正しく代入し，管理できていることが確認できる．Pythonでは <code class="docutils literal notranslate"><span class="pre">print(変数名)</span></code> とすることで変数名に含まれるデータを出力できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+<p>Jupyter Notebookでは特別に以下のプログラムでも参照できる</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>式を計算する<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>前述した方程式 <span class="math notranslate nohighlight">\(y=2x+1\)</span> の右辺を変数 <span class="math notranslate nohighlight">\(x=10\)</span> として計算する．詳細は後述するが，Pythonでは数値同士の四則演算がサポートされている．足し算は <code class="docutils literal notranslate"><span class="pre">+</span></code> 演算子，掛け算は <code class="docutils literal notranslate"><span class="pre">*</span></code> 演算子で実行することができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+</pre></div>
+</div>
+</div>
+</div>
+<p>実際の計算結果と一致することがわかる．続いて，左辺について変数 <span class="math notranslate nohighlight">\(y\)</span> に上式の結果を代入する処理を実装する．代入は <code class="docutils literal notranslate"><span class="pre">=</span></code> で実行できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>変数 <span class="math notranslate nohighlight">\(y\)</span> の値を <code class="docutils literal notranslate"><span class="pre">print</span></code> 文で確認されたい．計算結果が代入されていることがわかる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>21
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>代入した値を変更する<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p><img alt="" src="../../_images/reassign.png" /></p>
+<p>では，最後に，変数 <span class="math notranslate nohighlight">\(x\)</span> の中身を変更することを試みる．上記の代入手順を再度行うことで変数の中身を新たなデータで更新できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>100
+</pre></div>
+</div>
+</div>
+</div>
+<p>再代入した変数 <span class="math notranslate nohighlight">\(x\)</span> で前述の式を計算してみる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>201
+</pre></div>
+</div>
+</div>
+</div>
+<p>結果が変わったことがわかる．<span class="math notranslate nohighlight">\(y=2x+1\)</span> の <span class="math notranslate nohighlight">\(x\)</span> に値を代入し式を計算するシンプルな問題を通して変数と演算のイメージを掴んでいただきたい．</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>前述の説明はプログラミングの導入として非常に簡略化された説明である．そのため，メモリの仕組みやプログラムの処理手順については専門課程での講義に任せたい．また，情報系学生だけでなくより深く計算機科学について理解したい学生はサポートページ内の <a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/advanced_materials.html">さらに勉強したい方へ</a> を参照されたい．</p>
+</div>
+</section>
+</section>
+<section id="id8">
+<h2>変数の型と名前<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<p>先ほどの例では，数値を扱う変数を定義して演算を行った．Pythonでは数値だけでなく文字列，論理値，集合データなど様々なデータ（=変数）を変数として扱うことができる．このようなデータの種類を <strong>データ型</strong> （または単に，<strong>型</strong>）と呼ぶ．Pythonによってサポートされる変数は多岐にわたり，実は，変数自身も実装することができる．本講義で取り上げる代表的な変数を紹介する前に変数の種類について説明する．</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>発展的な内容であるが，本来ならばデータの種類に応じて変数の定義を行う必要がある．Pythonは<code class="docutils literal notranslate"><span class="pre">=</span></code>によって代入する値に応じて <strong>自動的に</strong> 変数（=メモリ）を確保する仕組みを持つ．これは <strong>動的型付け</strong> と呼ばれる仕組みである．データの種類に応じて私たちが型を定義することなく変数の定義ができる利点を持つが，大規模なプログラムを作成したり，変数が増えたとき，意図しないデータ同士の演算をしてしまうことがある．この意図しない処理を <strong>バグ</strong> と言う．代入されるデータ型を把握しておくことは，バグを生じさせないためにも重要である．</p>
+</div>
+<section id="id9">
+<h3>変数の型の確認方法<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>変数の型を調べるときは以下で確認できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">変数名</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>以下のコードでは整数 <code class="docutils literal notranslate"><span class="pre">4</span></code> を代入した変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> の型を確認している．Pythonでは整数を扱うデータ型は <code class="docutils literal notranslate"><span class="pre">int</span></code> 型と呼ばれ，<code class="docutils literal notranslate"><span class="pre">type(x)</span></code> の出力が <code class="docutils literal notranslate"><span class="pre">int</span></code> であることが確認できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">print</span></code>や<code class="docutils literal notranslate"><span class="pre">type</span></code>などPythonが提供する関数を<strong>組み込み関数</strong>と呼ぶ．Pythonでは様々な組み込み関数が提供されており，Pythonの<a class="reference external" href="https://docs.python.org/ja/3/library/functions.html">ドキュメントページ</a>で確認できる．</p>
+</div>
+</section>
+<section id="id10">
+<h3>変数名<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>データ型に加えて変数の名前にも注意が必要である．変数名には小文字の英字（<code class="docutils literal notranslate"><span class="pre">a-z</span></code>），大文字の英字（<code class="docutils literal notranslate"><span class="pre">A-Z</span></code>），数字（<code class="docutils literal notranslate"><span class="pre">0-9</span></code>），アンダースコア（<code class="docutils literal notranslate"><span class="pre">_</span></code>）を利用することができるが，変数名の付け方にはルールがある．具体的には，変数名の先頭が数字の場合や以下に示す変数名に使えない文字列で変数を定義した場合はエラーが生じる．これは変数名のルールに反したためである．エラーが生じた時は変数の名前を確認されたい．</p>
+<p><strong>変数名に使えない文字列</strong></p>
+<p>以下の単語はプログラム上で意味をなす役割を持った単語のため変数には利用できない．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kc">False</span><span class="p">,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="ow">and</span><span class="p">,</span> <span class="k">as</span><span class="p">,</span> <span class="k">assert</span><span class="p">,</span> <span class="k">break</span><span class="p">,</span> <span class="n">class</span><span class="p">,</span> <span class="k">continue</span><span class="p">,</span> <span class="n">def</span><span class="p">,</span> <span class="k">del</span><span class="p">,</span> <span class="k">elif</span><span class="p">,</span> <span class="k">else</span><span class="p">,</span> <span class="k">except</span><span class="p">,</span> <span class="k">finally</span><span class="p">,</span> <span class="k">for</span><span class="p">,</span> <span class="n">from</span><span class="p">,</span> <span class="k">global</span><span class="p">,</span> <span class="k">if</span><span class="p">,</span> <span class="n">import</span><span class="p">,</span> <span class="ow">in</span><span class="p">,</span> <span class="ow">is</span><span class="p">,</span> <span class="k">lambda</span><span class="p">,</span> <span class="k">nonlocal</span><span class="p">,</span> <span class="ow">not</span><span class="p">,</span> <span class="ow">or</span><span class="p">,</span> <span class="k">pass</span><span class="p">,</span> <span class="k">raise</span><span class="p">,</span> <span class="k">return</span><span class="p">,</span> <span class="k">try</span><span class="p">,</span> <span class="k">while</span><span class="p">,</span> <span class="k">with</span><span class="p">,</span> <span class="k">yield</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="id11">
+<h2>【発展】変数のアドレス<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<p>PythonではC言語と異なり動的にメモリを確保する仕組みが提供されているため，メモリの確保やメモリ上の位置はユーザには秘匿されている．しかしながら，内部では前述したように変数はメモリ上に格納され，演算時はメモリのアドレスに基づいて参照される．このときのメモリのアドレスは<code class="docutils literal notranslate"><span class="pre">id</span></code>関数を利用することで取得できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">id</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4338215504
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">変数のまとめ</p>
+<ul class="simple">
+<li><p>変数の仕組みによってコンピュータ内部の挙動を把握することなくデータの読み書きができる．</p></li>
+<li><p>変数にはデータに応じていくつかの種類があり，この種類のことをデータの型という．</p></li>
+<li><p>データの型は <code class="docutils literal notranslate"><span class="pre">type</span></code> で知ることができる．</p></li>
+</ul>
+</div>
+</section>
+<section id="id12">
+<h2>数値データ<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<p><strong>数値データ型</strong> は整数（<span class="math notranslate nohighlight">\(1\)</span>, <span class="math notranslate nohighlight">\(-10\)</span>,…），浮動小数点数（<span class="math notranslate nohighlight">\(3.14\)</span>, <span class="math notranslate nohighlight">\(-0.01\)</span>,…），複素数（<span class="math notranslate nohighlight">\(2+3i\)</span>，<span class="math notranslate nohighlight">\(5-2i\)</span>,…）といった数値を扱う際に定義される変数である．前述したようにPythonでは代入時の数値に応じて動的に変数の型が定義される．Pythonではスカラーだけでなくベクトルや行列もサポートされている．演算のために<a class="reference external" href="https://numpy.org">Numpy</a>と呼ばれる数値計算ライブラリが一般的に利用されるが，詳細は第10回以降のPythonの応用場面で紹介する．ここでは，代表的な数値データ型である<code class="docutils literal notranslate"><span class="pre">int</span></code>型と<code class="docutils literal notranslate"><span class="pre">float</span></code>型を紹介する．これらはそれぞれ整数値と浮動小数点数を扱うデータ型である．</p>
+<p><img alt="" src="../../_images/num.png" /></p>
+<p>発展的な内容であるが複素数（<span class="math notranslate nohighlight">\(2+3i\)</span>，<span class="math notranslate nohighlight">\(5-2i\)</span>,…）は<code class="docutils literal notranslate"><span class="pre">complex</span></code>型として定義される．</p>
+<section id="id13">
+<h3>代表的な数値データ型<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<section id="int">
+<h4>int型<a class="headerlink" href="#int" title="Permalink to this headline">#</a></h4>
+<p>整数を扱う型を<code class="docutils literal notranslate"><span class="pre">int</span></code>型という．以下に<code class="docutils literal notranslate"><span class="pre">int</span></code>型の変数の代入例を示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">type</span></code>関数で変数<code class="docutils literal notranslate"><span class="pre">x</span></code>が<code class="docutils literal notranslate"><span class="pre">int</span></code>型であることを確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>int
+</pre></div>
+</div>
+</div>
+</div>
+<p>負の値を代入したいときは<code class="docutils literal notranslate"><span class="pre">-</span></code>を加えれば良い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="float">
+<h4>float型<a class="headerlink" href="#float" title="Permalink to this headline">#</a></h4>
+<p>小数点を扱う型を<code class="docutils literal notranslate"><span class="pre">float</span></code>型という．以下に<code class="docutils literal notranslate"><span class="pre">float</span></code>型の変数の代入例を示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mf">3.14159</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.14159
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">type</span></code>関数で変数<code class="docutils literal notranslate"><span class="pre">y</span></code>が<code class="docutils literal notranslate"><span class="pre">float</span></code>型であることを確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>float
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mf">0.12345</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.12345
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.2345</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-1.2345
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id14">
+<h3>数値データの演算<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<p>数値データの定義の次は，数値データ同士の四則演算を紹介する．Pythonは <code class="docutils literal notranslate"><span class="pre">int</span></code> 型や <code class="docutils literal notranslate"><span class="pre">float</span></code> 型といった数値データに対して一般的な四則演算がサポートされており，1. 導入で行った数値データの演算を変数データに対しても同様に行うことができる．</p>
+<p>数値データ型の変数 <code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> を作成し，足し算 <code class="docutils literal notranslate"><span class="pre">+</span></code> ，引き算 <code class="docutils literal notranslate"><span class="pre">-</span></code> ，掛け算 <code class="docutils literal notranslate"><span class="pre">*</span></code> ，割り算 <code class="docutils literal notranslate"><span class="pre">/</span></code> ，切り捨て <code class="docutils literal notranslate"><span class="pre">//</span></code> ，冪乗 <code class="docutils literal notranslate"><span class="pre">**</span></code> ，余剰 <code class="docutils literal notranslate"><span class="pre">%</span></code> の計算例を確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">11</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>11
+3
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>14
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>8
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>33
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">/</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.6666666666666665
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">//</span></code>を使うと余りが切り捨てられ，整数値が得られる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">//</span> <span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+</pre></div>
+</div>
+</div>
+</div>
+<p>冪乗の計算は<code class="docutils literal notranslate"><span class="pre">**</span></code>で実行できる．例：<span class="math notranslate nohighlight">\(a^{b}\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">**</span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1331
+</pre></div>
+</div>
+</div>
+</div>
+<p>余り（剰余）は <code class="docutils literal notranslate"><span class="pre">%</span></code> で計算できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">%</span> <span class="n">b</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<p>複数の計算はまとめることができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="mf">3.14</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.910828025477707
+</pre></div>
+</div>
+</div>
+</div>
+<p>数式の計算と同じように計算には優先順序があり，<code class="docutils literal notranslate"><span class="pre">()</span></code>で囲うことで優先的に計算される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span> <span class="o">*</span> <span class="n">b</span> <span class="o">/</span> <span class="mf">3.14</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12.420382165605096
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">数値データ型のまとめ</p>
+<ul class="simple">
+<li><p>数値データは種類に応じて <code class="docutils literal notranslate"><span class="pre">int</span></code>型，<code class="docutils literal notranslate"><span class="pre">float</span></code>型，<code class="docutils literal notranslate"><span class="pre">complex</span></code>型がある．</p></li>
+<li><p>数値データ型には一般的な四則演算がサポートされている．</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id15">
+<h2>文字列<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h2>
+<p>プログラミングを活用する場面では計算結果やエラー文を表示する際に文章を出力することが多々ある．ここでは，<code class="docutils literal notranslate"><span class="pre">A</span></code>，<code class="docutils literal notranslate"><span class="pre">Hello</span></code>，<code class="docutils literal notranslate"><span class="pre">This</span> <span class="pre">is</span> <span class="pre">a</span> <span class="pre">pen.</span></code>など文字，単語，文章をプログラミングで扱うことを考える．プログラミングでは，単語や文章など複数の <strong>文字</strong> が連なったものを <strong>文字列</strong> と呼び，PythonではPythonでは文字列は<code class="docutils literal notranslate"><span class="pre">str</span></code>型として扱われる．<code class="docutils literal notranslate"><span class="pre">str</span></code>型の変数の定義方法は，シングルクォーテーション <code class="docutils literal notranslate"><span class="pre">'</span></code> もしくはダブルクォーテーション <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> で囲んだ文字または文字列を数値データと同様に代入すれば良い．</p>
+<p><img alt="" src="../../_images/str.png" /></p>
+<p>文字の場合は数値データと同様に一つの変数に文字データが格納されているとイメージすれば良い．一方で，文字列に関しては文字が格納された変数が複数個連なったデータをイメージされたい．これを上図に示す．<code class="docutils literal notranslate"><span class="pre">Hello</span></code>という文字列は単一の変数<code class="docutils literal notranslate"><span class="pre">s</span></code>に格納されているが各文字<code class="docutils literal notranslate"><span class="pre">H</span></code>，<code class="docutils literal notranslate"><span class="pre">e</span></code>，<code class="docutils literal notranslate"><span class="pre">l</span></code>，<code class="docutils literal notranslate"><span class="pre">l</span></code>，<code class="docutils literal notranslate"><span class="pre">o</span></code>はそれぞれ異なるメモリ位置に保存されていることに注意されたい．</p>
+<p>以下のコードは文字列を扱う <code class="docutils literal notranslate"><span class="pre">str</span></code> 変数 <code class="docutils literal notranslate"><span class="pre">s</span></code> に文字列 <code class="docutils literal notranslate"><span class="pre">Hello</span></code> を代入するものである．<code class="docutils literal notranslate"><span class="pre">print</span></code> 文で文字列が正しく代入されていることを確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello
+</pre></div>
+</div>
+</div>
+</div>
+<p>前述しように文字列はシングルクォーテーション <code class="docutils literal notranslate"><span class="pre">'</span></code> でもダブルクォーテーション <code class="docutils literal notranslate"><span class="pre">&quot;</span></code> で囲んでも代入できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<p>文字列中に<code class="docutils literal notranslate"><span class="pre">\n</span></code>を挿入することで任意の位置で改行できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Hel</span><span class="se">\n</span><span class="s1">lo&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hel
+lo
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">str</span></code>型の注意点を述べたい．以下のコードのように<code class="docutils literal notranslate"><span class="pre">print</span></code>の結果は<code class="docutils literal notranslate"><span class="pre">1</span></code>が出力され，変数<code class="docutils literal notranslate"><span class="pre">s</span></code>の中身は整数の<code class="docutils literal notranslate"><span class="pre">int</span></code>型であると思われるかもしれない．しかしながら，<code class="docutils literal notranslate"><span class="pre">s='1'</span></code>と定義したため，変数<code class="docutils literal notranslate"><span class="pre">s</span></code>の型は文字列を表す<code class="docutils literal notranslate"><span class="pre">str</span></code>型となる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;1&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">type</span></code>関数でデータ型をチェックできる．Pythonは動的にデータ型が決定されるため注意されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>str
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id16">
+<h3>文字列の演算<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">str</span></code>型で定義される文字列について文字列同士の演算やサポートされている関数を紹介する．</p>
+<section id="id17">
+<h4>文字列の長さの取得<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h4>
+<p>代入した文字列の文字数は<code class="docutils literal notranslate"><span class="pre">len</span></code>関数で取得できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<p>空白（スペース）や改行は一文字としてカウントされる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;He llo&#39;</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;He</span><span class="se">\n</span><span class="s1">llo&#39;</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id18">
+<h4>文字列変数に対する足し算と掛け算<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h4>
+<p>複数の文字列の結合<code class="docutils literal notranslate"><span class="pre">+</span></code>や文字列の繰り返し<code class="docutils literal notranslate"><span class="pre">*</span></code>処理がサポートされている．同じ演算子であっても文字列と数値データでは処理が異なるため，データ型には常に注意されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;AAA&#39;</span> <span class="o">+</span> <span class="s1">&#39;BBB&#39;</span> <span class="o">+</span> <span class="s1">&#39;CCC&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;AAABBBCCC&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;abcd_&quot;</span> <span class="o">*</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;abcd_abcd_abcd_&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>数値データの <code class="docutils literal notranslate"><span class="pre">+</span></code> や <code class="docutils literal notranslate"><span class="pre">*</span></code> と機能が異なる．データ型には注意されたい．</p>
+</div>
+</section>
+<section id="id19">
+<h4>文字列中の文字を参照する<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h4>
+<p><img alt="" src="../../_images/slice.png" /></p>
+<p>続いて，定義した文字列中の文字を参照する方法を紹介する．例えば，<code class="docutils literal notranslate"><span class="pre">Hello</span></code> から最後の文字 <code class="docutils literal notranslate"><span class="pre">o</span></code> を出力する場面である．このような場面では要素の <strong>インデックス（index）</strong> を指定することで参照できる．前述したように文字列は文字が格納された変数の集まりであり，インデックスは文字列の各変数の番号を示していることを上図からイメージされたい．参照したい文字列の文字の先頭からの数がインデックスである．インデックスが計算できたら以下のように指定することで参照できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">文字列</span><span class="p">[</span><span class="n">インデックス</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>注意点として先頭は <span class="math notranslate nohighlight">\(0\)</span> 番目から始まる．そのため <span class="math notranslate nohighlight">\(0\)</span> から開始して参照したい要素のインデックスを数える必要があることに注意されたい．また，インデックスを指定して要素を参照する処理を <strong>インデキシング（indexing）</strong> と呼ぶ．</p>
+<p>文字列<code class="docutils literal notranslate"><span class="pre">&quot;Hello&quot;</span></code>が格納された<code class="docutils literal notranslate"><span class="pre">str</span></code>型の変数<code class="docutils literal notranslate"><span class="pre">s</span></code>を定義し，各要素を参照する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+<span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;H&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;o&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">len</span></code>関数で文字数を取得できるため，<code class="docutils literal notranslate"><span class="pre">len(変数)-1</span></code>とすると最後の文字を参照できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;o&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>インデックスは<code class="docutils literal notranslate"><span class="pre">-</span></code>をつけると最後尾から数えたインデックスとなる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;o&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id20">
+<h4>文字列中の部分文字列を参照する<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h4>
+<p><img alt="" src="../../_images/slice_start_end.png" /></p>
+<p>前述のように文字列から文字を抽出する際はインデックスを指定すれば良い．ここでは，文字列から部分文字列を参照することを考える．例えば，上図のように文字列<code class="docutils literal notranslate"><span class="pre">Hello</span></code>から部分文字列<code class="docutils literal notranslate"><span class="pre">ell</span></code>を抽出する場面である．このような処理を実現するためには，参照したい部分文字列の開始インデックスと終了インデックスをコロン<code class="docutils literal notranslate"><span class="pre">:</span></code>を用いて以下のように指定すれば良い．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">文字列</span><span class="p">[</span><span class="n">開始インデックス</span><span class="p">:</span><span class="n">終了インデックス</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>文字列から部分文字列を上記のように参照することを <strong>スライシング（Slicing）</strong> と呼ぶ</p>
+<p>スライシングを利用しないと以下のように参照したい文字数だけ <code class="docutils literal notranslate"><span class="pre">print</span></code> 文による出力が必要となる．参照したい文字列が増えると可読性が低い冗長なプログラムになる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Hello&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="n">s</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>e l l
+</pre></div>
+</div>
+</div>
+</div>
+<p>スライシングを利用するとシンプルに参照できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;ell&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><code class="docutils literal notranslate"><span class="pre">s[1:4]</span></code>で終了インデックスは<code class="docutils literal notranslate"><span class="pre">4</span></code>を指定したが<code class="docutils literal notranslate"><span class="pre">s[4]</span></code>の要素である<code class="docutils literal notranslate"><span class="pre">o</span></code>は参照されないことに注意されたい．スライシングにおいて終了インデックスは<code class="docutils literal notranslate"><span class="pre">抽出したい要素のインデックス+1</span></code>と覚えておくと良い．</p>
+</div>
+<p>次のようなスライシングも可能である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;Hello World!&#39;</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Hello World!&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>あるインデックス<span class="math notranslate nohighlight">\(i\)</span>から文字列の末尾までを部分文字列として参照する際は終了インデックスを省略できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">文字列</span><span class="p">[</span><span class="n">開始インデックス</span><span class="p">:]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;lo World!&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">len</span></code>関数で文字数が取得できるため上記の処理は下記の処理と等しい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;lo World!&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>文字列の最初の最初の文字（<code class="docutils literal notranslate"><span class="pre">0</span></code>インデックス）からあるインデックス<span class="math notranslate nohighlight">\(j\)</span>までを部分文字列として参照する際は開始インデックスを省略できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">文字列</span><span class="p">[:</span><span class="n">終了インデックス</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">j</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">s</span><span class="p">[:</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Hel&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の処理は最初の文字のインデックスは<code class="docutils literal notranslate"><span class="pre">0</span></code>であるため<code class="docutils literal notranslate"><span class="pre">文字列[0:終了インデックス]</span></code>と等しい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;Hel&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>開始インデックス<span class="math notranslate nohighlight">\(i\)</span>から終了インデックス<span class="math notranslate nohighlight">\(j\)</span>まで<span class="math notranslate nohighlight">\(k\)</span>文字ごとに参照する場合は以下で書ける．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">文字列</span><span class="p">[</span><span class="n">開始インデックス</span><span class="p">:</span><span class="n">終了インデックス</span><span class="p">:</span><span class="n">スキップ数</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">:</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;loW&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">文字列データ型のまとめ</p>
+<ul class="simple">
+<li><p>文字列は <code class="docutils literal notranslate"><span class="pre">str</span></code>型として扱われる．</p></li>
+<li><p>文字列から文字または文字列を参照するときはインデキシングまたはスライシングを用いる．</p></li>
+<li><p>文字列の長さは <code class="docutils literal notranslate"><span class="pre">len</span></code>関数で取得できる．</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="id21">
+<h2>リスト<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../../_images/list.png" /></p>
+<p><strong>リスト</strong> は複数のデータを扱いたいときに利用されるデータ型である．例えば，3日間の平均気温をプログラム上で定義したいとき3日分の3つの変数を定義することなく，1つのリストで管理することができる．リストは以下のように <code class="docutils literal notranslate"><span class="pre">[]</span></code> の中に，値（要素とも呼ばれる）をカンマ <code class="docutils literal notranslate"><span class="pre">,</span></code> 区切りで並べることで定義できる．</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">リスト</span> <span class="o">=</span> <span class="p">[</span><span class="n">要素1</span><span class="p">,</span> <span class="n">要素2</span><span class="p">,</span> <span class="n">要素3</span><span class="p">,</span><span class="o">...</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>後述するがリストには <code class="docutils literal notranslate"><span class="pre">str</span></code> 型と同じ参照（インデキシングやスライシング）の機能がサポートされている．<code class="docutils literal notranslate"><span class="pre">str</span></code> 型は複数の値（文字）が格納されたデータ構造であるがリストとは異なるデータ型であることに注意されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<p>リストは<code class="docutils literal notranslate"><span class="pre">type(リスト)</span></code>とすると<code class="docutils literal notranslate"><span class="pre">list</span></code>と呼ばれるデータ型が出力される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>list
+</pre></div>
+</div>
+</div>
+</div>
+<p>リストと文字列は異なるデータ構造であるがリストの値に文字を代入することもできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<p>リストの要素数は<code class="docutils literal notranslate"><span class="pre">len</span></code>関数を利用することで取得できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<p>リストの要素は異なるデータ型でも良い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;a&#39;, 0, 1, True]
+</pre></div>
+</div>
+</div>
+</div>
+<p>リストの中にリストを定義できる．これは <strong>多重リスト</strong> とも呼ばれる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[[0, 1], [1, 0]]
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id22">
+<h3>リストの演算<a class="headerlink" href="#id22" title="Permalink to this headline">#</a></h3>
+<p>リスト型に定義されているインデキシングとスライシングによる参照方法，リスト同士の演算，値の操作を紹介する．これらの方法は文字列と同じである．</p>
+<section id="id23">
+<h4>リストのインデキシング<a class="headerlink" href="#id23" title="Permalink to this headline">#</a></h4>
+<p><img alt="" src="../../_images/list_index.png" /></p>
+<p>リストには<code class="docutils literal notranslate"><span class="pre">str</span></code>型と同様にインデキシングがサポートされる．
+そのためリストの要素へは以下で参照できる．</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">リスト</span><span class="p">[</span><span class="n">インデックス</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>リスト型においてもインデックスはリスト内の要素番号を示し，<span class="math notranslate nohighlight">\(0\)</span>番目から開始する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;a&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;d&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>リスト型においても<code class="docutils literal notranslate"><span class="pre">-</span></code>をつけると最後尾から数えたインデックスとなる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;d&#39;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id24">
+<h4>リストのスライシング<a class="headerlink" href="#id24" title="Permalink to this headline">#</a></h4>
+<p>リストにはスライシングもまたサポートされている．<code class="docutils literal notranslate"><span class="pre">str</span></code>型と同様に開始インデックスと終了インデックスを指定することで部分要素を参照できる．
+参照方法は以下である．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">リスト</span><span class="p">[</span><span class="n">開始インデックス</span><span class="p">:</span><span class="n">終了インデックス</span><span class="p">]</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">l</span><span class="p">[</span><span class="mi">3</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">j</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">l</span><span class="p">[:</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span>
+<span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 3, 4, 5, 6, 7]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span>
+<span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">j</span><span class="p">:</span><span class="n">k</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[2, 4, 6]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id25">
+<h4>要素の追加<a class="headerlink" href="#id25" title="Permalink to this headline">#</a></h4>
+<p>リストへ新たな要素を追加する際は<code class="docutils literal notranslate"><span class="pre">リスト.append(追加する値)</span></code>を呼び出す．追加された値は末尾に挿入される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id26">
+<h4>要素の削除<a class="headerlink" href="#id26" title="Permalink to this headline">#</a></h4>
+<p>要素の削除は<code class="docutils literal notranslate"><span class="pre">リスト.remove(削除する値)</span></code>で行う．ただし，最初にヒットした値を持つ要素が削除されることに注意されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id27">
+<h4>要素の挿入<a class="headerlink" href="#id27" title="Permalink to this headline">#</a></h4>
+<p>値を挿入したい位置のインデックスを指定して<code class="docutils literal notranslate"><span class="pre">リスト.insert(インデックス,</span> <span class="pre">値)</span></code>と実行することで任意の位置に値を挿入できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 100, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id28">
+<h4>リストの連結<a class="headerlink" href="#id28" title="Permalink to this headline">#</a></h4>
+<p>二つのリストを連結したいとき，<code class="docutils literal notranslate"><span class="pre">+</span></code>演算子を利用して以下のように実行する．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">リスト1</span> <span class="o">+</span> <span class="n">リスト2</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">l3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 10, 11, 12]
+</pre></div>
+</div>
+</div>
+</div>
+<p>3つ以上のリストの連結も同時にできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="n">l3</span> <span class="o">=</span> <span class="p">[</span><span class="mi">100</span><span class="p">,</span><span class="mi">101</span><span class="p">,</span><span class="mi">102</span><span class="p">]</span>
+<span class="n">l4</span> <span class="o">=</span> <span class="n">l1</span> <span class="o">+</span> <span class="n">l2</span> <span class="o">+</span> <span class="n">l3</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">l4</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 10, 11, 12, 100, 101, 102]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>二つのリストを連結したいとき，<code class="docutils literal notranslate"><span class="pre">append</span></code>関数を利用すると意図しない結合となる．<code class="docutils literal notranslate"><span class="pre">+</span></code>演算子を利用せずに結合したい場合は<code class="docutils literal notranslate"><span class="pre">extend</span></code>関数を利用すると良い．</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="n">l1</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, [10, 11, 12]]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>
+<span class="n">l2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">12</span><span class="p">]</span>
+<span class="n">l1</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 3, 10, 11, 12]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id29">
+<h4>【発展】要素の存在確認<a class="headerlink" href="#id29" title="Permalink to this headline">#</a></h4>
+<p>リストの中にある要素が存在するかを知りたいとき，<code class="docutils literal notranslate"><span class="pre">in</span></code>演算子を利用する．存在する場合は論理型の<code class="docutils literal notranslate"><span class="pre">True</span></code>が存在しない場合は<code class="docutils literal notranslate"><span class="pre">False</span></code>が出力される．条件分岐の際に便利なので覚えておくと良い．詳細は第4回で述べる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="ow">in</span> <span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="mi">1000</span> <span class="ow">in</span> <span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">リスト型のまとめ</p>
+<ul class="simple">
+<li><p>複数データを扱うときはリストを利用する．</p></li>
+<li><p>文字列と同様にインデキシングやスライシングがサポートされている．</p></li>
+<li><p>リストの要素の操作やリスト間の操作に関する機能がサポートされている．</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+<section id="id30">
+<h2>【発展】タプル<a class="headerlink" href="#id30" title="Permalink to this headline">#</a></h2>
+<p>リストと似たデータ型に<strong>タプル</strong>がある．タプルはリストと異なり後から値を変更することができない．そのため，意図せず書き換えることを防ぐためにタプルが利用される．タプルはカンマ区切りの値の集合を<code class="docutils literal notranslate"><span class="pre">()</span></code>で囲うことで定義できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">タプル</span> <span class="o">=</span> <span class="p">(</span><span class="n">要素1</span><span class="p">,</span> <span class="n">要素2</span><span class="p">,</span> <span class="n">要素3</span><span class="p">,</span><span class="o">...</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 1, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>tuple
+</pre></div>
+</div>
+</div>
+</div>
+<p>タプルは要素の変更ができないことを確認する．以下のコードをコメントアウトして実行するとエラーが発生することがわかる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># t[0] = 100</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;, &#39;e&#39;)
+</pre></div>
+</div>
+</div>
+</div>
+<p>タプルの要素を参照するときはリストと同様にインデックスを指定する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>d
+</pre></div>
+</div>
+</div>
+</div>
+<p>タプルの長さも同様である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>リストのように要素を変更できるオブジェクトを<strong>ミュータブル</strong>オブジェクト，タプルのように要素を変更できないオブジェクトを<strong>イミュータブル</strong>オブジェクトと呼ぶ．</p>
+</div>
+</section>
+<section id="id31">
+<h2>【発展】辞書<a class="headerlink" href="#id31" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../../_images/dict.png" /></p>
+<p><strong>辞書</strong>は<strong>キー</strong>を使って複数の値を管理するために利用されるデータ型（<code class="docutils literal notranslate"><span class="pre">dict</span></code>）である．辞書は以下のようにキーから値を参照できる．</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">辞書</span><span class="p">[</span><span class="n">キー</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>辞書は以下のように定義できる．</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">辞書</span> <span class="o">=</span> <span class="p">{</span><span class="n">キー1</span><span class="p">:</span> <span class="n">値1</span><span class="p">,</span> <span class="n">キー2</span><span class="p">:</span> <span class="n">値2</span><span class="p">,</span> <span class="n">キー3</span><span class="p">:</span> <span class="n">値3</span><span class="p">}</span>
+</pre></div>
+</div>
+<p>例えば，広島県（<code class="docutils literal notranslate"><span class="pre">hiroshima</span></code>），岡山県（<code class="docutils literal notranslate"><span class="pre">okayama</span></code>），島根県（<code class="docutils literal notranslate"><span class="pre">shimane</span></code>），鳥取県（<code class="docutils literal notranslate"><span class="pre">tottori</span></code>），山口県（<code class="docutils literal notranslate"><span class="pre">yamaguchi</span></code>）の8月の平均気温を辞書<code class="docutils literal notranslate"><span class="pre">d</span></code>で管理したいとする．このとき，リストを利用すると各県のリストへ格納された順番を記録しておく必要があるが，辞書で管理することで<code class="docutils literal notranslate"><span class="pre">d['hiroshima']</span></code>で広島県の平均気温を参照できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hiroshima&#39;</span><span class="p">:</span> <span class="mf">35.0</span><span class="p">,</span> <span class="s1">&#39;okayama&#39;</span><span class="p">:</span> <span class="mf">35.5</span><span class="p">,</span> <span class="s1">&#39;shimane&#39;</span><span class="p">:</span> <span class="mf">34.0</span><span class="p">,</span> <span class="s1">&#39;tottori&#39;</span><span class="p">:</span> <span class="mf">34.3</span><span class="p">,</span> <span class="s1">&#39;yamaguchi&#39;</span><span class="p">:</span> <span class="mf">35.2</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;hiroshima&#39;: 35.0, &#39;okayama&#39;: 35.5, &#39;shimane&#39;: 34.0, &#39;tottori&#39;: 34.3, &#39;yamaguchi&#39;: 35.2}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;hiroshima&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>35.0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id32">
+<h3>辞書の演算<a class="headerlink" href="#id32" title="Permalink to this headline">#</a></h3>
+<section id="id33">
+<h4>値の取得<a class="headerlink" href="#id33" title="Permalink to this headline">#</a></h4>
+<p>キーワードよって参照される辞書に格納された全ての値は<code class="docutils literal notranslate"><span class="pre">辞書.values()</span></code>で取得できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;key3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_values([1, 2, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><code class="docutils literal notranslate"><span class="pre">values()</span></code>関数の返り値は<code class="docutils literal notranslate"><span class="pre">dict_values</span></code>型であることに注意されたい．これは第6回繰り返し処理で発展内容として紹介するイテラブルなオブジェクトである．リストやタプルとして利用したい場合は，後述するデータ型の変換を行う必要がある．</p>
+</div>
+</section>
+<section id="id34">
+<h4>キーの取得<a class="headerlink" href="#id34" title="Permalink to this headline">#</a></h4>
+<p>値を参照するためのキーワードは<code class="docutils literal notranslate"><span class="pre">辞書.keys()</span></code>で取得できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_keys([&#39;key1&#39;, &#39;key2&#39;, &#39;key3&#39;])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id35">
+<h4>値とキーの取得<a class="headerlink" href="#id35" title="Permalink to this headline">#</a></h4>
+<p>キーワードと値を同時に取得したいときは<code class="docutils literal notranslate"><span class="pre">辞書.items()</span></code>を利用する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>dict_items([(&#39;key1&#39;, 1), (&#39;key2&#39;, 2), (&#39;key3&#39;, 3)])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>上記の<code class="docutils literal notranslate"><span class="pre">keys()</span></code>，<code class="docutils literal notranslate"><span class="pre">values()</span></code>，<code class="docutils literal notranslate"><span class="pre">items()</span></code>は第6回で学ぶ繰り返し処理と合わせて利用される．例えば，辞書の値に対してなんらかの演算処理を施したい場合に便利な関数である．</p>
+</div>
+</section>
+<section id="id36">
+<h4>要素の追加<a class="headerlink" href="#id36" title="Permalink to this headline">#</a></h4>
+<p>辞書に新たな要素を加えるときは<code class="docutils literal notranslate"><span class="pre">辞書[新しいキーワード]=新しい値</span></code>とする．このとき既に定義済みのキーワードを指定すると値が更新されるので注意されたい．前述の<code class="docutils literal notranslate"><span class="pre">keys()</span></code>関数で定義済みのキーワードの管理をすると意図しない更新を避けることができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="p">[</span><span class="s1">&#39;key4&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;key1&#39;: 1, &#39;key2&#39;: 2, &#39;key3&#39;: 3, &#39;key4&#39;: 4}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id37">
+<h4>辞書の追加<a class="headerlink" href="#id37" title="Permalink to this headline">#</a></h4>
+<p>辞書に別の辞書を追加するためには<code class="docutils literal notranslate"><span class="pre">辞書.update(追加したい辞書)</span></code>とする．重複するキーが含まれているときは追加側の辞書の値が優先される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">new_d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key10&#39;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;key11&#39;</span><span class="p">:</span> <span class="mi">11</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;key10&#39;: 10, &#39;key11&#39;: 11}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new_d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;key1&#39;: 1, &#39;key2&#39;: 2, &#39;key3&#39;: 3, &#39;key4&#39;: 4, &#39;key10&#39;: 10, &#39;key11&#39;: 11}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="id38">
+<h2>【発展】論理値<a class="headerlink" href="#id38" title="Permalink to this headline">#</a></h2>
+<p>プログラムである条件を満たしていることを<code class="docutils literal notranslate"><span class="pre">True</span></code>，満たしていないことを<code class="docutils literal notranslate"><span class="pre">False</span></code>といい，第4回の講義で行う<strong>条件分岐</strong>で必要な型となる．詳細は第4回で説明するがここでは簡単に論理値とは何か？を紹介したい．</p>
+<p>例えば，変数<code class="docutils literal notranslate"><span class="pre">x</span></code>の中身の数値（<code class="docutils literal notranslate"><span class="pre">int</span></code>型）が<code class="docutils literal notranslate"><span class="pre">0</span></code>より大きい場合，処理Aを行うプログラムを書きたいとする．このとき，条件は <code class="docutils literal notranslate"><span class="pre">x&gt;0</span></code>であり，変数<code class="docutils literal notranslate"><span class="pre">x</span></code>の値がこの条件を満たすとき，<code class="docutils literal notranslate"><span class="pre">True</span></code>，満たさないとき，<code class="docutils literal notranslate"><span class="pre">False</span></code>となる．<code class="docutils literal notranslate"><span class="pre">True</span></code>と<code class="docutils literal notranslate"><span class="pre">False</span></code>も論理値（または真偽値）と呼ばれる<code class="docutils literal notranslate"><span class="pre">bool</span></code>型である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>bool
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>上記のコードからわかるように，論理値はPythonによって事前に定義された<strong>変数</strong>であり，変数名として再定義してはいけない．</p>
+</div>
+</section>
+<section id="id39">
+<h2>【発展】代入演算子<a class="headerlink" href="#id39" title="Permalink to this headline">#</a></h2>
+<p>値を変数に代入する操作は上記の<code class="docutils literal notranslate"><span class="pre">var</span> <span class="pre">=</span> <span class="pre">10</span></code>以外も提供されている．例えば，変数1（<code class="docutils literal notranslate"><span class="pre">var1</span></code>）と変数2（<code class="docutils literal notranslate"><span class="pre">var2</span></code>）を足して新たな変数（<code class="docutils literal notranslate"><span class="pre">var3</span></code>）を定義できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var1</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">var2</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">var3</span> <span class="o">=</span> <span class="n">var1</span> <span class="o">+</span> <span class="n">var2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">var3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の代入は<code class="docutils literal notranslate"><span class="pre">var3</span></code>を定義することなく<code class="docutils literal notranslate"><span class="pre">var1</span></code>に<code class="docutils literal notranslate"><span class="pre">var2</span></code>を足す代入演算子<code class="docutils literal notranslate"><span class="pre">+=</span></code>で書くこともできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var1</span> <span class="o">+=</span> <span class="n">var2</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">var1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>12
+</pre></div>
+</div>
+</div>
+</div>
+<p>二変数の足し算だけでなく引き算（<code class="docutils literal notranslate"><span class="pre">-=</span></code>），掛け算（<code class="docutils literal notranslate"><span class="pre">*=</span></code>），割り算（<code class="docutils literal notranslate"><span class="pre">/=</span></code>）も同様に定義されている．</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>ここまで数値データから始まり，文字列，リスト，タプル，辞書，論理値，代入演算子と多くのPythonの文法を学んだが，例えば，リストの <code class="docutils literal notranslate"><span class="pre">append</span></code>関数やスライシングなど本講義で学ぶ文法やテクニックを丸暗記する必要は全くない．研究や商用レベルではもちろん細かなアルゴリズムや仕組みの理解が求められるが，要求されるプログラムを作成するためにどのような機能や関数を利用するべきか？ということがイメージできれば「ゼロからはじめるプログラミング」の単位取得条件としては十分である．細かな仕様や実装方法は本講義資料，書籍，Google検索などを用いて適宜調べれば良い．このように本講義を通して，Pythonの使い方だけでなく，プログラミングの思考を学ぶことも意識されたい．</p>
+</div>
+</section>
+<section id="id40">
+<h2>【発展】データ型の変換<a class="headerlink" href="#id40" title="Permalink to this headline">#</a></h2>
+<p>Pythonでは動的に確保したデータ型を任意のデータ型へ変更することができる．このような変換を<strong>キャスト</strong>と呼ぶ．数値データに対して文字列の繰り返し処理<code class="docutils literal notranslate"><span class="pre">*</span></code>を適用する際など便利な枠組みである．しかしながら，文字データの例で確認したように出力が数値であってもデータ型は数値データ型であるとは限らない．また，文字データと数値データで同一の演算子であっても同一の処理をするとは限らない．このようなデータ型と演算子の定義に応じた処理の違いはバグの温床となりうるため，プログラムを作成する際はデータ型の確認（<code class="docutils literal notranslate"><span class="pre">type()</span></code>関数）を心がけたい．以降，主要なデータ型についてデータ型の変換が必要な場面とその変換方法を紹介する．</p>
+<section id="intfloat-floatint">
+<h3><code class="docutils literal notranslate"><span class="pre">int</span></code>型から<code class="docutils literal notranslate"><span class="pre">float</span></code>型へ，<code class="docutils literal notranslate"><span class="pre">float</span></code>型から<code class="docutils literal notranslate"><span class="pre">int</span></code>型への変換<a class="headerlink" href="#intfloat-floatint" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">int</span></code>型から<code class="docutils literal notranslate"><span class="pre">float</span></code>型への変換は<code class="docutils literal notranslate"><span class="pre">float()</span></code>関数を，<code class="docutils literal notranslate"><span class="pre">float</span></code>型から<code class="docutils literal notranslate"><span class="pre">int</span></code>型への変換は<code class="docutils literal notranslate"><span class="pre">int()</span></code>関数を利用することで行うことができる．ただし，<code class="docutils literal notranslate"><span class="pre">int</span></code>型への変換は小数点以下が切り捨てられることに注意されたい．以下に変換例を示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+&lt;class &#39;int&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+&lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mf">3.14</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.14
+&lt;class &#39;float&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mf">3.14</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3
+&lt;class &#39;int&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="strint-intstr">
+<h3><code class="docutils literal notranslate"><span class="pre">str</span></code>型から<code class="docutils literal notranslate"><span class="pre">int</span></code>型へ，<code class="docutils literal notranslate"><span class="pre">int</span></code>型から<code class="docutils literal notranslate"><span class="pre">str</span></code>型への変換<a class="headerlink" href="#strint-intstr" title="Permalink to this headline">#</a></h3>
+<section id="id41">
+<h4>意図した例<a class="headerlink" href="#id41" title="Permalink to this headline">#</a></h4>
+<p>数値<span class="math notranslate nohighlight">\(2\)</span>が格納された変数<code class="docutils literal notranslate"><span class="pre">x</span></code>を<span class="math notranslate nohighlight">\(3\)</span>倍した結果を変数<span class="math notranslate nohighlight">\(y\)</span>に代入する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id42">
+<h4>意図しない例<a class="headerlink" href="#id42" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">print</span></code>の出力は数値データのように思えても変数<code class="docutils literal notranslate"><span class="pre">x</span></code>のデータ型が<code class="docutils literal notranslate"><span class="pre">str</span></code>型の場合，意図しない結果が出力される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>222
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id43">
+<h4>変換方法<a class="headerlink" href="#id43" title="Permalink to this headline">#</a></h4>
+<p>変数を<code class="docutils literal notranslate"><span class="pre">int()</span></code>で囲むとデータ型を<code class="docutils literal notranslate"><span class="pre">int</span></code>型へ変更できる．反対に，<code class="docutils literal notranslate"><span class="pre">str()</span></code>で囲むと<code class="docutils literal notranslate"><span class="pre">str</span></code>型へ変更できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="s1">&#39;2&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+&lt;class &#39;str&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+&lt;class &#39;int&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">x</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>6
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id44">
+<h3>タプル型からリスト型へ，リスト型からタプル型への変換<a class="headerlink" href="#id44" title="Permalink to this headline">#</a></h3>
+<p>タプル型（<code class="docutils literal notranslate"><span class="pre">tuple</span></code>）をリスト型（<code class="docutils literal notranslate"><span class="pre">list</span></code>）へ，リスト型からタプル型へ変換する方法を学ぶ．タプルとリストの違いは要素の変更ができるかどうかである．プログラム内で意図しない変更を避けたいときはリストからタプルへ変更すると良い．また，ユーザ入力に応じた変更など要素を変更したい場面ではタプルからリストへ変換する必要がある．</p>
+<section id="id45">
+<h4>タプル型からリスト型への変換<a class="headerlink" href="#id45" title="Permalink to this headline">#</a></h4>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)
+&lt;class &#39;tuple&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>タプル型は要素を変更できない．コメントアウトして確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># data[0] = &#39;d&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>リスト型への変換は変数を<code class="docutils literal notranslate"><span class="pre">list()</span></code>で囲うことで実現できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_data</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;a&#39;, &#39;b&#39;, &#39;c&#39;)
+&lt;class &#39;tuple&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">list_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;d&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">list_data</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;d&#39;, &#39;b&#39;, &#39;c&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id46">
+<h4>リスト型からタプル型への変換<a class="headerlink" href="#id46" title="Permalink to this headline">#</a></h4>
+<p>タプル型への変換は変数を<code class="docutils literal notranslate"><span class="pre">tuple()</span></code>で囲うことで実現．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tuple_data</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="n">list_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tuple_data</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">tuple_data</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(&#39;d&#39;, &#39;b&#39;, &#39;c&#39;)
+&lt;class &#39;tuple&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>タプル型へ変換した後の変数は要素を変更できない．コメントアウトして確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># tuple_data[0] = &#39;e&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="print">
+<h2>【発展】print文<a class="headerlink" href="#print" title="Permalink to this headline">#</a></h2>
+<p>第1回の講義で変数の中身を参照する<code class="docutils literal notranslate"><span class="pre">print</span></code>文について学んだ．ここではより直感的に変数を出力できる<code class="docutils literal notranslate"><span class="pre">f-string</span></code>記法について紹介する．例えば，<code class="docutils literal notranslate"><span class="pre">変数xの値は...です．</span></code>と文字を含めて<code class="docutils literal notranslate"><span class="pre">print</span></code>で出力したいとする．このとき，Pythonでは次の方法で出力できる．</p>
+<section id="id47">
+<h3>文字連結によるprint出力<a class="headerlink" href="#id47" title="Permalink to this headline">#</a></h3>
+<p>文字列で学んだように，変数が文字列型の場合，<code class="docutils literal notranslate"><span class="pre">+</span></code>演算子で文字列を連結できる．連結した文字列を<code class="docutils literal notranslate"><span class="pre">print</span></code>出力することで文字列と変数を同時に出力できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;変数xの値は&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;です．&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>変数xの値は10です．
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id48">
+<h3>カンマ（,）によるprint出力<a class="headerlink" href="#id48" title="Permalink to this headline">#</a></h3>
+<p>pythonでは以下のようにカンマ <strong>,</strong> で区切ることで複数の変数を同時に出力できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;変数xの値は&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="s2">&quot;です．&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>変数xの値は 10 です．
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="formatprint">
+<h3>format表記によるprint出力<a class="headerlink" href="#formatprint" title="Permalink to this headline">#</a></h3>
+<p>文字列内に<code class="docutils literal notranslate"><span class="pre">{}</span></code>で示される位置に<code class="docutils literal notranslate"><span class="pre">.format(変数)</span></code>を利用して値を文字列に埋め込むことでも出力できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;変数xの値は</span><span class="si">{}</span><span class="s2">です．&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>変数xの値は10です．
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="f-stringprint">
+<h3>f-string表記によるprint出力<a class="headerlink" href="#f-stringprint" title="Permalink to this headline">#</a></h3>
+<p>変数を含んだ文字列を出力する際に，<code class="docutils literal notranslate"><span class="pre">f&quot;文字列{変数}&quot;</span></code>として記載することで<code class="docutils literal notranslate"><span class="pre">format</span></code>を利用せずに変数を埋め込むことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;変数xの値は</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">です．&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>変数xの値は10です．
+</pre></div>
+</div>
+</div>
+</div>
+<p>Pythonでは上記のような出力方法が提供されている．本講義では可読性を考慮し，<strong>f-string</strong>記法を利用して説明する．</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/02"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../01/introduction_and_setup.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第1回：イントロダクションとGoogle Colaboratoryの導入</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../03/exercise_variables_and_data_types.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第3回：変数とデータ型（演習）</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

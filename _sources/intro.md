@@ -18,17 +18,20 @@
   - 各自で教材とビデオを参照しながら学習を進めてください．
   - 教材もビデオも，本サポートページ上で順次公開します．
 - 内容ごとに講義回と演習回があります．
-  - 演習回には課題を出すので，期限までに解いて提出してください（→ [課題提出方法](docs/submission/submission.md)）．
+  - 演習回には課題を出すので期限までに解いて提出してください（→ [課題提出方法](docs/submission/submission.md)）．
     - 演習課題は成績評価にも関係するので，注意してください．
 - Microsoft Teams上に各クラスのチームが作成されています．
   - Teamsでは，講義内容に関する質問対応や，課題提出などを行います．
 
 ## 講義資料
 
+教材中の `【発展】` で始まる項目は講義では扱いません．
+各自の興味に応じて学習してください．
+
 | 教材 | ビデオ | 課題提出〆切 | 課題の解答 |
 | ---- | :----: | :----: | :----: |
 | [第1回：イントロダクションと<br>Google Colaboratoryの導入](docs/01/introduction_and_setup.ipynb) | [Play](https://web.microsoftstream.com/video/69469261-20b5-401d-84b4-d1476dc7e1ca) | - | - |
-| [第2回：変数とデータ型（講義）](docs/02/variables_and_data_types.ipynb) | 準備中 | - | - |
+| [第2回：変数とデータ型（講義）](docs/02/variables_and_data_types.ipynb) | [Play](https://web.microsoftstream.com/video/ccbda2e7-5c19-4b83-a2c5-640f7268016d) | - | - |
 | [第3回：変数とデータ型（演習）](docs/03/exercise_variables_and_data_types.ipynb)  | - | 10/20 | 10/21公開 |
 | [第4回：条件分岐（講義）](docs/04/conditional_branch.ipynb) | 準備中 | - | - |
 | [第5回：条件分岐（演習）](docs/05/exercise_conditional_branch.ipynb) | - | 10/27 | 10/28公開 |
