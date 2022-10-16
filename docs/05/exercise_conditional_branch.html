@@ -1,0 +1,1029 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第5回：条件分岐（演習） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="課題提出方法" href="../submission/submission.html" />
+    <link rel="prev" title="第4回：条件分岐（講義）" href="../04/conditional_branch.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/variables_and_data_types.html">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/conditional_branch.html">
+   第4回：条件分岐（講義）
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第5回：条件分岐（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/05/exercise_conditional_branch.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/05/exercise_conditional_branch.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/05/exercise_conditional_branch.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   演習1：真偽値と条件式
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     例題
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     演習1-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     演習1-2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     演習1-3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     演習1-4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     演習1-5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     演習1-6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     演習1-7
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if">
+   演習2：
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-else">
+   演習3：
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if　...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     演習3-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     演習3-2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-elif-else">
+   演習4：
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     elif
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   演習5：複数条件の組み合わせ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     演習5-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     演習5-2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id16">
+   演習6：発展課題
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fizzbuzz">
+     演習6-1：FizzBuzz問題
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     演習6-2：うるう年判定プログラム
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     演習6-3：3の倍数と3のつく数
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第5回：条件分岐（演習）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   演習1：真偽値と条件式
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     例題
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     演習1-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     演習1-2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     演習1-3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     演習1-4
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     演習1-5
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     演習1-6
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     演習1-7
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if">
+   演習2：
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-else">
+   演習3：
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if　...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     演習3-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     演習3-2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-elif-else">
+   演習4：
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     elif
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   演習5：複数条件の組み合わせ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     演習5-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     演習5-2
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id16">
+   演習6：発展課題
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#fizzbuzz">
+     演習6-1：FizzBuzz問題
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     演習6-2：うるう年判定プログラム
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     演習6-3：3の倍数と3のつく数
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第5回：条件分岐（演習）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>学籍番号：…</p>
+<p>氏名：…</p>
+<hr class="docutils" />
+<section id="id2">
+<h2>演習1：真偽値と条件式<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<section id="id3">
+<h3>例題<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>「<code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> より小さい」を，比較演算子を用いて記述せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> にはあらかじめ条件式が「<code class="docutils literal notranslate"><span class="pre">True</span></code>」となる適当な数値を代入しておくこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セルの記入例</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id4">
+<h3>演習1-1<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>「<code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> より大きい」を，比較演算子を用いて記述せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> にはあらかじめ条件式が「<code class="docutils literal notranslate"><span class="pre">True</span></code>」となる適当な数値を代入しておくこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>演習1-2<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>「<code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> と等しい」を，比較演算子を用いて記述せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> にはあらかじめ条件式が「<code class="docutils literal notranslate"><span class="pre">True</span></code>」となる適当な数値を代入しておくこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>演習1-3<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>「<code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> と等しくない」を，比較演算子を用いて記述せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> にはあらかじめ条件式が「<code class="docutils literal notranslate"><span class="pre">True</span></code>」となる適当な数値を代入しておくこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>演習1-4<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>「<code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> 以上である」を，比較演算子を用いて記述せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> にはあらかじめ条件式が「<code class="docutils literal notranslate"><span class="pre">True</span></code>」となる適当な数値を代入しておくこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>演習1-5<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>「<code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> 以下である」を，比較演算子を用いて記述せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> にはあらかじめ条件式が「<code class="docutils literal notranslate"><span class="pre">True</span></code>」となる適当な数値を代入しておくこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>演習1-6<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>「リスト <code class="docutils literal notranslate"><span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6,</span> <span class="pre">8]</span></code> の中に <code class="docutils literal notranslate"><span class="pre">5</span></code> が含まれているか？」を比較演算子を用いて記述せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id10">
+<h3>演習1-7<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>「文字列 <code class="docutils literal notranslate"><span class="pre">Hello,</span> <span class="pre">World!</span></code> に，部分文字列 <code class="docutils literal notranslate"><span class="pre">Hello</span></code> が含まれているか？」を，比較演算子を用いて記述せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="if">
+<h2>演習2：<code class="docutils literal notranslate"><span class="pre">if</span></code>文<a class="headerlink" href="#if" title="Permalink to this headline">#</a></h2>
+<p>変数 <code class="docutils literal notranslate"><span class="pre">a</span></code> の値が <code class="docutils literal notranslate"><span class="pre">5</span></code> と等しければ「<code class="docutils literal notranslate"><span class="pre">5と等しいです</span></code>」と表示するプログラムを書け．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">a</span></code> には適当な値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="if-else">
+<h2>演習3：<code class="docutils literal notranslate"><span class="pre">if　...</span> <span class="pre">else</span></code>文<a class="headerlink" href="#if-else" title="Permalink to this headline">#</a></h2>
+<section id="id11">
+<h3>演習3-1<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>変数 <code class="docutils literal notranslate"><span class="pre">a</span></code> の値が <code class="docutils literal notranslate"><span class="pre">5</span></code> で割り切れるときは「<code class="docutils literal notranslate"><span class="pre">5で割り切れます</span></code>」，そうでないときには「<code class="docutils literal notranslate"><span class="pre">5で割り切れません</span></code>」と表示するプログラムを作成せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">a</span></code> には適当な値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">ヒント</p>
+<p>「割り切れる」を表現するためには，<code class="docutils literal notranslate"><span class="pre">a</span></code> を <code class="docutils literal notranslate"><span class="pre">5</span></code> で割った余りが <code class="docutils literal notranslate"><span class="pre">0</span></code> と等しくなればよい．
+余りの計算方法は <a class="reference internal" href="../01/introduction_and_setup.html"><span class="doc std std-doc">第1回</span></a> または <a class="reference internal" href="../02/variables_and_data_types.html"><span class="doc std std-doc">第2回</span></a> の教材を参照されたい．</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h3>演習3-2<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<p>人数に応じて，団体割が適用されるかどうかを判定するプログラムを考える．ここでは，人数が10名以上だったら団体割が適用されるとする．</p>
+<p>人数を表す変数 <code class="docutils literal notranslate"><span class="pre">number</span></code> の値が <code class="docutils literal notranslate"><span class="pre">10</span></code> 以上であれば「<code class="docutils literal notranslate"><span class="pre">団体割が適用されます</span></code>」，そうでなければ「<code class="docutils literal notranslate"><span class="pre">団体割が適用されません</span></code>」と表示するプログラムを作成せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">number</span></code> には任意の値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="if-elif-else">
+<h2>演習4：<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">elif</span> <span class="pre">...</span> <span class="pre">else</span></code>文<a class="headerlink" href="#if-elif-else" title="Permalink to this headline">#</a></h2>
+<p>参加者の年齢に応じて，適切な入場料金を表示するプログラムを考える．
+ここでは，3歳児以下は無料，15歳児以下は子供料金，そうでなければ大人料金となるとする．</p>
+<p>年齢を表す変数 <code class="docutils literal notranslate"><span class="pre">age</span></code> の値が <code class="docutils literal notranslate"><span class="pre">3</span></code> 以下であれば「<code class="docutils literal notranslate"><span class="pre">入場料は無料です</span></code>」，<code class="docutils literal notranslate"><span class="pre">15</span></code> 以下であれば「<code class="docutils literal notranslate"><span class="pre">子供料金が必要です</span></code>」，そうでなければ「<code class="docutils literal notranslate"><span class="pre">大人料金が必要です</span></code>」と表示するプログラムを作成せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">age</span></code> には適当の値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id13">
+<h2>演習5：複数条件の組み合わせ<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h2>
+<section id="id14">
+<h3>演習5-1<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<p>与えられた値が10以下の偶数であることを判定するプログラムを考えよう．</p>
+<p>変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> の値が「10以下である」かつ「2で割り切れる」場合のみ「<code class="docutils literal notranslate"><span class="pre">10以下の偶数です</span></code>」と表示し，そうでない場合は何も表示しないプログラムを作成せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> には適当な値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id15">
+<h3>演習5-2<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
+<p>与えられた値が1〜10の範囲にあることを判定するプログラムを考えよう．</p>
+<p>変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> の値が「1よりも小さい」または「10よりも大きい」場合に「<code class="docutils literal notranslate"><span class="pre">範囲外の値です</span></code>」，そうでない場合に「<code class="docutils literal notranslate"><span class="pre">範囲内の値です</span></code>」と表示するプログラムを作成せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> には適当な値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id16">
+<h2>演習6：発展課題<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h2>
+<p>これ以降は発展的な演習課題となります．
+解くことは必須ではありませんが，条件分岐を応用する良い練習になるので，ぜひチャレンジしてみてください．</p>
+<section id="fizzbuzz">
+<h3>演習6-1：FizzBuzz問題<a class="headerlink" href="#fizzbuzz" title="Permalink to this headline">#</a></h3>
+<p>変数 <code class="docutils literal notranslate"><span class="pre">number</span></code> の値に対し，次のことを出力せよ．</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> で割り切れて <code class="docutils literal notranslate"><span class="pre">5</span></code> で割り切れないときは「<code class="docutils literal notranslate"><span class="pre">Fizz</span></code>」と出力</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">5</span></code> で割り切れて <code class="docutils literal notranslate"><span class="pre">3</span></code> で割り切れない時は「<code class="docutils literal notranslate"><span class="pre">Buzz</span></code>」と出力</p></li>
+<li><p>両方で割り切れるときは「<code class="docutils literal notranslate"><span class="pre">FizzBuzz</span></code>」と出力</p></li>
+<li><p>両方で割り切れないときは，入力した数をそのまま出力</p></li>
+</ul>
+<p>なお，変数 <code class="docutils literal notranslate"><span class="pre">number</span></code> には適当な値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id17">
+<h3>演習6-2：うるう年判定プログラム<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
+<p>年（西暦）を表す変数 <code class="docutils literal notranslate"><span class="pre">year</span></code> の値が，うるう年かどうかを判定するプログラムを作成せよ．
+なお，変数 <code class="docutils literal notranslate"><span class="pre">year</span></code> には適当な値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">うるう年の規則</p>
+<ul class="simple">
+<li><p>「400で割り切れる」年はうるう年</p>
+<ul>
+<li><p>たとえば，2000年はこれを満たすのでうるう年</p></li>
+</ul>
+</li>
+<li><p>「4で割り切れる」かつ「100で割り切れない」年はうるう年</p>
+<ul>
+<li><p>たとえば，2020年はこれを満たすのでうるう年</p></li>
+</ul>
+</li>
+<li><p>上記の両方とも満たさない場合はうるう年ではない</p>
+<ul>
+<li><p>たとえば，2100年は4で割り切れるが，100でも割り切れるので，うるう年ではない</p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id18">
+<h3>演習6-3：3の倍数と3のつく数<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h3>
+<p>変数 <code class="docutils literal notranslate"><span class="pre">number</span></code> の値に対し，3の倍数と3のつく数の時だけ「3に関する数です」と出力するプログラムを作成せよ．なお，変数 <code class="docutils literal notranslate"><span class="pre">number</span></code> には適当な値を代入し，プログラムの実行結果も表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/05"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../04/conditional_branch.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第4回：条件分岐（講義）</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../submission/submission.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">課題提出方法</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

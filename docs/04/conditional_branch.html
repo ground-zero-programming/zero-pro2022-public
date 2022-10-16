@@ -1,0 +1,1544 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第4回：条件分岐（講義） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="第5回：条件分岐（演習）" href="../05/exercise_conditional_branch.html" />
+    <link rel="prev" title="第3回：変数とデータ型（演習）" href="../03/exercise_variables_and_data_types.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/variables_and_data_types.html">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第4回：条件分岐（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/exercise_conditional_branch.html">
+   第5回：条件分岐（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/04/conditional_branch.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/04/conditional_branch.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/04/conditional_branch.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   条件分岐とは？
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   真偽値と条件式
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     代表的な比較演算子と条件式
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   数値の比較
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   文字列の比較
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     in
+    </span>
+   </code>
+   演算子
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     基本的な使い方
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     文字列に対する
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       in
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#not-in">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       not
+      </span>
+      <span class="pre">
+       in
+      </span>
+     </code>
+     による否定
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   インデント構文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     インデントの作成方法
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-else">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-elif-else">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     elif
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   複数の条件の組み合わせ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       if
+      </span>
+     </code>
+     文の入れ子構造
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ab">
+     条件式Aかつ条件式Bが成り立つなら
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     条件式Aまたは条件式Bが成り立つなら
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   【発展】3項演算子
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第4回：条件分岐（講義）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   条件分岐とは？
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   真偽値と条件式
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     代表的な比較演算子と条件式
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   数値の比較
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   文字列の比較
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#in">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     in
+    </span>
+   </code>
+   演算子
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     基本的な使い方
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     文字列に対する
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       in
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#not-in">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       not
+      </span>
+      <span class="pre">
+       in
+      </span>
+     </code>
+     による否定
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id10">
+   インデント構文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     インデントの作成方法
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-else">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#if-elif-else">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     if
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     elif
+    </span>
+    <span class="pre">
+     ...
+    </span>
+    <span class="pre">
+     else
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   複数の条件の組み合わせ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       if
+      </span>
+     </code>
+     文の入れ子構造
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#ab">
+     条件式Aかつ条件式Bが成り立つなら
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     条件式Aまたは条件式Bが成り立つなら
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   【発展】3項演算子
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第4回：条件分岐（講義）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>担当：古居彬</p>
+<section id="id2">
+<h2>内容<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>第4回 条件分岐では，与えられた条件式に応じて処理を切り替える仕組みについて学ぶ．
+条件分岐を用いることで，例えばユーザの入力した内容に応じて処理を変えたり，プログラム内で計算した値に応じて細かい処理を切り替えることが可能になる．
+具体的には，以下の内容を身につけることを目指す．</p>
+<ul class="simple">
+<li><p>条件式と，それによって得られる真偽値を理解する</p></li>
+<li><p>条件式を用いて，数値や文字列の比較を行う方法を理解する</p></li>
+<li><p>Pythonのインデント構文を理解する</p></li>
+<li><p>条件分岐を行うための <code class="docutils literal notranslate"><span class="pre">if</span></code> 文，<code class="docutils literal notranslate"><span class="pre">if...else</span></code> 文，<code class="docutils literal notranslate"><span class="pre">if...elif...else</span></code> 文について学ぶ</p></li>
+<li><p>より複雑な条件分岐について学ぶ</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>条件分岐とは？<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>日常生活において，何かしらの「条件」に基づき，もし〇〇ならXXする，そうでなければ△△するというような場面は多くあるだろう．</p>
+<p><img alt="" src="../../_images/if-image.png" /></p>
+<div class="admonition- admonition">
+<p class="admonition-title">身の回りの条件分岐の例</p>
+<ul class="simple">
+<li><p>もし明日晴れていたら畑を耕す，そうでなければ家で読書する</p></li>
+<li><p>もしアイスが100円以下なら買う，そうでなければ買わない</p></li>
+</ul>
+</div>
+<p>このように条件に応じて処理内容を変える処理をコンピュータに指示するために，<strong>条件分岐</strong> という仕組みがサポートされている．</p>
+<p>通常，プログラムは上から順番に実行されるが，条件分岐を行うと途中で処理を分岐できるようになり，より柔軟なプログラムを作成することができる．
+このような条件分岐処理を行うためには，まず「もし〇〇なら〜」という条件の部分をプログラミング的に表現する必要がある．</p>
+</section>
+<section id="id4">
+<h2>真偽値と条件式<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p><strong>真偽値（bool）</strong> とは，<strong>真</strong>（<code class="docutils literal notranslate"><span class="pre">True</span></code>）であるか <strong>偽</strong>（<code class="docutils literal notranslate"><span class="pre">False</span></code>）であるかの二値を取る型のことであり，<strong>条件</strong> が満たされているか？満たされてないか？を表す変数の型として用いられる（<strong>論理値</strong> とも呼ばれる）．
+この真偽値は，条件を分岐する上で非常に重要な概念となる．</p>
+<p>皆さんが中学・高校で勉強した値の比較から真偽値について確認しよう．
+例えば，<span class="math notranslate nohighlight">\(2\)</span> と <span class="math notranslate nohighlight">\(3\)</span> の値を比較したとき，<span class="math notranslate nohighlight">\(2 &lt; 3\)</span> は明らかに真である．
+この不等式のような式を，プログラミングでは <strong>条件式</strong> と呼ぶ．
+この条件式の結果に応じて，真偽値が得られる．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">条件式と真偽値の例</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(2 &lt; 3\)</span> のときは式は真なので <code class="docutils literal notranslate"><span class="pre">True</span></code> が得られる．</p></li>
+<li><p><span class="math notranslate nohighlight">\(2 &gt; 3\)</span> や <span class="math notranslate nohighlight">\(2 = 3\)</span> の式は偽なので <code class="docutils literal notranslate"><span class="pre">False</span></code> が得られる．</p></li>
+</ul>
+</div>
+<p>このように，条件式とその結果（真偽値）によって条件分岐を制御する．</p>
+<section id="id5">
+<h3>代表的な比較演算子と条件式<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>二つの変数に対する条件式を構成する演算子（<code class="docutils literal notranslate"><span class="pre">&lt;</span></code> や <code class="docutils literal notranslate"><span class="pre">&gt;</span></code> や <code class="docutils literal notranslate"><span class="pre">=</span></code>など）のことを <strong>比較演算子</strong> と呼ぶ．
+以下に，代表的な比較演算子を用いた条件式とその意味を示す．</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>条件式</p></th>
+<th class="head"><p>意味</p></th>
+<th class="head"><p>Trueの例</p></th>
+<th class="head"><p>Falseの例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> より小さい</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&lt;</span> <span class="pre">3</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">&lt;</span> <span class="pre">2</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&lt;=</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> 以下である</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">&lt;=</span> <span class="pre">7</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">&lt;=</span> <span class="pre">5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">&lt;=</span> <span class="pre">4</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> より大きい</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">&gt;</span> <span class="pre">2</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">2</span> <span class="pre">&gt;</span> <span class="pre">3</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">&gt;=</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> は <code class="docutils literal notranslate"><span class="pre">y</span></code> 以上である</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">7</span> <span class="pre">&gt;=</span> <span class="pre">4</span></code>, <code class="docutils literal notranslate"><span class="pre">5</span> <span class="pre">&gt;=</span> <span class="pre">5</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4</span> <span class="pre">&gt;=</span> <span class="pre">7</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">!=</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> は等しくない</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">!=</span> <span class="pre">8</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">9</span> <span class="pre">!=</span> <span class="pre">9</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> は等しい</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">==</span> <span class="pre">10</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">10</span> <span class="pre">==</span> <span class="pre">4</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code> の中に <code class="docutils literal notranslate"><span class="pre">x</span></code> という要素が存在する</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">in</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">5]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">in</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">y</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">y</span></code> の中に <code class="docutils literal notranslate"><span class="pre">x</span></code> という要素が存在しない</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">[2,</span> <span class="pre">4,</span> <span class="pre">6]</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">[1,</span> <span class="pre">3,</span> <span class="pre">5]</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="tip admonition">
+<p class="admonition-title">「等しい」の表し方</p>
+<p>「<code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> は等しい」を通常の数式で表現すると <span class="math notranslate nohighlight">\(x = y\)</span> だが，Pythonにおいて等号 <code class="docutils literal notranslate"><span class="pre">=</span></code> は「代入」の意味を持つので，条件式では使えない（詳しくは <a class="reference internal" href="../02/variables_and_data_types.html"><span class="doc std std-doc">前回</span></a> を参照）．
+代わりに，等号を2つ続けた演算子 <code class="docutils literal notranslate"><span class="pre">==</span></code> を用いて <code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">==</span> <span class="pre">y</span></code> と書くことで，「<code class="docutils literal notranslate"><span class="pre">x</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> は等しい」という条件式を表現できる．</p>
+<p>この点は特に間違いやすいので，注意しよう．</p>
+</div>
+</section>
+</section>
+<section id="id6">
+<h2>数値の比較<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>いくつか条件式の練習をしてみよう．
+条件式が満たされているかどうか，またそれに応じて出力が <code class="docutils literal notranslate"><span class="pre">True</span></code> と <code class="docutils literal notranslate"><span class="pre">False</span></code> のどちらになるのか注意して実行してみて欲しい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">&lt;</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">==</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">2</span> <span class="o">!=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>文字列の比較<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p>数値だけでなく，文字列同時の比較も可能である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Hello&#39;</span> <span class="o">==</span> <span class="s1">&#39;Hello&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Hello&#39;</span> <span class="o">==</span> <span class="s1">&#39;Bonjour&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Hello&#39;</span> <span class="o">&gt;</span> <span class="s1">&#39;Bonjour&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>なお，文字列の大小関係（順番）は，文字コードで判定される．
+詳しい説明は省略するが，英字の場合，基本的にはアルファベットの順番がそのまま大小関係になるという認識で良い．</p>
+<p>例えば上記の<code class="docutils literal notranslate"><span class="pre">Hello</span></code>と<code class="docutils literal notranslate"><span class="pre">Bounjour</span></code>の場合だと，<code class="docutils literal notranslate"><span class="pre">Hello</span></code>の1文字目「H」と<code class="docutils literal notranslate"><span class="pre">Bonjour</span></code>の1文字目「B」がまず比較され，アルファベット順で「B &lt; H」となるため（Bの方が順番が若い），<code class="docutils literal notranslate"><span class="pre">&quot;Hello&quot;</span> <span class="pre">&gt;</span> <span class="pre">&quot;Bonjour&quot;</span></code> は <code class="docutils literal notranslate"><span class="pre">True</span></code> となる．
+なお，1文字目が同じなら2文字目，3文字目，…と順番に評価される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;a&#39;</span> <span class="o">&lt;</span> <span class="s1">&#39;b&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;aa&#39;</span> <span class="o">&lt;</span> <span class="s1">&#39;ab&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>なお，大文字と小文字は別物として扱われ，大文字の方が小文字よりも順番が若い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;A&#39;</span> <span class="o">==</span> <span class="s1">&#39;a&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;A&#39;</span> <span class="o">&lt;</span> <span class="s1">&#39;a&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="in">
+<h2><code class="docutils literal notranslate"><span class="pre">in</span></code> 演算子<a class="headerlink" href="#in" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">in</span></code> という演算子を使うことで，リストや文字列など複数の要素が格納されたデータ型に対して，「ある要素が含まれているか？」という条件式を定義できる．
+より数式的に説明すると，<code class="docutils literal notranslate"><span class="pre">in</span></code> という演算子を使うことで，右辺に左辺の値が含まれているかどうかを判定することが可能である．
+例として，<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">in</span> <span class="pre">y</span></code> のように書くと，<code class="docutils literal notranslate"><span class="pre">x</span></code> が <code class="docutils literal notranslate"><span class="pre">y</span></code> に含まれていると <code class="docutils literal notranslate"><span class="pre">True</span></code>，含まれていないと <code class="docutils literal notranslate"><span class="pre">False</span></code> を返す条件式となる．</p>
+<section id="id8">
+<h3>基本的な使い方<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>例えばリストの中に特定の値が含まれているかどうかを判定したい場合は，以下のように書けば良い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span> <span class="c1"># リスト[0, 1, 2]の中に 1 が存在するかどうかの判定</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">100</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;Hiroshima&#39;</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Yamaguchi&#39;</span><span class="p">,</span> <span class="s1">&#39;Hiroshima&#39;</span><span class="p">,</span> <span class="s1">&#39;Shimane&#39;</span><span class="p">,</span> <span class="s1">&#39;Tottori&#39;</span><span class="p">,</span> <span class="s1">&#39;Okayama&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<p>リストのほか，タプルや集合，<code class="docutils literal notranslate"><span class="pre">range</span></code> などのイテラブルオブジェクトに対する演算が可能である（<code class="docutils literal notranslate"><span class="pre">range</span></code>については第6回で説明する）．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c1"># タプル</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">in</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">}</span> <span class="c1"># 集合</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>文字列に対する <code class="docutils literal notranslate"><span class="pre">in</span></code><a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>文字列に対しては，ある部分文字列が含まれているか？といった判定が可能である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;a&#39;</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span> <span class="c1"># 文字列 &#39;abc&#39; の中に文字 &#39;a&#39; が含まれるかどうかの判定</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;x&#39;</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="s1">&#39;ab&#39;</span> <span class="ow">in</span> <span class="s1">&#39;abc&#39;</span> <span class="c1"># 文字列 &#39;abc&#39; の中に文字列 &#39;ab&#39; が含まれるかどうかの判定</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="not-in">
+<h3><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code> による否定<a class="headerlink" href="#not-in" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">in</span></code> 演算子の否定には，<code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">in</span></code> を用いる．
+つまり，<code class="docutils literal notranslate"><span class="pre">x</span> <span class="pre">not</span> <span class="pre">in</span> <span class="pre">y</span></code> と書くと，<code class="docutils literal notranslate"><span class="pre">y</span></code> に <code class="docutils literal notranslate"><span class="pre">x</span></code> が含まれていない場合に <code class="docutils literal notranslate"><span class="pre">True</span></code> となる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mi">100</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">真偽値と条件式のまとめ</p>
+<ul class="simple">
+<li><p>「条件を満たす」あるいは「条件を満たさない」の判断に用いる式を条件式と呼ぶ．</p></li>
+<li><p>条件式の結果は真偽値で表現され，条件を満たす場合には <code class="docutils literal notranslate"><span class="pre">True</span></code>，満たさない場合には <code class="docutils literal notranslate"><span class="pre">False</span></code> となる．</p></li>
+<li><p>条件式は，<code class="docutils literal notranslate"><span class="pre">&lt;</span></code>，<code class="docutils literal notranslate"><span class="pre">&gt;</span></code>，<code class="docutils literal notranslate"><span class="pre">&lt;=</span></code>，<code class="docutils literal notranslate"><span class="pre">&gt;=</span></code>，<code class="docutils literal notranslate"><span class="pre">==</span></code>，<code class="docutils literal notranslate"><span class="pre">!=</span></code> などの比較演算子を用いて記述する．</p>
+<ul>
+<li><p>数値だけでなく，文字列の比較も行える</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id10">
+<h2>インデント構文<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<p>条件式を用いた分岐処理（条件分岐）について説明する前に，Pythonのインデント（行頭の空白，字下げ）について説明する．</p>
+<p>これまで書いてきたプログラムは，ほとんどが1行で書けるような短い「文」だったが，実際には複数行にわたる「文」で構成される．
+基本的には，記述した順番に上から一文ずつ実行されていくが，いくつかの文の「グループ」を作成することで，条件分岐のような特殊な処理ができるようになる．
+このようなグループのことを <strong>ブロック</strong> または <strong>コードブロック</strong> と呼ぶ．</p>
+<p>例えば，以下は <code class="docutils literal notranslate"><span class="pre">if</span></code> 文（後ほど詳しく述べます）を用いて条件分岐を行なっているプログラムである．
+具体的には，条件式 <code class="docutils literal notranslate"><span class="pre">condition</span> <span class="pre">==</span> <span class="pre">'ok'</span></code> が成り立つ（つまり <code class="docutils literal notranslate"><span class="pre">True</span></code> となる）ときに <code class="docutils literal notranslate"><span class="pre">condition:</span> <span class="pre">○</span></code> を表示するような処理になっている．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">condition</span> <span class="o">==</span> <span class="s1">&#39;ok&#39;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;condition: ○&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>上記のプログラムをみたとき，<code class="docutils literal notranslate"><span class="pre">print</span></code> の前に空白（スペース）が含まれていることに気がついただろうか？
+このような空白は <strong>インデント</strong> と呼び，Pythonではこのインデントによってコードブロックを表現するという決まりがある．</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">【発展】他のプログラミング言語におけるコードブロックの作り方</p>
+<p>コードブロックの表現方法は，プログラミング言語によって異なる．
+詳しくは省略するが，大きく分けると以下のような方法がある．</p>
+<ul class="simple">
+<li><p>括弧で囲む方法：C/C++，Java，Rなど</p></li>
+<li><p>キーワードで囲む方法：Visual Basic，Rubyなど</p></li>
+<li><p>インデントで区別する方法：Pythonなど</p></li>
+</ul>
+<p>複数の言語を学んでいるとこのあたりを混同してしまうことがあるので，気をつけよう．</p>
+</div>
+<p>Pythonでは，このインデントの深さによって，プログラム文は異なるブロックとして扱われる．
+具体的には，「キーワード + コロン (<code class="docutils literal notranslate"><span class="pre">:</span></code>)」でブロックが始まり，続くブロックはインデントで表現される．
+インデントの深さが戻るまで，プログラム文は同じブロックに属することになる．</p>
+<p>まとめると次のようなイメージである．</p>
+<p><img alt="" src="../../_images/indent_1.png" /></p>
+<p>1行目の <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">condition</span> <span class="pre">==</span> <span class="pre">'ok':</span></code> は， <code class="docutils literal notranslate"><span class="pre">if</span></code> 文の条件式 <code class="docutils literal notranslate"><span class="pre">condition</span> <span class="pre">==</span> <span class="pre">'ok'</span></code> が <code class="docutils literal notranslate"><span class="pre">True</span></code> の場合，コードブロックの処理を実行することを意味している．
+末尾にコロン (<code class="docutils literal notranslate"><span class="pre">:</span></code>) があるので，その次の行からインデントが開始され，コードブロックが作られている．
+3行目でインデントが戻っているので，ここで <code class="docutils literal notranslate"><span class="pre">if</span></code> 文が作るブロックは終わりである．</p>
+<p>また，以下の図のように異なる深さのインデントが存在する場合，それぞれに対応するブロックが作られる．</p>
+<p><img alt="" src="../../_images/indent_2.png" /></p>
+<p>インデントの深さが戻るまで，プログラム文は同じブロックに属することに注意されたい．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">補足</p>
+<p>やや抽象的な説明だったので具体的なイメージが持ちにくいかもしれないが，ひとまずこれ以降のプログラム中にインデント（行頭の空白）が登場したら，何かしら特殊な意味を持っていると解釈しよう．
+どういう意図でインデントが入っているのかを見抜くためには，インデントが最初に始まっている箇所の真上の一行（末尾に <code class="docutils literal notranslate"><span class="pre">:</span></code> があるはず）を見ればよい．
+例えば <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span></code> から始まっていれば，条件分岐を行うためのインデントである．
+インデント構文は条件分岐以外でも様々用いられるので，今後の講義の中で一つ一つ身につけていこう．</p>
+</div>
+<section id="id11">
+<h3>インデントの作成方法<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>なお，Colaboratoryでは，コードセル中の行頭で「Tab」キーを入力すると自動的にインデントが挿入される．
+また，末尾にコロン（<code class="docutils literal notranslate"><span class="pre">:</span></code>）がある状態で「Enter」キーを押した場合でも同様にインデントの挿入が行われる．
+インデントを戻すときは「Shift + Tab」を押せばよい．</p>
+<p>Pythonではインデントとして半角スペース4つが広く利用されており，本教材でもその表記を採用している．
+ただしColaboratoryでは，インデントの幅は半角スペース2つ分となっているので，注意されたい．</p>
+<div class="tip admonition">
+<p class="admonition-title">Colaboratoryでインデント幅を半角スペース4つ分にしたい場合</p>
+<p>Google Colaboratoryのメニューバーから「ツール -&gt; 設定 -&gt; エディタ」を選択し，「インデント幅」を「4」にすればよい．</p>
+<p><img alt="" src="../../_images/colab_tab_setting.png" /></p>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">インデント構文のまとめ</p>
+<ul class="simple">
+<li><p>インデント構文は，プログラム中でコードブロックを定義するために用いられる．</p>
+<ul>
+<li><p>通常，インデントは半角スペース4個分で表現される．</p></li>
+</ul>
+</li>
+<li><p>インデント構文が使われている箇所は，条件分岐や繰り返し処理など，何かしら特殊な役割を持っている箇所である．</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="if">
+<h2><code class="docutils literal notranslate"><span class="pre">if</span></code> 文<a class="headerlink" href="#if" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">if</span></code> 文を用いると，「もし〇〇ならA」のような条件式を満たす（<code class="docutils literal notranslate"><span class="pre">True</span></code>）か満たさない（<code class="docutils literal notranslate"><span class="pre">False</span></code>）に応じて処理を分岐することができる．
+これを，<code class="docutils literal notranslate"><span class="pre">if</span></code> 文による <strong>条件分岐</strong> と呼ぶ．</p>
+<p><img alt="" src="../../_images/if.png" /></p>
+<p>Pythonで <code class="docutils literal notranslate"><span class="pre">if</span></code> 文を書く際には，以下のように書く．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">条件式</span><span class="p">:</span>
+    <span class="n">処理内容</span>
+</pre></div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">重要なポイント</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code>と条件式の間には半角スペースを空ける</p></li>
+<li><p>条件式の後にはコロン「<code class="docutils literal notranslate"><span class="pre">:</span></code>」を付ける</p></li>
+<li><p>処理内容の前にインデントを入れる</p></li>
+</ul>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">if</span></code> に続けて書いた条件式が <code class="docutils literal notranslate"><span class="pre">True</span></code> のとき（つまり条件を満たすとき），インデントされたブロック内の処理が実行される．
+一方，条件式が <code class="docutils literal notranslate"><span class="pre">False</span></code> のとき（つまり条件を満たさないとき）には処理は実行されない．</p>
+<p>以下のコードは <code class="docutils literal notranslate"><span class="pre">int</span></code> 型変数 <code class="docutils literal notranslate"><span class="pre">a</span></code>，<code class="docutils literal notranslate"><span class="pre">b</span></code> を定義し，「<code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> が等しい」 とき文字列を出力するコードである．実行して確認してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">と</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">は等しいです．&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3と3は等しいです．
+</pre></div>
+</div>
+</div>
+</div>
+<p>なお，上記のプリント文では f-string表記を利用した．詳しくは 第2回の<a class="reference external" href="../02/variables_and_data_types.html#print">【発展】print文</a> を参照されたい．
+以降，このf-string表記を利用してprint文を表記することが増えるので，注意しておこう．</p>
+<p>上記プログラムの <code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> の値を色々変えてみて，出力がそれに応じて変化することを確認せよ．</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">条件式:</span></code> の後にインデントを入れ忘れると，<code class="docutils literal notranslate"><span class="pre">IndentationError:</span> <span class="pre">expected</span> <span class="pre">an</span> <span class="pre">indented</span> <span class="pre">block</span></code> というエラーメッセージが表示される．
+慣れないうちはインデントを入れ忘れてこのようなエラーにたびたび遭遇するかもしれないが，焦らず対処しよう．</p>
+<p>実際に以下のコードを実行して，エラーメッセージを確認してみよう．</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">と</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">は等しいです．&#39;</span><span class="p">)</span> <span class="c1"># if文の後にインデントを入れ忘れている</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span>  <span class="n">Input</span> <span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">と</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">は等しいです．&#39;</span><span class="p">)</span> <span class="c1"># if文の後にインデントを入れ忘れている</span>
+    <span class="o">^</span>
+<span class="ne">IndentationError</span>: expected an indented block
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="if-else">
+<h2><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">else</span></code>文<a class="headerlink" href="#if-else" title="Permalink to this headline">#</a></h2>
+<p>「もし〇〇ならA，そうでなければB」のような処理を行いたい場合，<code class="docutils literal notranslate"><span class="pre">else</span></code> を用いる．</p>
+<p><img alt="" src="../../_images/if_else.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">条件式</span><span class="p">:</span>
+    <span class="n">処理内容1</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">処理内容2</span>
+</pre></div>
+</div>
+<p>条件式が <code class="docutils literal notranslate"><span class="pre">True</span></code> であれば <code class="docutils literal notranslate"><span class="pre">if</span></code> 直後のブロックが，<code class="docutils literal notranslate"><span class="pre">False</span></code> であれば <code class="docutils literal notranslate"><span class="pre">else</span></code> 直後のブロックがそれぞれ実行される．
+なお，<code class="docutils literal notranslate"><span class="pre">True</span></code> であった場合，<code class="docutils literal notranslate"><span class="pre">else</span></code> 直後のブロックは実行されない．</p>
+<p>以下のコードは <code class="docutils literal notranslate"><span class="pre">int</span></code> 変数で定義した <code class="docutils literal notranslate"><span class="pre">a</span></code>，<code class="docutils literal notranslate"><span class="pre">b</span></code> に関する <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">else</span></code> 文の例である．
+セルを実行して確認してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">6</span>
+
+<span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">と</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">は等しいです．&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">と</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">は等しくありません．&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> の値を色々変えてみて，出力がそれに応じて変化することを確認せよ．</p>
+</section>
+<section id="if-elif-else">
+<h2><code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">elif</span> <span class="pre">...</span> <span class="pre">else</span></code> 文<a class="headerlink" href="#if-elif-else" title="Permalink to this headline">#</a></h2>
+<p>「もし〇〇ならA，そうでない場合で△△ならばB」のような処理を行いたい場合，<code class="docutils literal notranslate"><span class="pre">elif</span></code>（else if）を用いる．</p>
+<p><img alt="" src="../../_images/if_elif_else.png" /></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">条件式1</span><span class="p">:</span>
+    <span class="n">処理内容1</span>
+<span class="k">elif</span> <span class="n">条件式2</span><span class="p">:</span>
+    <span class="n">処理内容2</span>
+<span class="k">elif</span> <span class="n">条件式3</span><span class="p">:</span>
+    <span class="n">処理内容3</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">処理内容4</span>
+</pre></div>
+</div>
+<p>それぞれの条件式は上から順番に評価され，条件式が <code class="docutils literal notranslate"><span class="pre">True</span></code> であった場合，直後のブロックのみが実行されて条件式の評価は終了する．
+すべての条件式が <code class="docutils literal notranslate"><span class="pre">False</span></code> であった場合，<code class="docutils literal notranslate"><span class="pre">else</span></code> 直後のブロックが実行される（なお <code class="docutils literal notranslate"><span class="pre">else</span></code> が不要な場合は省略しても良い）．
+また，<code class="docutils literal notranslate"><span class="pre">elif</span></code> は必要に応じて何個でも用いることができる．</p>
+<p>ポイントとしては，処理内容のうち条件を満たしたいずれか一つが実行されることである．</p>
+<p>以下，<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">elif</span> <span class="pre">...</span> <span class="pre">else</span></code> 文の例を示す．セルを実行して確認してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">と</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">は等しいです．&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">は</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">より大きいです．&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1">は</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1">より小さいです．&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> の値を色々変えてみて，出力がそれに応じて変化することを確認せよ．</p>
+</section>
+<section id="id12">
+<h2>複数の条件の組み合わせ<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<section id="id13">
+<h3><code class="docutils literal notranslate"><span class="pre">if</span></code> 文の入れ子構造<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p>実現した条件分岐が複雑な場合，<code class="docutils literal notranslate"><span class="pre">if</span></code> 文の中にさらに <code class="docutils literal notranslate"><span class="pre">if</span></code> 文を記述して，<strong>入れ子</strong> 構造の条件分岐を作ることができる．
+このような場合，インデントは以下のようにさらに深くなる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">条件式1</span><span class="p">:</span>
+    <span class="n">処理1</span>
+    <span class="k">if</span> <span class="n">条件式2</span><span class="p">:</span>
+        <span class="n">処理2</span>
+        <span class="k">if</span> <span class="n">条件式3</span><span class="p">:</span>
+            <span class="n">処理3</span>
+</pre></div>
+</div>
+<p>このような入れ子構造の <code class="docutils literal notranslate"><span class="pre">if</span></code> 文では，深いインデントにおける <code class="docutils literal notranslate"><span class="pre">if</span></code> 文は，上位の条件式が満たされた場合のみ実行されることに注意する．
+例えば，4行目の <code class="docutils literal notranslate"><span class="pre">処理2</span></code> のブロックは，<code class="docutils literal notranslate"><span class="pre">条件式1</span></code> と <code class="docutils literal notranslate"><span class="pre">条件式2</span></code> の両方が <code class="docutils literal notranslate"><span class="pre">True</span></code> の時に実行される．
+同様に，6行目の <code class="docutils literal notranslate"><span class="pre">処理3</span></code>　のブロックは， <code class="docutils literal notranslate"><span class="pre">条件式1</span></code>, <code class="docutils literal notranslate"><span class="pre">条件式2</span></code>, <code class="docutils literal notranslate"><span class="pre">条件式3</span></code> の全てが <code class="docutils literal notranslate"><span class="pre">True</span></code> の時のみ実行される．</p>
+<p>このように複数の条件が同時に成り立つ場合に処理を実行したい場合は，次に示す <code class="docutils literal notranslate"><span class="pre">and</span></code> や <code class="docutils literal notranslate"><span class="pre">or</span></code> といった <strong>論理演算子</strong> を使うこともできる．
+以下に，論理演算子の一覧を示す．</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>演算子</p></th>
+<th class="head"><p>役割</p></th>
+<th class="head"><p><code class="docutils literal notranslate"><span class="pre">True</span></code> となる条件</p></th>
+<th class="head"><p>例</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">and</span> <span class="pre">B</span></code></p></td>
+<td><p>論理積</p></td>
+<td><p>条件式 <code class="docutils literal notranslate"><span class="pre">A</span></code> と条件式 <code class="docutils literal notranslate"><span class="pre">B</span></code> の両方が成り立つとき</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">and</span> <span class="pre">b</span> <span class="pre">&lt;</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">A</span> <span class="pre">or</span> <span class="pre">B</span></code></p></td>
+<td><p>論理和</p></td>
+<td><p>条件式 <code class="docutils literal notranslate"><span class="pre">A</span></code> と条件式 <code class="docutils literal notranslate"><span class="pre">B</span></code> のどちらか一方が成り立つとき</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">a</span> <span class="pre">&gt;</span> <span class="pre">0</span> <span class="pre">or</span> <span class="pre">b</span> <span class="pre">&lt;</span> <span class="pre">0</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">A</span></code></p></td>
+<td><p>否定</p></td>
+<td><p>条件式 <code class="docutils literal notranslate"><span class="pre">A</span></code> が成り立たないとき</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">a</span> <span class="pre">&lt;</span> <span class="pre">0</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>なお，<code class="docutils literal notranslate"><span class="pre">not</span></code> は複数条件の組み合わせではなく，「ある条件が満たされない」という条件式を記述するときに利用される．</p>
+</section>
+<section id="ab">
+<h3>条件式Aかつ条件式Bが成り立つなら<a class="headerlink" href="#ab" title="Permalink to this headline">#</a></h3>
+<p>複数の条件が両方成り立った場合のみ処理を実行したい場合，<code class="docutils literal notranslate"><span class="pre">and</span></code> を用いて各条件式を結合して書くことができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">条件式A</span> <span class="ow">and</span> <span class="n">条件式B</span><span class="p">:</span>
+    <span class="n">処理</span>
+</pre></div>
+</div>
+<p>上記の例だと，<code class="docutils literal notranslate"><span class="pre">条件式A</span></code> と <code class="docutils literal notranslate"><span class="pre">条件式B</span></code> の両方が <code class="docutils literal notranslate"><span class="pre">True</span></code> であった場合のみ処理が実行される．</p>
+</section>
+<section id="id14">
+<h3>条件式Aまたは条件式Bが成り立つなら<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<p>複数の条件のうち，いずれかが成り立った場合のみ処理を実行したい場合，<code class="docutils literal notranslate"><span class="pre">or</span></code> を用いて各条件式を結合して書くことができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="n">条件式A</span> <span class="ow">or</span> <span class="n">条件式B</span><span class="p">:</span>
+    <span class="n">処理</span>
+</pre></div>
+</div>
+<p>上記の例だと，<code class="docutils literal notranslate"><span class="pre">条件式A</span></code> と <code class="docutils literal notranslate"><span class="pre">条件式B</span></code> のうち片方が <code class="docutils literal notranslate"><span class="pre">True</span></code> であれば処理が実行される．</p>
+<p>以下は，変数 <code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> の値の両方またはいずれかがゼロかどうかを判定するコードである．</p>
+<p><code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> の値を変えながら，出力が変わることを確認せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">b</span> <span class="o">=</span> <span class="mi">0</span>
+
+<span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;変数 a=</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> と b=</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> は両方とも0です．&#39;</span><span class="p">)</span>
+<span class="k">elif</span> <span class="n">a</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;変数 a=</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> と b=</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> はどちらかが0です．&#39;</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;変数 a=</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> と b=</span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> は両方とも0ではありません．&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>なお可読性のため，論理演算子で繋がれた各条件式を，以下のように括弧で囲って表記することもある．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
+    <span class="n">処理内容</span>
+</pre></div>
+</div>
+<div class="admonition-if admonition">
+<p class="admonition-title">if文などを用いた条件分岐のまとめ</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> 文，<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">else</span></code> 文，<code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">elif</span> <span class="pre">...</span> <span class="pre">else</span></code> 文を用いると，条件式に応じて処理を切り替えられる．</p>
+<ul>
+<li><p>「もし〇〇ならばA」： <code class="docutils literal notranslate"><span class="pre">if</span></code> 文</p></li>
+<li><p>「もし〇〇ならばA，そうでなければB」： <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">else</span></code> 文</p></li>
+<li><p>「もし〇〇ならばA，そうでない場合で△△ならばB，そうでなければC」： <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">elif</span> <span class="pre">...</span> <span class="pre">else</span></code> 文</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">if</span></code> 文を入れ子にすることで，複雑な条件分岐を作ることができる．</p></li>
+<li><p>論理演算子を用いることで，複数の条件を組み合わせることができる．</p>
+<ul>
+<li><p>どちらも成り立つとき：論理積（<code class="docutils literal notranslate"><span class="pre">and</span></code>）</p></li>
+<li><p>いずれかが成り立つとき：論理和（<code class="docutils literal notranslate"><span class="pre">or</span></code>）</p></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id15">
+<h2>【発展】3項演算子<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h2>
+<p>Pythonでは，以下のように1行で <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">...</span> <span class="pre">else</span></code> 文を書くことができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Trueの場合の処理</span> <span class="k">if</span> <span class="n">条件式</span> <span class="k">else</span> <span class="n">Falseの場合の処理</span>
+</pre></div>
+</div>
+<p>以下に例を示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;0以上です．&#39;</span> <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s1">&#39;0より小さいです．&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>これを普通の <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">~</span> <span class="pre">else</span></code> 文で書くと，以下のようになる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;0以上です．&#39;</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;0より小さいです．&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/04"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../03/exercise_variables_and_data_types.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第3回：変数とデータ型（演習）</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../05/exercise_conditional_branch.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第5回：条件分岐（演習）</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
