@@ -7,7 +7,7 @@ Traceback (most recent call last):
     return just_run(coro(*args, **kwargs))
   File "/Users/furui/envs/zeropro-book/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
     return loop.run_until_complete(coro)
-  File "/opt/homebrew/Cellar/python@3.9/3.9.13_3/Frameworks/Python.framework/Versions/3.9/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+  File "/Users/furui/.pyenv/versions/3.9.7/lib/python3.9/asyncio/base_events.py", line 642, in run_until_complete
     return future.result()
   File "/Users/furui/envs/zeropro-book/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
     await self.async_execute_cell(
@@ -23,10 +23,10 @@ if a == b:
 print(f'{a}と{b}は等しいです．') # if文の後にインデントを入れ忘れている
 ------------------
 
-[0;36m  Input [0;32mIn [23][0;36m[0m
+[0;36m  File [0;32m"<ipython-input-23-e10d26aacd68>"[0;36m, line [0;32m4[0m
 [0;31m    print(f'{a}と{b}は等しいです．') # if文の後にインデントを入れ忘れている[0m
-[0m    ^[0m
+[0m        ^[0m
 [0;31mIndentationError[0m[0;31m:[0m expected an indented block
 
-IndentationError: expected an indented block (4061242926.py, line 4)
+IndentationError: expected an indented block (<ipython-input-23-e10d26aacd68>, line 4)
 
