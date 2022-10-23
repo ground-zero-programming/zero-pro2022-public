@@ -35,7 +35,7 @@
 | [第3回：変数とデータ型（演習）](docs/03/exercise_variables_and_data_types.ipynb)  | - | <del>10/20</del> | [Open](docs/03_ans/answer_variables_and_data_types.ipynb) |
 | [第4回：条件分岐（講義）](docs/04/conditional_branch.ipynb) | [Play](https://web.microsoftstream.com/video/ea304ce1-d621-401d-9218-77ca8a5f02f1) | - | - |
 | [第5回：条件分岐（演習）](docs/05/exercise_conditional_branch.ipynb) | - | 10/27 | 10/28公開 |
-| [第6回：繰り返し処理（講義）](docs/06/loops.ipynb) | 準備中 | - | - |
+| [第6回：繰り返し処理（講義）](docs/06/loops.ipynb) | [Play](https://web.microsoftstream.com/video/98820113-4ad5-434d-8530-4bf93a934668) | - | - |
 | [第7回：繰り返し処理（演習）](docs/07/exercise_loops.ipynb)  | - | 11/3 | 11/4公開 |
 | [第8回：関数とスコープ（講義）](docs/08/functions_and_scope.ipynb) | 準備中 | - | - |
 | [第9回：関数とスコープ（演習）](docs/09/exercise_functions_and_scope.ipynb) |- | 11/10 | 11/11公開 |
