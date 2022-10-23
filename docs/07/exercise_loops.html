@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>第3回：変数とデータ型（演習） &#8212; ゼロから始めるプログラミング</title>
+    <title>第7回：繰り返し処理（演習） &#8212; ゼロから始めるプログラミング</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -54,8 +54,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
-    <link rel="next" title="第4回：条件分岐（講義）" href="../04/conditional_branch.html" />
-    <link rel="prev" title="第2回：変数とデータ型（講義）" href="../02/variables_and_data_types.html" />
+    <link rel="next" title="課題提出方法" href="../submission/submission.html" />
+    <link rel="prev" title="第6回：繰り返し処理（講義）" href="../06/loops.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -131,8 +131,8 @@ const thebe_selector_output = ".output, .cell_output"
    第2回：変数とデータ型（講義）
   </a>
  </li>
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
    第3回：変数とデータ型（演習）
   </a>
  </li>
@@ -151,8 +151,8 @@ const thebe_selector_output = ".output, .cell_output"
    第6回：繰り返し処理（講義）
   </a>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../07/exercise_loops.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    第7回：繰り返し処理（演習）
   </a>
  </li>
@@ -237,7 +237,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/03/exercise_variables_and_data_types.ipynb"
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/07/exercise_loops.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -297,7 +297,7 @@ title="Source repository"
       </li>
       
       <li>
-        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/03/exercise_variables_and_data_types.html&body=Your%20issue%20content%20here."
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/07/exercise_loops.html&body=Your%20issue%20content%20here."
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -325,7 +325,7 @@ title="Open an issue"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../../_sources/docs/03/exercise_variables_and_data_types.ipynb"
+        <a href="../../_sources/docs/07/exercise_loops.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -386,106 +386,82 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   演習1：変数の代入
+   演習1:リストの作成
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   演習2：変数の出力
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   演習3：変数の型の確認
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   演習4：数値データの演算
+   演習2:繰り返し処理
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rangefor">
+     演習2-1:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       range
+      </span>
+     </code>
+     関数を用いたfor文よる繰り返し処理
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     演習2-2:繰り返し処理と演算
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     演習2-3：リストの作成
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
-     演習4-1：数値データの和
+     演習2-4：繰り返し処理と文字列
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
-     演習4-2：数値データの差
+     演習2-5：繰り返し処理による文字列処理
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id8">
-     演習4-3：数値データの積
+     演習2-6：繰り返し処理による文字列処理
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     演習4-4：数値データの商
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   演習3:繰り返し処理と条件分岐
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id10">
-     演習4-5：数値データの剰余
+     演習3-1:繰り返し処理と条件分岐
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id11">
-     演習4-5：数値データの冪乗
+     演習3-2:繰り返し処理と条件分岐
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id12">
-   演習5：文字列
+   演習4:発展課題
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id13">
-     演習5-1：文字列の代入と出力
+     演習4-1: 繰り返し処理による文字出力
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
-     演習5-2：文字数の取得
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id15">
-     演習5-3：文字列のインデキシング
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id16">
-     演習5-4：文字列のスライシング
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id17">
-   演習6：リスト
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id18">
-     演習6-1：リストの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id19">
-     演習6-2：リストの要素数の計算
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id20">
-     演習6-3：リストのインデキシング
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id21">
-     演習6-4：リストのスライシング
+    <a class="reference internal nav-link" href="#fizzbuzz">
+     演習4-2: 繰り返し処理によるFizzBuzz問題
     </a>
    </li>
   </ul>
@@ -499,7 +475,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>第3回：変数とデータ型（演習）</h1>
+                <h1>第7回：繰り返し処理（演習）</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -511,106 +487,82 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   演習1：変数の代入
+   演習1:リストの作成
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   演習2：変数の出力
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   演習3：変数の型の確認
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   演習4：数値データの演算
+   演習2:繰り返し処理
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#rangefor">
+     演習2-1:
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       range
+      </span>
+     </code>
+     関数を用いたfor文よる繰り返し処理
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     演習2-2:繰り返し処理と演算
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     演習2-3：リストの作成
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
-     演習4-1：数値データの和
+     演習2-4：繰り返し処理と文字列
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
-     演習4-2：数値データの差
+     演習2-5：繰り返し処理による文字列処理
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id8">
-     演習4-3：数値データの積
+     演習2-6：繰り返し処理による文字列処理
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     演習4-4：数値データの商
-    </a>
-   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   演習3:繰り返し処理と条件分岐
+  </a>
+  <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id10">
-     演習4-5：数値データの剰余
+     演習3-1:繰り返し処理と条件分岐
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id11">
-     演習4-5：数値データの冪乗
+     演習3-2:繰り返し処理と条件分岐
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id12">
-   演習5：文字列
+   演習4:発展課題
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id13">
-     演習5-1：文字列の代入と出力
+     演習4-1: 繰り返し処理による文字出力
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
-     演習5-2：文字数の取得
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id15">
-     演習5-3：文字列のインデキシング
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id16">
-     演習5-4：文字列のスライシング
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id17">
-   演習6：リスト
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id18">
-     演習6-1：リストの作成
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id19">
-     演習6-2：リストの要素数の計算
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id20">
-     演習6-3：リストのインデキシング
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id21">
-     演習6-4：リストのスライシング
+    <a class="reference internal nav-link" href="#fizzbuzz">
+     演習4-2: 繰り返し処理によるFizzBuzz問題
     </a>
    </li>
   </ul>
@@ -626,225 +578,29 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>第3回：変数とデータ型（演習）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1>第7回：繰り返し処理（演習）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>学籍番号：…</p>
 <p>氏名：…</p>
 <hr class="docutils" />
 <section id="id2">
-<h2>演習1：変数の代入<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>整数<code class="docutils literal notranslate"><span class="pre">11</span></code>を変数<code class="docutils literal notranslate"><span class="pre">a</span></code>に代入せよ</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id3">
-<h2>演習2：変数の出力<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p><code class="docutils literal notranslate"><span class="pre">print</span></code>文を利用して変数<code class="docutils literal notranslate"><span class="pre">a</span></code>の値を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">11</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id4">
-<h2>演習3：変数の型の確認<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>変数<code class="docutils literal notranslate"><span class="pre">a</span></code>のデータ型を<code class="docutils literal notranslate"><span class="pre">type</span></code>関数を利用して確認せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;int&#39;&gt;
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id5">
-<h2>演習4：数値データの演算<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<section id="id6">
-<h3>演習4-1：数値データの和<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
-<p>整数値13が格納された変数<code class="docutils literal notranslate"><span class="pre">a</span></code>と整数値4が格納された変数<code class="docutils literal notranslate"><span class="pre">b</span></code>をそれぞれ定義し，<code class="docutils literal notranslate"><span class="pre">a</span></code>と<code class="docutils literal notranslate"><span class="pre">b</span></code>の足し算の結果を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">17</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id7">
-<h3>演習4-2：数値データの差<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
-<p>整数値13が格納された変数<code class="docutils literal notranslate"><span class="pre">a</span></code>と整数値4が格納された変数<code class="docutils literal notranslate"><span class="pre">b</span></code>をそれぞれ定義し，<code class="docutils literal notranslate"><span class="pre">a</span></code>から<code class="docutils literal notranslate"><span class="pre">b</span></code>を引いた時の値を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">9</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id8">
-<h3>演習4-3：数値データの積<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
-<p>整数値13が格納された変数<code class="docutils literal notranslate"><span class="pre">a</span></code>と整数値4が格納された変数<code class="docutils literal notranslate"><span class="pre">b</span></code>をそれぞれ定義し，<code class="docutils literal notranslate"><span class="pre">a</span></code>と<code class="docutils literal notranslate"><span class="pre">b</span></code>の積の結果を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">52</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id9">
-<h3>演習4-4：数値データの商<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
-<p>整数値13が格納された変数<code class="docutils literal notranslate"><span class="pre">a</span></code>と整数値4が格納された変数<code class="docutils literal notranslate"><span class="pre">b</span></code>をそれぞれ定義し，<code class="docutils literal notranslate"><span class="pre">a</span></code>を<code class="docutils literal notranslate"><span class="pre">b</span></code>で割った結果を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">3.25</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id10">
-<h3>演習4-5：数値データの剰余<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
-<p>整数値13が格納された変数<code class="docutils literal notranslate"><span class="pre">a</span></code>と整数値4が格納された変数<code class="docutils literal notranslate"><span class="pre">b</span></code>をそれぞれ定義し，<code class="docutils literal notranslate"><span class="pre">a</span></code>を<code class="docutils literal notranslate"><span class="pre">b</span></code>で割ったときの余りを出力せよ</p>
-<p><strong>出力例</strong></p>
+<h2>演習1:リストの作成<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>以下の値を持つリスト<code class="docutils literal notranslate"><span class="pre">l</span></code>を作成し，<code class="docutils literal notranslate"><span class="pre">l</span></code>の値とデータ型を出力せよ</p>
+<p><strong>リストの値</strong></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">4</span>
+<span class="mi">8</span>
+<span class="mi">16</span>
+<span class="mi">32</span>
+<span class="mi">64</span>
+<span class="mi">128</span>
+<span class="mi">256</span>
+<span class="mi">512</span>
+<span class="mi">1024</span>
 </pre></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id11">
-<h3>演習4-5：数値データの冪乗<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
-<p>整数値13が格納された変数<code class="docutils literal notranslate"><span class="pre">a</span></code>と整数値4が格納された変数<code class="docutils literal notranslate"><span class="pre">b</span></code>をそれぞれ定義し，<span class="math notranslate nohighlight">\(a^b\)</span>の結果を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">28561</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="id12">
-<h2>演習5：文字列<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
-<section id="id13">
-<h3>演習5-1：文字列の代入と出力<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
-<p>文字列<code class="docutils literal notranslate"><span class="pre">Ground</span> <span class="pre">Zero</span> <span class="pre">Programming!</span></code>が格納された変数<code class="docutils literal notranslate"><span class="pre">s</span></code>を定義し，変数の中身とデータ型を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>Ground Zero Programming!
-&lt;class &#39;str&#39;&gt;
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id14">
-<h3>演習5-2：文字数の取得<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
-<p>演習5-1で定義した変数<code class="docutils literal notranslate"><span class="pre">s</span></code>の文字数を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">24</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id15">
-<h3>演習5-3：文字列のインデキシング<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
-<p>演習5-1で定義した変数<code class="docutils literal notranslate"><span class="pre">s</span></code>についてインデキシングを利用して<code class="docutils literal notranslate"><span class="pre">G</span></code>，<code class="docutils literal notranslate"><span class="pre">Z</span></code>，<code class="docutils literal notranslate"><span class="pre">P</span></code>，<code class="docutils literal notranslate"><span class="pre">!</span></code>を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>G
-Z
-P
-!
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-<section id="id16">
-<h3>演習5-4：文字列のスライシング<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
-<p>演習5-1で定義した変数<code class="docutils literal notranslate"><span class="pre">s</span></code>についてスライシングを利用して<code class="docutils literal notranslate"><span class="pre">Zero</span></code>を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">Zero</span>
-</pre></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
-</pre></div>
-</div>
-</div>
-</div>
-</section>
-</section>
-<section id="id17">
-<h2>演習6：リスト<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h2>
-<section id="id18">
-<h3>演習6-1：リストの作成<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h3>
-<p>以下の4つの値を持つリスト <code class="docutils literal notranslate"><span class="pre">l</span></code> を作成し，<code class="docutils literal notranslate"><span class="pre">l</span></code>の値とデータ型を出力せよ</p>
-<p><strong>値</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">27.4</span>
-<span class="mf">29.0</span>
-<span class="mf">33.8</span>
-<span class="mf">30.1</span>
-</pre></div>
-</div>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>[27.4, 29.0, 33.8, 30.1]
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>[1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
 &lt;class &#39;list&#39;&gt;
 </pre></div>
 </div>
@@ -856,11 +612,23 @@ P
 </div>
 </div>
 </section>
-<section id="id19">
-<h3>演習6-2：リストの要素数の計算<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h3>
-<p>演習6-1で定義したリスト<code class="docutils literal notranslate"><span class="pre">l</span></code>の要素数を出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">4</span>
+<section id="id3">
+<h2>演習2:繰り返し処理<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<section id="rangefor">
+<h3>演習2-1:<code class="docutils literal notranslate"><span class="pre">range</span></code>関数を用いたfor文よる繰り返し処理<a class="headerlink" href="#rangefor" title="Permalink to this headline">#</a></h3>
+<p>以下の出力結果となるように<code class="docutils literal notranslate"><span class="pre">range</span></code>関数と<code class="docutils literal notranslate"><span class="pre">for</span></code>文を用いて<span class="math notranslate nohighlight">\({0,1,2,...,10}\)</span>の値を出力する処理を作成せよ</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">0</span>
+<span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">3</span>
+<span class="mi">4</span>
+<span class="mi">5</span>
+<span class="mi">6</span>
+<span class="mi">7</span>
+<span class="mi">8</span>
+<span class="mi">9</span>
+<span class="mi">10</span>
 </pre></div>
 </div>
 <div class="cell docutils container">
@@ -871,11 +639,21 @@ P
 </div>
 </div>
 </section>
-<section id="id20">
-<h3>演習6-3：リストのインデキシング<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h3>
-<p>演習6-1で定義したリスト<code class="docutils literal notranslate"><span class="pre">l</span></code>に含まれる値<code class="docutils literal notranslate"><span class="pre">33.8</span></code>をインデキシングを利用して出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mf">33.8</span>
+<section id="id4">
+<h3>演習2-2:繰り返し処理と演算<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>演習2-1で作成した繰り返し処理を使って以下の出力結果となる処理を作成せよ</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">1</span>
+<span class="mi">2</span>
+<span class="mi">4</span>
+<span class="mi">8</span>
+<span class="mi">16</span>
+<span class="mi">32</span>
+<span class="mi">64</span>
+<span class="mi">128</span>
+<span class="mi">256</span>
+<span class="mi">512</span>
+<span class="mi">1024</span>
 </pre></div>
 </div>
 <div class="cell docutils container">
@@ -886,11 +664,212 @@ P
 </div>
 </div>
 </section>
-<section id="id21">
-<h3>演習6-4：リストのスライシング<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h3>
-<p>演習6-1で定義したリスト<code class="docutils literal notranslate"><span class="pre">l</span></code>に含まれる2つの値<code class="docutils literal notranslate"><span class="pre">29.0</span></code>と<code class="docutils literal notranslate"><span class="pre">33.8</span></code>をスライシングを利用して出力せよ</p>
-<p><strong>出力例</strong></p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mf">29.0</span><span class="p">,</span> <span class="mf">33.8</span><span class="p">]</span>
+<section id="id5">
+<h3>演習2-3：リストの作成<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>演習1で作成したリスト<code class="docutils literal notranslate"><span class="pre">l</span></code>と同じリスト<code class="docutils literal notranslate"><span class="pre">l_loop</span></code>を繰り返し処理と<code class="docutils literal notranslate"><span class="pre">append</span></code>関数を用いて作成せよ</p>
+<p>また作成したリストの値とデータ型を出力せよ</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>[1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024]
+&lt;class &#39;list&#39;&gt;
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>演習2-4：繰り返し処理と文字列<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>文字列<code class="docutils literal notranslate"><span class="pre">hiroshima</span></code>を作成し，以下の出力結果となるように繰り返し処理を作成せよ．</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>
+<span class="n">i</span>
+<span class="n">r</span>
+<span class="n">o</span>
+<span class="n">s</span>
+<span class="n">h</span>
+<span class="n">i</span>
+<span class="n">m</span>
+<span class="n">a</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>演習2-5：繰り返し処理による文字列処理<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>文字列<code class="docutils literal notranslate"><span class="pre">hiroshima</span></code>を作成し，以下の出力結果となるような繰り返し処理を作成せよ．</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span><span class="o">-</span><span class="mi">1</span>
+<span class="n">i</span><span class="o">-</span><span class="mi">2</span>
+<span class="n">r</span><span class="o">-</span><span class="mi">3</span>
+<span class="n">o</span><span class="o">-</span><span class="mi">4</span>
+<span class="n">s</span><span class="o">-</span><span class="mi">5</span>
+<span class="n">h</span><span class="o">-</span><span class="mi">6</span>
+<span class="n">i</span><span class="o">-</span><span class="mi">7</span>
+<span class="n">m</span><span class="o">-</span><span class="mi">8</span>
+<span class="n">a</span><span class="o">-</span><span class="mi">9</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h3>演習2-6：繰り返し処理による文字列処理<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>文字列<code class="docutils literal notranslate"><span class="pre">hiroshima</span></code>を作成し，以下の出力結果となるような繰り返し処理を作成せよ．</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>
+<span class="n">ii</span>
+<span class="n">rrr</span>
+<span class="n">oooo</span>
+<span class="n">sssss</span>
+<span class="n">hhhhhh</span>
+<span class="n">iiiiiii</span>
+<span class="n">mmmmmmmm</span>
+<span class="n">aaaaaaaaa</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id9">
+<h2>演習3:繰り返し処理と条件分岐<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<section id="id10">
+<h3>演習3-1:繰り返し処理と条件分岐<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>以下の出力のように<span class="math notranslate nohighlight">\({1,2,...,999}\)</span>の数の中で<span class="math notranslate nohighlight">\(123\)</span>で割り切れる値をすべて出力せよ</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="mi">123</span>
+<span class="mi">246</span>
+<span class="mi">369</span>
+<span class="mi">492</span>
+<span class="mi">615</span>
+<span class="mi">738</span>
+<span class="mi">861</span>
+<span class="mi">984</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h3>演習3-2:繰り返し処理と条件分岐<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>以下の出力となるような繰り返し処理を作成せよ．ただし，<code class="docutils literal notranslate"><span class="pre">文字列.upper()</span></code>で小文字から大文字へ変換できるとする．</p>
+<p><strong>出力</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">h</span>
+<span class="n">II</span>
+<span class="n">rrr</span>
+<span class="n">OOOO</span>
+<span class="n">sssss</span>
+<span class="n">HHHHHH</span>
+<span class="n">iiiiiii</span>
+<span class="n">MMMMMMMM</span>
+<span class="n">aaaaaaaaa</span>
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 小文字から大文字への変換例</span>
+<span class="n">s</span> <span class="o">=</span> <span class="s1">&#39;abc&#39;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ABC
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id12">
+<h2>演習4:発展課題<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<p>これ以降は発展的な演習課題となります． 解くことは必須ではありませんが，繰り返し処理を応用する良い練習になるので，ぜひチャレンジしてみてください．</p>
+<section id="id13">
+<h3>演習4-1: 繰り返し処理による文字出力<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p>繰り返し処理を使って以下の出力を得よ．</p>
+<div class="highlight-:python notranslate"><div class="highlight"><pre><span></span>         H
+        III
+       RRRRR
+      OOOOOOO
+     SSSSSSSSS
+    HHHHHHHHHHH
+   IIIIIIIIIIIII
+  MMMMMMMMMMMMMMM
+ AAAAAAAAAAAAAAAAA
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="fizzbuzz">
+<h3>演習4-2: 繰り返し処理によるFizzBuzz問題<a class="headerlink" href="#fizzbuzz" title="Permalink to this headline">#</a></h3>
+<p>条件分岐の発展課題のFizzBuzz問題を繰り返し処理で拡張する．
+変数 <code class="docutils literal notranslate"><span class="pre">number</span></code> の値を <code class="docutils literal notranslate"><span class="pre">1</span></code> から <code class="docutils literal notranslate"><span class="pre">20</span></code> まで繰り返し，<code class="docutils literal notranslate"><span class="pre">number</span></code> が</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">3</span></code> で割り切れて <code class="docutils literal notranslate"><span class="pre">5</span></code> で割り切れないときは「<code class="docutils literal notranslate"><span class="pre">Fizz</span></code>」と出力</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">5</span></code> で割り切れて <code class="docutils literal notranslate"><span class="pre">3</span></code> で割り切れない時は「<code class="docutils literal notranslate"><span class="pre">Buzz</span></code>」と出力</p></li>
+<li><p>両方で割り切れるときは「<code class="docutils literal notranslate"><span class="pre">FizzBuzz</span></code>」と出力</p></li>
+<li><p>両方で割り切れないときは，入力した数をそのまま出力</p></li>
+</ul>
+<p>とされるような繰り返し処理を実装せよ．</p>
+<p>出力例は以下である．</p>
+<div class="highlight-:python notranslate"><div class="highlight"><pre><span></span>1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+16
+17
+Fizz
+19
+Buzz
 </pre></div>
 </div>
 <div class="cell docutils container">
@@ -917,7 +896,7 @@ P
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./docs/03"
+            path: "./docs/07"
         },
         predefinedOutput: true
     }
@@ -931,17 +910,17 @@ P
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../02/variables_and_data_types.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../06/loops.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">第2回：変数とデータ型（講義）</p>
+            <p class="prev-next-title">第6回：繰り返し処理（講義）</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../04/conditional_branch.html" title="next page">
+    <a class='right-next' id="next-link" href="../submission/submission.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">第4回：条件分岐（講義）</p>
+        <p class="prev-next-title">課題提出方法</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

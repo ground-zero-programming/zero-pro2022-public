@@ -1,0 +1,1541 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第6回：繰り返し処理（講義） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="第7回：繰り返し処理（演習）" href="../07/exercise_loops.html" />
+    <link rel="prev" title="第5回：条件分岐（演習）" href="../05/exercise_conditional_branch.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/variables_and_data_types.html">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/conditional_branch.html">
+   第4回：条件分岐（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/exercise_conditional_branch.html">
+   第5回：条件分岐（演習）
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第6回：繰り返し処理（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/exercise_loops.html">
+   第7回：繰り返し処理（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/06/loops.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/06/loops.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/06/loops.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   繰り返し処理とは？
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   繰り返し処理の利用場面
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     【発展】多重ループ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#range">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       range
+      </span>
+     </code>
+     関数
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     【発展】イテレータ
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#while">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     while
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#break">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     break
+    </span>
+   </code>
+   文によるループの終了
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continue">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     continue
+    </span>
+   </code>
+   文による次の繰り返しの開始
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate">
+   【発展】
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     enumerate
+    </span>
+   </code>
+   関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zip">
+   【発展】
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     zip
+    </span>
+   </code>
+   関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   【発展】辞書と
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   文によるリストの作成
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   【発展】内包表記
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第6回：繰り返し処理（講義）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   繰り返し処理とは？
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   繰り返し処理の利用場面
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#for">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   文
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     【発展】多重ループ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#range">
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       range
+      </span>
+     </code>
+     関数
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     【発展】イテレータ
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#while">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     while
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#break">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     break
+    </span>
+   </code>
+   文によるループの終了
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#continue">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     continue
+    </span>
+   </code>
+   文による次の繰り返しの開始
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#enumerate">
+   【発展】
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     enumerate
+    </span>
+   </code>
+   関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#zip">
+   【発展】
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     zip
+    </span>
+   </code>
+   関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   【発展】辞書と
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   文
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     for
+    </span>
+   </code>
+   文によるリストの作成
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   【発展】内包表記
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第6回：繰り返し処理（講義）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>担当：相澤宏旭</p>
+<section id="id2">
+<h2>内容<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>第6回 繰り返し処理では，ある処理を条件式に基づき繰り返す処理について学ぶ．プログラムにおいて繰り返し処理は複数のデータ値を持つ変数に対する演算，ユーザ入力の待機時間の実装など様々な場面で利用される．さらに，第4回で学んだ条件分岐と組み合わせることで繰り返し処理を停止させたり，繰り返される処理を制御できる．このような処理はPythonではfor文やwhile文で実装できる．具体的に，これらの文法について以下を学ぶ．</p>
+<ul class="simple">
+<li><p>一定回数繰り返すまたは条件に応じて処理を反復するための，for文とwhile文の基本文法を理解する．</p></li>
+<li><p>繰り返し処理を強制的に制御するbreakとcontinueの文法を学び，その動作を確認する．</p></li>
+<li><p>Pythonに実装されているより実用的な繰り返し処理を学ぶ．</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>繰り返し処理とは？<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>繰り返し処理とは，言葉の通り，ある処理を複数回繰り返す処理である．プログラムにおいて繰り返し処理は複数のデータ値を持つ変数に対する演算，ユーザ入力の待機時間の実装など様々な場面で利用される．また，条件分岐と組み合わせることで繰り返し処理を停止させたり，繰り返される処理を制御できるようになる．何より，複数回同じプログラムを記述する必要がなくなるため，コードの可読性を改善し，コード量も減らすことができる．</p>
+</section>
+<section id="id4">
+<h2>繰り返し処理の利用場面<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>第2回の講義で学んだリストの各要素に対して何らかの処理を加えて<code class="docutils literal notranslate"><span class="pre">print</span></code>で出力する場面を考える．例えば，以下のような曜日の文字列が格納されたリストを与えられ，<code class="docutils literal notranslate"><span class="pre">今日は...です</span></code>と要素を出力することを考える．このとき繰り返し処理を知らないならば以下のような出力方法が考えられる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">days</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Thursday&#39;</span><span class="p">,</span> <span class="s1">&#39;Friday&#39;</span><span class="p">,</span> <span class="s1">&#39;Saturday&#39;</span><span class="p">,</span> <span class="s1">&#39;Sunday&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>今日はMondayです
+今日はTuesdayです
+今日はWednesdayです
+今日はThursdayです
+今日はFridayです
+今日はSaturdayです
+今日はSundayです
+</pre></div>
+</div>
+</div>
+</div>
+<p>このように愚直に<code class="docutils literal notranslate"><span class="pre">print</span></code>文を要素数だけ記述すると各要素に対して何らかの演算と出力できる．続いて，平日の場合は<code class="docutils literal notranslate"><span class="pre">...は平日です</span></code>，休日の場合は<code class="docutils literal notranslate"><span class="pre">...は休日です</span></code>と出力することを考える．同様に<code class="docutils literal notranslate"><span class="pre">print</span></code>文を使って以下のように書ける．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s1">は平日です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s1">は平日です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="si">}</span><span class="s1">は平日です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span><span class="si">}</span><span class="s1">は平日です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span><span class="si">}</span><span class="s1">は平日です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span><span class="si">}</span><span class="s1">は休日です&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">days</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span><span class="si">}</span><span class="s1">は休日です&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mondayは平日です
+Tuesdayは平日です
+Wednesdayは平日です
+Thursdayは平日です
+Fridayは平日です
+Saturdayは休日です
+Sundayは休日です
+</pre></div>
+</div>
+</div>
+</div>
+<p>しかしながら，このような<code class="docutils literal notranslate"><span class="pre">print</span></code>文による処理は問題がある．わかりやすい問題点をいくつか述べると，1つ目に要素数が増えると<code class="docutils literal notranslate"><span class="pre">print</span></code>文の行数が増えること，2つ目に要素の順番が可変の場合は<code class="docutils literal notranslate"><span class="pre">print</span></code>文を修正する必要があること，3つ目に要素の数が可変の場合は<code class="docutils literal notranslate"><span class="pre">print</span></code>文では対処しきれないことが挙げられる．このような問題を解決する処理が繰り返し処理である．</p>
+</section>
+<section id="for">
+<h2><code class="docutils literal notranslate"><span class="pre">for</span></code>文<a class="headerlink" href="#for" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../../_images/for.png" /></p>
+<p>リストの各要素に対して繰り返し処理を適用する．もちろんリストだけでなくある処理を一定回数繰り返したい時に利用され，辞書やタプルといったデータ型（=オブジェクト）も繰り返すことができる．<code class="docutils literal notranslate"><span class="pre">for</span></code>文では繰り返される処理をインデントを使いコードブロックとして記述する．インデントの詳細については<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/04/conditional_branch.html#id10">第4回 条件分岐</a>を参照されたい．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">要素</span> <span class="ow">in</span> <span class="n">リスト</span><span class="p">:</span>
+    <span class="n">処理</span>
+</pre></div>
+</div>
+<p>使用例として曜日を要素として格納した<code class="docutils literal notranslate"><span class="pre">days</span></code>リストの各要素を出力する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">day</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+</pre></div>
+</div>
+</div>
+</div>
+<p>出力結果からもわかるように，リストの各要素に対して<code class="docutils literal notranslate"><span class="pre">print</span></code>文を書くことなく，すべての要素を出力できている．続いて，各要素に処理を加えて出力する場合を確認する．前述のように，<code class="docutils literal notranslate"><span class="pre">今日は...です</span></code>と文字列を加える処理を<code class="docutils literal notranslate"><span class="pre">for</span></code>文で記述する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;今日は</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s1">です&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>今日はMondayです
+今日はTuesdayです
+今日はWednesdayです
+今日はThursdayです
+今日はFridayです
+今日はSaturdayです
+今日はSundayです
+</pre></div>
+</div>
+</div>
+</div>
+<p>このようにコードの行数を削減できるだけでなく，リストの要素数が可変であっても処理できることが繰り返し処理の利点である．最後に，平日の場合は<code class="docutils literal notranslate"><span class="pre">...は平日です</span></code>，休日の場合は<code class="docutils literal notranslate"><span class="pre">...は休日です</span></code>と出力するプログラムを作成する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">day</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">day</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Monday&#39;</span><span class="p">,</span> <span class="s1">&#39;Tuesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Wednesday&#39;</span><span class="p">,</span> <span class="s1">&#39;Thursday&#39;</span><span class="p">,</span> <span class="s1">&#39;Friday&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s1">は平日です&#39;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">day</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Saturday&#39;</span><span class="p">,</span> <span class="s1">&#39;Sunday&#39;</span><span class="p">]:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s1">は休日です&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Mondayは平日です
+Tuesdayは平日です
+Wednesdayは平日です
+Thursdayは平日です
+Fridayは平日です
+Saturdayは休日です
+Sundayは休日です
+</pre></div>
+</div>
+</div>
+</div>
+<p>繰り返し処理は条件分岐と組み合わせることで非常に柔軟な処理を実現できる．利用場面として紹介した特定の処理を予め予想し固定の処理としてコーディングすることは<strong>ハードコーディング</strong>と呼ばれバグの温床となる．今回の場合では悪い例として要素数を固定して<code class="docutils literal notranslate"><span class="pre">print</span></code>文で出力したが，<code class="docutils literal notranslate"><span class="pre">for</span></code>文を使って要素数や順番が可変であっても対応できるコーディングをすることが望まれる．</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>発展的な内容であるが<code class="docutils literal notranslate"><span class="pre">for</span></code>文などの繰り返し処理に利用できるオブジェクトは<strong>イテラブル</strong>オブジェクト（itarable object）と呼ばれる．イテラブルオブジェクトとして代表的なデータ型はリスト，タプル，辞書，文字列である．これらのオブジェクトは<code class="docutils literal notranslate"><span class="pre">for</span></code>文で上記のように利用できる．一方で，数値データや論理値はイテラブルでないオブジェクトである．</p>
+</div>
+<section id="id5">
+<h3>【発展】多重ループ<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">for</span></code>文の応用として，複数のオブジェクトの要素を繰り返す<strong>多重ループ</strong>がある．多重ループは<strong>ネストループ</strong>とも呼ばれ，2重だけでなく3重以上のループも実装できる．このような多重ループは，例えば，2つの要素集合のリスト間の組み合わせを出力する場面で利用できる．</p>
+<p>以下は集合<span class="math notranslate nohighlight">\(A=\{a,b,c\}\)</span>と集合<span class="math notranslate nohighlight">\(B=\{x,y,z\}\)</span>間の組み合わせ出力する多重ループのサンプルコードである．各集合はリストとして実装し，2重ループとして，各組み合わせを<code class="docutils literal notranslate"><span class="pre">print</span></code>文で出力する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]</span>
+
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">A</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">B</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a x
+a y
+a z
+b x
+b y
+b z
+c x
+c y
+c z
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>多重ループは後述の<code class="docutils literal notranslate"><span class="pre">while</span></code>文，<code class="docutils literal notranslate"><span class="pre">break</span></code>文，<code class="docutils literal notranslate"><span class="pre">continue</span></code>文と組み合わせると便利である．しかしながら，多重ループはコードの可読性を下げるため多用は厳禁である．Pythonには <a class="reference external" href="https://docs.python.org/ja/3/library/itertools.html"><code class="docutils literal notranslate"><span class="pre">itertools</span></code></a> を代表とするループ処理のライブラリも提供されており，複雑なループを実装したいときに便利である．</p>
+</div>
+</section>
+<section id="range">
+<h3><code class="docutils literal notranslate"><span class="pre">range</span></code>関数<a class="headerlink" href="#range" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">for</span></code>文では繰り返し処理のために反復可能なオブジェクトを作成する必要がある．前述の例では，曜日や集合の要素が格納されたリストを事前に定義する必要があった．しかしながら，例えば，<span class="math notranslate nohighlight">\(100,000\)</span>回繰り返し処理をしたいとき， <span class="math notranslate nohighlight">\(100,000\)</span>までの値が格納されたリストを定義しなければならない．前述までの例のように，愚直にリストに値を格納することは非常に非効率的である．このような場面では，<code class="docutils literal notranslate"><span class="pre">range</span></code>関数を利用すると良い．<code class="docutils literal notranslate"><span class="pre">range</span></code>関数は任意の回数反復可能な整数列を作成できる．</p>
+<p><code class="docutils literal notranslate"><span class="pre">range</span></code>関数は以下のように利用できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">,</span> <span class="n">step</span><span class="p">):</span>
+    <span class="n">処理</span>
+</pre></div>
+</div>
+<p>ここで，<code class="docutils literal notranslate"><span class="pre">start</span></code>は開始時の数，<code class="docutils literal notranslate"><span class="pre">end</span></code>は反復回数，<code class="docutils literal notranslate"><span class="pre">step</span></code>は一定回数ごとにスキップする数である．例えば，<code class="docutils literal notranslate"><span class="pre">range(0,10,1)</span></code>は0から9までの整数列を返す．</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">range</span></code>文ではデフォルト引数として<code class="docutils literal notranslate"><span class="pre">start=0</span></code>と<code class="docutils literal notranslate"><span class="pre">step=1</span></code>が指定されているため，<code class="docutils literal notranslate"><span class="pre">start</span></code>と<code class="docutils literal notranslate"><span class="pre">step</span></code>は省略できる．そのため，<code class="docutils literal notranslate"><span class="pre">range(0,n,1)</span></code>は<code class="docutils literal notranslate"><span class="pre">range(n)</span></code>と書くことができる．<code class="docutils literal notranslate"><span class="pre">range</span></code>関数は<code class="docutils literal notranslate"><span class="pre">for</span></code>や<code class="docutils literal notranslate"><span class="pre">while</span></code>と同様に組み込み関数と呼ばれる．デフォルト引数や関数は第8回 関数とスコープで紹介する．ここでは<code class="docutils literal notranslate"><span class="pre">print</span></code>文や<code class="docutils literal notranslate"><span class="pre">if</span></code>文のように使い方だけを習得してほしい．</p>
+</div>
+<p>以下，<code class="docutils literal notranslate"><span class="pre">range</span></code>関数のサンプルコードである．<code class="docutils literal notranslate"><span class="pre">range</span></code>関数の<code class="docutils literal notranslate"><span class="pre">start</span></code>，<code class="docutils literal notranslate"><span class="pre">end</span></code>，<code class="docutils literal notranslate"><span class="pre">step</span></code>を変更し，挙動を確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">10</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5
+6
+7
+8
+9
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0
+2
+4
+6
+8
+</pre></div>
+</div>
+</div>
+</div>
+<p>よく利用されるテクニックとして<code class="docutils literal notranslate"><span class="pre">range</span></code>関数によるリストのインデキシングがある．例えば，<code class="docutils literal notranslate"><span class="pre">len</span></code>関数でリストの要素数を取得できるので，以下のように<code class="docutils literal notranslate"><span class="pre">range</span></code>関数を定義すると，インデックスによるリストの走査ができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">days</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">days</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+</pre></div>
+</div>
+</div>
+</div>
+<p>前述の例であるがリストは反復可能なイテラブルなデータ型なので以下のコードのようにも書ける．上記のコードは以下と同じである．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">days</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Monday
+Tuesday
+Wednesday
+Thursday
+Friday
+Saturday
+Sunday
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>【発展】イテレータ<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>厳密にはPythonにおいて<code class="docutils literal notranslate"><span class="pre">range</span></code>関数は <strong>イテレータ</strong> と呼ばれる仕組みであり，オブジェクトの中身がわからなくても繰り返し処理ができるような仕組みである．そのため，<code class="docutils literal notranslate"><span class="pre">range</span></code>関数を<code class="docutils literal notranslate"><span class="pre">print</span></code>してみるとリストのように中身の要素が出力されないことに注意されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>range(0, 3)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;class &#39;range&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">range</span></code>関数から直接にリストやタプルが作成できると便利である．<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/02/variables_and_data_types.html#id40">データ型の変換</a>を利用すると<code class="docutils literal notranslate"><span class="pre">range</span></code>関数からリストやタプルが作成できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0, 1, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition-for admonition">
+<p class="admonition-title">for文のまとめ</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span></code>文はリストなどの複数要素を繰り返すときに便利である．</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">for</span></code>文の処理はインデントを使って記述する必要がある．</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">range</span></code>関数を利用することで一定回数だけ繰り返す処理を実装できる．</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="while">
+<h2><code class="docutils literal notranslate"><span class="pre">while</span></code>文<a class="headerlink" href="#while" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../../_images/while.png" /></p>
+<p>Pythonでは<code class="docutils literal notranslate"><span class="pre">for</span></code>文以外にもいくつかの繰り返し処理が実装されている．その中でも代表的な繰り返し処理が条件式が<code class="docutils literal notranslate"><span class="pre">True</span></code>である間，処理を繰り返す<code class="docutils literal notranslate"><span class="pre">while</span></code>文である．<code class="docutils literal notranslate"><span class="pre">while</span></code>文の構文は以下である．条件式については<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/04/conditional_branch.html#id4">第4回 条件分岐</a>を参照されたい．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">条件式</span><span class="p">:</span>
+    <span class="n">処理</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">for</span></code>文との違いは，<code class="docutils literal notranslate"><span class="pre">for</span></code>文はあるオブジェクトの要素数分または<code class="docutils literal notranslate"><span class="pre">range</span></code>関数による一定回数の繰り返し処理に対して，<code class="docutils literal notranslate"><span class="pre">while</span></code>文はある条件が<code class="docutils literal notranslate"><span class="pre">True</span></code>の間処理を繰り返す．ただし，利用場面の違いはあるが<code class="docutils literal notranslate"><span class="pre">for</span></code>文であっても条件式に基づいた繰り返し処理を実装でき，<code class="docutils literal notranslate"><span class="pre">while</span></code>文についても一定回数後に繰り返しを終了するよう実装できる．このような書き換えは，後述する<code class="docutils literal notranslate"><span class="pre">break</span></code>文や条件分岐処理を使って実現できる．</p>
+<p>以下の<code class="docutils literal notranslate"><span class="pre">while</span></code>文は変数<code class="docutils literal notranslate"><span class="pre">count</span></code>が<span class="math notranslate nohighlight">\(0\)</span>以上のとき<code class="docutils literal notranslate"><span class="pre">True</span></code>となる条件式<code class="docutils literal notranslate"><span class="pre">count</span> <span class="pre">&gt;=</span> <span class="pre">0</span></code>に基づいて繰り返される．条件式が<code class="docutils literal notranslate"><span class="pre">True</span></code>の間は<code class="docutils literal notranslate"><span class="pre">count</span></code>の値の出力と繰り返されるたびに<code class="docutils literal notranslate"><span class="pre">count</span></code>の変数を<span class="math notranslate nohighlight">\(-1\)</span>する処理が実行される．<code class="docutils literal notranslate"><span class="pre">count</span></code>の値が繰り返すたびに減少するため，処理が<code class="docutils literal notranslate"><span class="pre">count</span></code><span class="math notranslate nohighlight">\(+1\)</span>回分行われると<code class="docutils literal notranslate"><span class="pre">count</span></code>の中身は負の値となり繰り返し処理が停止する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">count</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="n">count</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>上記のコードにおいて<code class="docutils literal notranslate"><span class="pre">count</span></code>を処理のたびに<span class="math notranslate nohighlight">\(-1\)</span>しない処理を考える．このとき，<code class="docutils literal notranslate"><span class="pre">count</span></code>の値が減少しないため，<code class="docutils literal notranslate"><span class="pre">while</span></code>文は強制的にプログラムを停止しない限り繰り返し処理が続く．この繰り返しは<strong>無限ループ</strong>と呼ばれ，ユーザ入力の待機待ちの実装等で利用される．Google Colabでは<strong>Ctrl+C</strong>や<strong>Interrupt</strong>ボタンを押さない限り動作し続けるため注意されたい．</p>
+</div>
+</section>
+<section id="break">
+<h2><code class="docutils literal notranslate"><span class="pre">break</span></code>文によるループの終了<a class="headerlink" href="#break" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../../_images/break.png" /></p>
+<p>前述の無限ループのように<strong>Ctrl+C</strong>や<strong>Interrupt</strong>ボタンを押すことなく，無限ループを強制的に終了させたいとき，<code class="docutils literal notranslate"><span class="pre">break</span></code>文を使用する．例えば，何回繰り返すか決まっていないループで，ある条件式が満たされたらループを終了させたい時に使用する．この処理は以下のように利用される．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">条件式</span><span class="p">:</span>
+    <span class="n">処理</span>
+    <span class="k">if</span> <span class="n">条件式</span><span class="p">:</span>
+        <span class="k">break</span>
+</pre></div>
+</div>
+<p>以下の<code class="docutils literal notranslate"><span class="pre">while</span></code>文によるループに与えられる条件式は<code class="docutils literal notranslate"><span class="pre">True</span></code>の条件式であり，中断処理をしない限り繰り返しが続く．ここでは <code class="docutils literal notranslate"><span class="pre">break</span></code>文の使用例として，ループの外で変数 <code class="docutils literal notranslate"><span class="pre">i</span></code> を定義し，繰り返すたびにループ内の処理として条件式の判定を行う．内部の条件式は <code class="docutils literal notranslate"><span class="pre">i</span></code> が <span class="math notranslate nohighlight">\(0\)</span> 未満となったときループを強制的に抜ける <code class="docutils literal notranslate"><span class="pre">break</span></code>文を実行し，<code class="docutils literal notranslate"><span class="pre">i</span></code> が <span class="math notranslate nohighlight">\(0\)</span> 以上のとき <code class="docutils literal notranslate"><span class="pre">i</span></code> を <span class="math notranslate nohighlight">\(-1\)</span> する処理である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">i</span> <span class="o">-=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10
+9
+8
+7
+6
+5
+4
+3
+2
+1
+0
+</pre></div>
+</div>
+</div>
+</div>
+<p>このようにループ内部に条件式と<code class="docutils literal notranslate"><span class="pre">break</span></code>文を設けることで無限ループによる処理を実装できる．</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">break</span></code>文は<code class="docutils literal notranslate"><span class="pre">while</span></code>文内だけでなく<code class="docutils literal notranslate"><span class="pre">for</span></code>文でも利用できる．</p>
+</div>
+</section>
+<section id="continue">
+<h2><code class="docutils literal notranslate"><span class="pre">continue</span></code>文による次の繰り返しの開始<a class="headerlink" href="#continue" title="Permalink to this headline">#</a></h2>
+<p><img alt="" src="../../_images/continue.png" /></p>
+<p>ループを終了することなくループ内の処理をスキップする場面では<code class="docutils literal notranslate"><span class="pre">continue</span></code>文を利用する．<code class="docutils literal notranslate"><span class="pre">continue</span></code>を挿入することでその後の処理をスキップして次の繰り返しに進む．条件式を満たすとき，処理1を実行するが，処理2は実行しないループ文を実行したいとき以下のように<code class="docutils literal notranslate"><span class="pre">continue</span></code>を利用する．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">while</span> <span class="n">条件式</span><span class="p">:</span>
+    <span class="n">処理1</span>
+    <span class="k">if</span> <span class="n">条件式</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">処理2</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">continue</span></code>文の利用場面として，例えば，整数のリストを与えられ，偶数の要素だけ表示するプログラムを考える．ここでの<code class="docutils literal notranslate"><span class="pre">while</span></code>文は整数リスト<code class="docutils literal notranslate"><span class="pre">num</span></code>の要素数<code class="docutils literal notranslate"><span class="pre">len(nums)</span></code>だけループする．ループ内では<code class="docutils literal notranslate"><span class="pre">i</span></code>番目のリストの要素<code class="docutils literal notranslate"><span class="pre">nums[i]</span></code>について<span class="math notranslate nohighlight">\(2\)</span>で割り切れるかを判定する．<span class="math notranslate nohighlight">\(2\)</span>で割り切れないとき，つまり，奇数であるとき，<code class="docutils literal notranslate"><span class="pre">i</span></code>を<span class="math notranslate nohighlight">\(+1\)</span>して<code class="docutils literal notranslate"><span class="pre">continue</span></code>する．このとき，<code class="docutils literal notranslate"><span class="pre">continue</span></code>後の処理<code class="docutils literal notranslate"><span class="pre">print</span></code>が実行されていないことを確認されたい．一方で，<span class="math notranslate nohighlight">\(2\)</span>で割り切れるとき，つまり，偶数であるとき，<code class="docutils literal notranslate"><span class="pre">print</span></code>文で<code class="docutils literal notranslate"><span class="pre">i</span></code>番目のリストの要素<code class="docutils literal notranslate"><span class="pre">nums[i]</span></code>を出力し，<code class="docutils literal notranslate"><span class="pre">i</span></code>を<span class="math notranslate nohighlight">\(+1\)</span>して次の繰り返し処理に進む．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nums</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span>
+
+<span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">nums</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">continue</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">nums</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2
+4
+6
+8
+10
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p><code class="docutils literal notranslate"><span class="pre">continue</span></code>文は<code class="docutils literal notranslate"><span class="pre">while</span></code>文内だけでなく<code class="docutils literal notranslate"><span class="pre">for</span></code>文でも利用できる．</p>
+</div>
+<div class="admonition-while admonition">
+<p class="admonition-title">while文のまとめ</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">while</span></code>文は条件式が<code class="docutils literal notranslate"><span class="pre">True</span></code>のとき処理を繰り返す．</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">break</span></code>文や<code class="docutils literal notranslate"><span class="pre">continue</span></code>文を組み合わせると複雑な繰り返し制御を実装できる．</p></li>
+<li><p>常に<code class="docutils literal notranslate"><span class="pre">True</span></code>状態となる無限ループとなる場合があるので注意する．</p></li>
+</ul>
+</div>
+</section>
+<section id="enumerate">
+<h2>【発展】<code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数<a class="headerlink" href="#enumerate" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数は<code class="docutils literal notranslate"><span class="pre">for</span></code>文や<code class="docutils literal notranslate"><span class="pre">while</span></code>文と同様に繰り返し処理のためのPythonの組み込み関数である．<code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数はループの回数（=要素の数）をカウントする利用場面で便利である．その具体例を以下のセルに示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 a
+1 b
+2 c
+</pre></div>
+</div>
+</div>
+</div>
+<p>ループと共にその回数をカウントしたいとき，上のコードのようにカウント用の変数<code class="docutils literal notranslate"><span class="pre">i</span></code>を定義して，ループ処理のたびに<code class="docutils literal notranslate"><span class="pre">i</span></code>のカウント数を<span class="math notranslate nohighlight">\(+1\)</span>する必要がある．このようなカウントは以下のように<code class="docutils literal notranslate"><span class="pre">range</span></code>関数でも実現できるが，多重ループでのカウントなどでコードの可読性が下がる可能性がある．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">l</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">l</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 a
+1 b
+2 c
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数は以下のように定義することで要素のカウントとループを同時に行うことができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">カウント</span><span class="p">,</span> <span class="n">要素</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">リスト</span><span class="p">):</span>
+    <span class="n">処理</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">for</span></code>文でリストや<code class="docutils literal notranslate"><span class="pre">range</span></code>関数を<code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数に置き換えるだけで実装でき，多重ループであっても可読性は高い．以下のセルに前述の<code class="docutils literal notranslate"><span class="pre">for</span></code>文でのループ数のカウントを<code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数で置き換えたコードを示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0 a
+1 b
+2 c
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="zip">
+<h2>【発展】<code class="docutils literal notranslate"><span class="pre">zip</span></code>関数<a class="headerlink" href="#zip" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">zip</span></code>関数は複数の反復可能なオブジェクトの繰り返し処理をしたいときに便利である．多重ループでの例のように，集合 <span class="math notranslate nohighlight">\(A=\{a,b,c\}\)</span> と集合 <span class="math notranslate nohighlight">\(B=\{x,y,z\}\)</span> について各要素を順番に取り出す処理を考える．望まれる出力は以下である．</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="n">x</span>
+<span class="n">b</span> <span class="n">y</span>
+<span class="n">c</span> <span class="n">z</span>
+</pre></div>
+</div>
+<p>このような出力を<code class="docutils literal notranslate"><span class="pre">for</span></code>文で実現したいとき要素のインデックスを要素数分だけ繰り返す<code class="docutils literal notranslate"><span class="pre">range</span></code>関数を作成すれば良い．以下が参考例である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">]</span>
+<span class="n">B</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">A</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">B</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a x
+b y
+c z
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">enumerate</span></code>関数の利用例とは異なり，既に可読性の高い繰り返し処理が<code class="docutils literal notranslate"><span class="pre">for</span></code>文で実現できている．シンプルな処理であれば十分であるが，要素数が異なる複数のオブジェクトを反復させたい場合や機械学習など大規模なプログラムを作成時に非効率的になる可能性がある．実際に，要素数が異なる複数オブジェクトを上記のように<code class="docutils literal notranslate"><span class="pre">for</span></code>文で繰り返し処理をしようとすると，少ない要素数のオブジェクトで参照エラーが発生する．以下のセルをコメントアウトして確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># A = [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
+<span class="c1"># B = [&#39;x&#39;, &#39;y&#39;, &#39;z&#39;]</span>
+<span class="c1"># for i in range(len(A)):</span>
+<span class="c1">#     print(A[i], B[i])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の例では集合<span class="math notranslate nohighlight">\(A\)</span>と<span class="math notranslate nohighlight">\(B\)</span>の要素数を予め取得し，少ない要素数を持つ集合に対して<code class="docutils literal notranslate"><span class="pre">range</span></code>関数を作成すれば良いが，Pythonにはこのような処理をすることなく複数オブジェクトを同時に反復する効率的な組み込み関数が提供されている．リストの場合，<code class="docutils literal notranslate"><span class="pre">zip</span></code>関数は以下のように定義できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">リストAの要素</span><span class="p">,</span> <span class="n">リストBの要素</span><span class="p">,</span> <span class="o">...</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">リストA</span><span class="p">,</span> <span class="n">リストB</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
+    <span class="n">処理</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">zip</span></code>関数ではオブジェクトの要素数が異なる場合はもっとも少ない要素数を持つオブジェクトを基準に繰り返し処理がなされる．以降のセルに，等しい要素数を持つ反復と異なる要素数を持つ反復の例を示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a x
+b y
+c z
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">u</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;b&#39;</span><span class="p">,</span> <span class="s1">&#39;c&#39;</span><span class="p">,</span> <span class="s1">&#39;d&#39;</span><span class="p">],</span> <span class="p">[</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="s1">&#39;y&#39;</span><span class="p">,</span> <span class="s1">&#39;z&#39;</span><span class="p">]):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a x
+b y
+c z
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h2>【発展】辞書と<code class="docutils literal notranslate"><span class="pre">for</span></code>文<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p>辞書を用いた繰り返し処理を紹介する．これまではリスト型を中心に繰り返し処理を説明したが，ここでは，辞書を用いた繰り返し処理を紹介する．<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/02/variables_and_data_types.html#id31">第2回の講義</a>で説明したように，辞書は変数<code class="docutils literal notranslate"><span class="pre">key</span></code>に基づいて値<code class="docutils literal notranslate"><span class="pre">value</span></code>を参照するデータ型である．辞書は反復可能なイテラブルなデータ型であるため，<code class="docutils literal notranslate"><span class="pre">len</span></code>関数がサポートされているが，リストのように要素の順番を示すインデックス変数<code class="docutils literal notranslate"><span class="pre">i</span></code>を利用した参照ができない．このような辞書型であってもシンプルかつ効果的に繰り返し処理をするための関数が提供されている．</p>
+<p>以降のセルでは第2回の講義で紹介した辞書の値のみ，キーワードのみ，またはその両方を取得する関数を復習し，<code class="docutils literal notranslate"><span class="pre">for</span></code>文による繰り返し処理を紹介する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;key1&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;key3&#39;</span><span class="p">:</span> <span class="mi">3</span><span class="p">}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;key1&#39;: 1, &#39;key2&#39;: 2, &#39;key3&#39;: 3}
+</pre></div>
+</div>
+</div>
+</div>
+<p>辞書の要素にアクセスするためのキーワードは<code class="docutils literal notranslate"><span class="pre">辞書.keys()</span></code>で取得できる．以下のように記述することで辞書のキーワードを繰り返すことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">d</span><span class="p">[</span><span class="n">key</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>key1 1
+key2 2
+key3 3
+</pre></div>
+</div>
+</div>
+</div>
+<p>辞書のキーワードによって参照される値は<code class="docutils literal notranslate"><span class="pre">辞書.values()</span></code>で取得できる．以下のように記述することで辞書の値を繰り返すことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1
+2
+3
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">辞書.items()</span></code>で辞書のキーワードと値を同時に取得できる．同様に<code class="docutils literal notranslate"><span class="pre">for</span></code>文と組み合わせることで辞書のキーワードと値を同時に繰り返すことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>key1 1
+key2 2
+key3 3
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id8">
+<h2><code class="docutils literal notranslate"><span class="pre">for</span></code>文によるリストの作成<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<p>繰り返し処理は特定の条件に沿ったリストや数値以外のリストを作成する際に便利である．
+リストを作成する方法としてリストの要素をハードコーディングするか，<code class="docutils literal notranslate"><span class="pre">range</span></code>関数の利用をこれまで紹介したが，
+例えば，<span class="math notranslate nohighlight">\(3\)</span>で割り切れない数値のみを持つリストは作成できない．</p>
+<p>このような場面においては，
+作成した空のリストに対して<code class="docutils literal notranslate"><span class="pre">append</span></code>関数による値の追加からリストを作成するとよい．
+まず初めに以下に<span class="math notranslate nohighlight">\(0\)</span>から<span class="math notranslate nohighlight">\(9\)</span>までの計10個の要素を持つリストを<code class="docutils literal notranslate"><span class="pre">for</span></code>文を利用するコードを示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記のような単純なリストなら<code class="docutils literal notranslate"><span class="pre">range</span></code>関数の方が容易に実現できるが，
+前述の<span class="math notranslate nohighlight">\(3\)</span>で割り切れない数値のみを持つリストは<code class="docutils literal notranslate"><span class="pre">range</span></code>関数では作成できない．
+<code class="docutils literal notranslate"><span class="pre">for</span></code>文によるリストの作成は<code class="docutils literal notranslate"><span class="pre">range</span></code>関数とは異なり条件分岐などを取り入れられるのでより柔軟なリストの作成ができる．
+以下に<code class="docutils literal notranslate"><span class="pre">for</span></code>文による<span class="math notranslate nohighlight">\(3\)</span>で割り切れない数値のみを持つリストの作成コードを示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">l</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 4, 5, 7, 8]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h2>【発展】内包表記<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<p>前述した<code class="docutils literal notranslate"><span class="pre">for</span></code>文によるリストの作成は便利であるが，コードはやや煩雑となる．Pythonでは<strong>内包表記</strong>と呼ばれる文法が定義されており，非常にシンプルかつ高速にリストの作成ができる．以下に，<span class="math notranslate nohighlight">\(0\)</span>から<span class="math notranslate nohighlight">\(9\)</span>までの計10個の要素を持つリストを内包表記で作成するコードを示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+</pre></div>
+</div>
+</div>
+</div>
+<p>出力結果とコードからわかるように，3行の処理が1行でリストを作成できる．続いて，<code class="docutils literal notranslate"><span class="pre">for</span></code>文による<span class="math notranslate nohighlight">\(3\)</span>で割り切れない数値のみを持つリストの作成コードを示す．ここでは条件分岐を行うために，以下のように3項演算子と同様の表記の条件式を繰り返し処理の後ろに記述する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">l</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[1, 2, 4, 5, 7, 8]
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の内包表記は条件式<code class="docutils literal notranslate"><span class="pre">i</span> <span class="pre">%</span> <span class="pre">3</span> <span class="pre">!=</span> <span class="pre">0</span></code>が<code class="docutils literal notranslate"><span class="pre">True</span></code>のときに<span class="math notranslate nohighlight">\(i\)</span>を追加する処理となっている．内包表記は多重ループに対しても利用できるが可読性が著しく下がるため推奨されない．また，内包表記はリストだけでなく辞書も作成できる．以下に，<code class="docutils literal notranslate"><span class="pre">zip</span></code>文を応用した辞書の内包表記の例を示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">([</span><span class="s1">&#39;key1&#39;</span><span class="p">,</span> <span class="s1">&#39;key2&#39;</span><span class="p">,</span> <span class="s1">&#39;key3&#39;</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">])}</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;key1&#39;: 1, &#39;key2&#39;: 2, &#39;key3&#39;: 3}
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/06"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../05/exercise_conditional_branch.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第5回：条件分岐（演習）</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../07/exercise_loops.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第7回：繰り返し処理（演習）</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
