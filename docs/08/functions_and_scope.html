@@ -1,0 +1,1348 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第8回：関数とスコープ（講義） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="第9回：関数とスコープ（演習）" href="../09/exercise_functions_and_scope.html" />
+    <link rel="prev" title="第7回：繰り返し処理（演習）" href="../07/exercise_loops.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/variables_and_data_types.html">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/conditional_branch.html">
+   第4回：条件分岐（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/exercise_conditional_branch.html">
+   第5回：条件分岐（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/loops.html">
+   第6回：繰り返し処理（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/exercise_loops.html">
+   第7回：繰り返し処理（演習）
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第8回：関数とスコープ（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/exercise_functions_and_scope.html">
+   第9回：関数とスコープ（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/08/functions_and_scope.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/08/functions_and_scope.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/08/functions_and_scope.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   関数とは
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   関数の定義
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   引数
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     複数の引数
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     キーワード引数
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     デフォルト引数
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   戻り値
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     【発展】複数の戻り値
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   スコープ
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   【発展】何もしない関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   【発展】高階関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   【発展】ラムダ式
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   【発展】可変長引数
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第8回：関数とスコープ（講義）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   関数とは
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   関数の定義
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   引数
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     複数の引数
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     キーワード引数
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     デフォルト引数
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   戻り値
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     【発展】複数の戻り値
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   スコープ
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id12">
+   【発展】何もしない関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   【発展】高階関数
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id14">
+   【発展】ラムダ式
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   【発展】可変長引数
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第8回：関数とスコープ（講義）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>担当：古居彬</p>
+<section id="id2">
+<h2>内容<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>第8回 関数とスコープでは，ひとまとまりの命令文に対して名前をつけ，関数として管理する仕組みについて学ぶ．
+ひとまとまりの処理を関数にすることで，プログラムコードの管理を効率化するとともに，全体の見通しをよくすることができる．
+関数を使う際には，変数の有効範囲（スコープ）に注意する必要がある．
+関数とスコープの概念を理解するため，具体的には以下の内容について学ぶ．</p>
+<ul class="simple">
+<li><p>関数の定義と呼び出し方法を理解する</p></li>
+<li><p>関数における引数と返り値について学ぶ</p></li>
+<li><p>複数の引数および返り値を設定する方法を学ぶ</p></li>
+<li><p>ローカルスコープ，グローバルスコープの違いと，実用上の注意点について学ぶ</p></li>
+</ul>
+</section>
+<section id="id3">
+<h2>関数とは<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p><strong>関数（function）</strong> とは，入力を入れると，何らかの出力が出てくる変換装置のようなものである．
+数学で，一次関数や二次関数を学んだかと思うが，プログラミングにおける関数もこれら数学の関数と本質的には同じものである．</p>
+<p>数学の関数として，例えば <span class="math notranslate nohighlight">\(y = 2x + 1\)</span> のような一次関数を考えよう．
+<span class="math notranslate nohighlight">\(x\)</span> に何かしらの値を与えると， <span class="math notranslate nohighlight">\(2x + 1\)</span> の計算結果が <span class="math notranslate nohighlight">\(y\)</span> として得られる．
+このように数学の関数は，「数値を与えたら，計算が行われ，その結果が得られる」というものである（数学的に厳密な定義はここでは考えないとする）．</p>
+<p>一方，プログラミングの関数は，「何か数値や文字列などを与えたら，計算などの処理が行われ，その結果が得られる」というものである．
+数学の関数は数値だけであったが，Pythonの関数は文字列など数値以外も与えられる．
+また，関数の中での処理も，単なる計算だけではなく，さまざまな処理が行われる．</p>
+<p><img alt="" src="../../_images/function_image.png" /></p>
+<p>このようにプログラミングの関数の方が機能が広いわけであるが，「何かしらの値を与えたら，計算などの処理が行われ，その結果が得られる」という点では，数学の関数と本質は同じである．</p>
+<p>プログラミングにおける関数は，よく使う処理をまとめておきたい場合などによく利用される．
+入力に対して出力をどう決めるか，という処理内容をプログラムの処理として自由自在に書くことができる．</p>
+<p>関数には，Pythonにはじめから準備されている <strong>組み込み関数</strong> と，自分で作成する <strong>ユーザ定義関数</strong> がある．
+例えばこれまで用いてきた <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数や <code class="docutils literal notranslate"><span class="pre">type</span></code> 関数，<code class="docutils literal notranslate"><span class="pre">range</span></code> 関数などは組み込み関数である．
+今回は，主にユーザ定義関数の利用方法について学んでいく．</p>
+<p>Pythonでユーザ定義関数を利用する場合，まず関数を <strong>定義</strong> した後，使いたい場所で <strong>呼び出し</strong> する必要がある．
+一度定義した関数は，コード内で再利用することができる．</p>
+</section>
+<section id="id4">
+<h2>関数の定義<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>まず，関数の定義をしてみよう．
+関数を定義するためには， <code class="docutils literal notranslate"><span class="pre">def</span></code> を使う．</p>
+<p>例えば，<code class="docutils literal notranslate"><span class="pre">Hello!</span></code> を表示する関数 <code class="docutils literal notranslate"><span class="pre">greeting</span></code> を定義する際には，次のように記述すれば良い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greeting</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Hello!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>定義した関数は，後から何度でも呼び出すことができる．先ほど作成した <code class="docutils literal notranslate"><span class="pre">greeting</span></code> 関数を呼び出すには，以下のように記述すればよい．<code class="docutils literal notranslate"><span class="pre">Hello!</span></code>という出力が表示されるはずだ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello!
+</pre></div>
+</div>
+</div>
+</div>
+<p>関数の定義の一般形は以下の通りである．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">関数名</span><span class="p">(</span><span class="n">引数</span><span class="p">):</span>
+    <span class="n">処理内容</span>
+</pre></div>
+</div>
+<p>一行目は関数のヘッダと呼ばれ，<strong>関数名</strong> と <strong>引数</strong> （その関数へ引き渡される変数）を指定する（引数については後述）．
+上記の <code class="docutils literal notranslate"><span class="pre">greeting</span></code> 関数のように渡す変数がなければ引数は指定しなくてもよい．</p>
+<div class="attention admonition">
+<p class="admonition-title">重要なポイント</p>
+<ul class="simple">
+<li><p>関数定義の右側にある「コロン」を忘れないように注意する．</p></li>
+<li><p>関数の処理内容はインデントした上でコードブロックとして記述する．</p></li>
+<li><p>ユーザ定義関数の名前として，既に存在する組み込み関数の名前（<code class="docutils literal notranslate"><span class="pre">print</span></code> など）や変数の型の名前（<code class="docutils literal notranslate"><span class="pre">list</span></code> など）は使わないこと．</p></li>
+</ul>
+</div>
+<p>前述の通り，関数を一度定義しておけば，単に「<code class="docutils literal notranslate"><span class="pre">関数名()</span></code>」と記述するだけでその関数をいつでも呼び出すことができる．</p>
+<p>関数の呼び出しを含む処理の流れは以下の通りである．</p>
+<p><img alt="" src="../../_images/function_process.png" /></p>
+<p>上図に対応して，以下のようなプログラムを考えてみよう．
+①, ②, ③それぞれの処理がどのようなタイミングで実行されるかに注意．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sample_function</span><span class="p">():</span> <span class="c1"># 関数の定義</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sample_function の内部の命令文です．&#39;</span><span class="p">)</span> <span class="c1"># ② 関数の中の処理</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;これから sample_function を呼び出します．&#39;</span><span class="p">)</span> <span class="c1"># ① 実際の処理はここからはじまる</span>
+<span class="n">sample_function</span><span class="p">()</span> <span class="c1"># 関数の呼び出し</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sample_function の呼び出しが終わりました．&#39;</span><span class="p">)</span> <span class="c1"># ③</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>これから sample_function を呼び出します．
+sample_function の内部の命令文です．
+sample_function の呼び出しが終わりました．
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">関数の定義のまとめ</p>
+<ul class="simple">
+<li><p>関数を用いることで，処理のまとまりに名前をつけて管理できる．</p></li>
+<li><p>一度定義した関数は，何度でも呼び出すことができる．</p></li>
+</ul>
+</div>
+</section>
+<section id="id5">
+<h2>引数<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>引数（ひきすう）とは，関数へ引き渡される変数のことである．簡単に言うと，関数への入力のことである．
+数学の関数 <span class="math notranslate nohighlight">\(y = 2x + 1\)</span> における <span class="math notranslate nohighlight">\(x\)</span> に相当する．</p>
+<p>引数に与える値を変えると，実行結果も変わる．
+例えば <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数であれば，引数に与える文字列を変えれば，表示される内容も変わる．
+「表示する」という <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数の機能自体は同じだが，引数によって表示内容を変えられるわけである．</p>
+<p>関数に引数を指定する流れを以下の図に示す．</p>
+<p><img alt="" src="../../_images/function_args.png" /></p>
+<p>関数の方に，引数を受け取るための変数を準備しておくことで，関数を呼び出す側から値を渡すことができる．</p>
+<p>引数を指定するには，関数ヘッダの括弧 <code class="docutils literal notranslate"><span class="pre">(</span> <span class="pre">)</span></code> の中に渡したい変数の一覧を記述すれば良い．</p>
+<p>例えば，先ほどの <code class="docutils literal notranslate"><span class="pre">greeting</span></code> 関数を改良して，引数 <code class="docutils literal notranslate"><span class="pre">name</span></code> に指定した人名も併せて表示するようにしてみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 引数nameをもつ関数greeting</span>
+<span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>関数を呼び出す際，引数に具体的な値を指定することで，関数は受け取った値を処理することができる．</p>
+<p>例えば，引数 <code class="docutils literal notranslate"><span class="pre">name</span></code> に <code class="docutils literal notranslate"><span class="pre">'John'</span></code> を指定すると，以下のようになる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;John&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, John!
+</pre></div>
+</div>
+</div>
+</div>
+<p>当然，指定する値によって異なる処理結果となる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Mike&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Mike!
+</pre></div>
+</div>
+</div>
+</div>
+<p>また，値そのものではなく，値が格納された変数を引数に指定することも可能である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">person_name</span> <span class="o">=</span> <span class="s1">&#39;Jack&#39;</span>
+
+<span class="n">greeting</span><span class="p">(</span><span class="n">person_name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Jack!
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id6">
+<h3>複数の引数<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>関数には，任意の数の引数を指定することができる．
+その場合，各引数をコンマで区切って記述する必要がある．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">関数名</span><span class="p">(</span><span class="n">引数1</span><span class="p">,</span> <span class="n">引数2</span><span class="p">,</span> <span class="n">引数3</span><span class="p">,</span> <span class="o">...</span><span class="p">):</span>
+    <span class="n">処理内容</span>
+</pre></div>
+</div>
+<p>先ほどの <code class="docutils literal notranslate"><span class="pre">greeting</span></code> 関数を，複数の人の名前を指定できるように書き換えてみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 引数nameをもつ関数greeting</span>
+<span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">name1</span><span class="p">,</span> <span class="n">name2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Hello, </span><span class="si">{</span><span class="n">name1</span><span class="si">}</span><span class="s1"> and </span><span class="si">{</span><span class="n">name2</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>関数を呼び出す際に，それぞれの引数に値を指定すればOK．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Jack&#39;</span><span class="p">,</span> <span class="s1">&#39;Taro&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Jack and Taro!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="caution admonition">
+<p class="admonition-title">注意</p>
+<p>複数の引数を指定する場合，引数名が重複しないようにする．</p>
+</div>
+</section>
+<section id="id7">
+<h3>キーワード引数<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>複数の引数を持つ関数の場合，事前に定義した引数の順番（位置）に従って関数に引数を渡す必要がある．</p>
+<p><strong>キーワード引数</strong> を用いると，関数に引数の変数名とその値のセットを渡すことができる．これにより，定義時の順番に縛られることなく引数を指定できる．</p>
+<p>例えば，次のように あいさつの言葉（<code class="docutils literal notranslate"><span class="pre">word</span></code>）と，敬称（<code class="docutils literal notranslate"><span class="pre">title</span></code>），人名（<code class="docutils literal notranslate"><span class="pre">name</span></code>）を引数として持つ関数 <code class="docutils literal notranslate"><span class="pre">greeting</span></code> を考える．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">word</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>それぞれの引数に値を指定することで，以下のような出力を得ることができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;Mr.&#39;</span><span class="p">,</span> <span class="s1">&#39;Brown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Mr. Brown!
+</pre></div>
+</div>
+</div>
+</div>
+<p>ここで，単純に引数に指定する値の順番を入れ替えると，以下のようになる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Brown&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="s1">&#39;Mr.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Brown, Hello Mr.!
+</pre></div>
+</div>
+</div>
+</div>
+<p>これは，事前に定義した引数の順番に応じて値が指定されるためである．
+上記の例だと，<code class="docutils literal notranslate"><span class="pre">word</span></code> に <code class="docutils literal notranslate"><span class="pre">'Brown'</span></code>， <code class="docutils literal notranslate"><span class="pre">title</span></code> に <code class="docutils literal notranslate"><span class="pre">'Hello'</span></code>， <code class="docutils literal notranslate"><span class="pre">name</span></code> に <code class="docutils literal notranslate"><span class="pre">'Mr.'</span></code> が指定されてしまうため，意図しない出力が得られてしまった．</p>
+<p>これに対し，以下のように引数の変数名とその値のセットを渡すことで，順不同で引数を関数に渡すことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;Brown&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Mr.&#39;</span><span class="p">,</span> <span class="n">word</span><span class="o">=</span><span class="s1">&#39;Hello&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Mr. Brown!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Brown&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Mr.&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Hello, Mr. Brown!
+</pre></div>
+</div>
+</div>
+</div>
+<div class="caution admonition">
+<p class="admonition-title">注意：通常の引数とキーワード引数が混在する場合</p>
+<p>キーワード引数と通常の引数の両方を混在させて関数を呼び出すことも可能だが，その際には指定する順番に注意が必要だ．
+原則として，<strong>最初に通常の引数を指定し，その後でキーワード引数を指定する</strong>必要がある．</p>
+<p>つまり，</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Mr.&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Brown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>のように書くことは可能だが，</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Mr.&#39;</span><span class="p">,</span> <span class="s1">&#39;Brown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>のように書くとエラーとなる．</p>
+</div>
+</section>
+<section id="id8">
+<h3>デフォルト引数<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>通常，関数において引数に値を渡さないとエラーが表示される．</p>
+<p>例えば，先ほどの <code class="docutils literal notranslate"><span class="pre">greeting</span></code> 関数において，本来3つの引数が必要なのに対して2つの引数しか指定しないと，以下のようなエラーが出る．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Mr.&#39;</span><span class="p">,</span> <span class="s1">&#39;Brown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">15</span><span class="o">-</span><span class="n">e5ede17610fd</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Mr.&#39;</span><span class="p">,</span> <span class="s1">&#39;Brown&#39;</span><span class="p">)</span>
+
+<span class="ne">TypeError</span>: greeting() missing 1 required positional argument: &#39;name&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>これに対し，関数を呼び出す際に引数に値を渡さなかったとしても，あらかじめ指定された値を使用するように設定できる．
+このような引数は <strong>デフォルト引数</strong> と呼ばれ，関数を定義（宣言）する際にその引数に何かしら値を設定しておけばよい．</p>
+<p>先ほどの <code class="docutils literal notranslate"><span class="pre">greeting</span></code> 関数において，引数 <code class="docutils literal notranslate"><span class="pre">word</span></code> をデフォルト引数として定義すると，以下のようになる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">title</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">word</span><span class="o">=</span><span class="s1">&#39;Hello&#39;</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">word</span><span class="si">}</span><span class="s1">, </span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s1"> </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s1">!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="caution admonition">
+<p class="admonition-title">注意：デフォルト引数の位置</p>
+<p>デフォルト引数を持つ関数を定義する際には，デフォルト引数を通常の引数よりも後ろに書く必要がある．</p>
+<p>つまり，</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">greeting</span><span class="p">(</span><span class="n">word</span><span class="o">=</span><span class="s1">&#39;Hello&#39;</span><span class="p">,</span> <span class="n">title</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+    <span class="o">...</span>
+</pre></div>
+</div>
+<p>のように書くことはできないことに注意しよう．</p>
+</div>
+<p>上記のように書くことで，<code class="docutils literal notranslate"><span class="pre">word</span></code> の値が引数で渡されなかったときに，あらかじめ設定された <code class="docutils literal notranslate"><span class="pre">'Hello'</span></code> が <code class="docutils literal notranslate"><span class="pre">word</span></code> の値として利用される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Mr&#39;</span><span class="p">,</span> <span class="s1">&#39;Brown&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>もちろん，これまでの関数と同様，<code class="docutils literal notranslate"><span class="pre">word</span></code> に引数で別の値を指定すればそれに応じた結果となる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">greeting</span><span class="p">(</span><span class="s1">&#39;Mr&#39;</span><span class="p">,</span> <span class="s1">&#39;Brown&#39;</span><span class="p">,</span> <span class="s1">&#39;Hi&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>前回登場した <code class="docutils literal notranslate"><span class="pre">range</span></code> 関数において，引数 <code class="docutils literal notranslate"><span class="pre">start</span></code> と <code class="docutils literal notranslate"><span class="pre">step</span></code> は省略できることを説明したが，これはまさにこれらの引数がデフォルト引数として定義されているからである．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">引数のまとめ</p>
+<ul class="simple">
+<li><p>引数とは，関数に渡す値のことである．</p></li>
+<li><p>カンマで区切ることで，複数の引数を設定することができる．</p></li>
+<li><p>キーワード引数を用いることで，順不同で関数に値を渡すことができる．</p></li>
+<li><p>デフォルト引数を設定することで，関数を呼び出すときに，値が指定されなかった場合でもあらかじめ設定した値を用いて処理を実行できる．</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id9">
+<h2>戻り値<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<p>関数を実行した後，何かしらの値を返すことができる．
+このような値のことを，<strong>戻り値</strong>（または <strong>返り値</strong>）と呼ぶ．
+数学の関数 <span class="math notranslate nohighlight">\(y = 2x + 1\)</span> における <span class="math notranslate nohighlight">\(y\)</span> に相当する．</p>
+<p>以下の図は，関数から戻り値を受け取るイメージを表したものである．</p>
+<p><img alt="" src="../../_images/function_return.png" /></p>
+<p>呼び出し側は，関数からの戻り値を受け取ることによって，計算を行った結果などを知ることができる．</p>
+<p>戻り値は，<code class="docutils literal notranslate"><span class="pre">return</span></code> で指定する．</p>
+<p>例えば，引数として与えられた値を10倍する関数 <code class="docutils literal notranslate"><span class="pre">ten_times</span></code> を考えよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ten_times</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="mi">10</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ten_times</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>引数として与えられた <code class="docutils literal notranslate"><span class="pre">3</span></code> が関数内で10倍され，結果が <code class="docutils literal notranslate"><span class="pre">return</span></code> によって返されていることがわかる．</p>
+<p>関数の戻り値を，変数に代入することもできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">ten_times</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>引数に指定する数字を変更すると，戻り値の値も変化することを確認してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">ten_times</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id10">
+<h3>【発展】複数の戻り値<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>引数と同様に，戻り値も複数設定することができる．
+そのためには，<code class="docutils literal notranslate"><span class="pre">return</span></code> の後にタプルを指定すればよい．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">タプルの復習（第2回）</p>
+<p>タプルとは，複数の要素から構成されるデータ構造である．</p>
+<p>括弧を使って <code class="docutils literal notranslate"><span class="pre">(123,</span> <span class="pre">45,</span> <span class="pre">678)</span></code> のように書いても良いし，括弧を省略し <code class="docutils literal notranslate"><span class="pre">123,</span> <span class="pre">45,</span> <span class="pre">678</span></code> としても良い．</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plus_minus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">c</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+    <span class="k">return</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span><span class="p">,</span> <span class="n">d</span> <span class="o">=</span> <span class="n">plus_minus</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">戻り値のまとめ</p>
+<ul class="simple">
+<li><p>関数内で <code class="docutils literal notranslate"><span class="pre">return</span></code> 文を用いることで，戻り値を設定することができる．</p></li>
+<li><p>(発展) 複数の値を戻り値に設定したい場合は，タプルを使用する．</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="id11">
+<h2>スコープ<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<p>関数の引数や関数内で宣言された変数の有効範囲は，その関数内に制限される．つまり，それらの変数は関数の外からは参照することができない．
+このような変数の有効範囲のことを，<strong>スコープ（scope）</strong> と呼ぶ．</p>
+<p>例として，以下のような関数を考えてみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_number</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>関数 <code class="docutils literal notranslate"><span class="pre">show_number()</span></code> 内で変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> に100を代入し，その値を表示するような関数である．
+実際に呼び出して実行してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_number</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の通り，確かに <code class="docutils literal notranslate"><span class="pre">x</span></code> に100が入っていることがわかるはずだ．</p>
+<p>では，この <code class="docutils literal notranslate"><span class="pre">x</span></code> を表示してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の通り， <code class="docutils literal notranslate"><span class="pre">NameError:</span> <span class="pre">name</span> <span class="pre">'x'</span> <span class="pre">is</span> <span class="pre">not</span> <span class="pre">defined</span></code>，つまり「変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> が定義されていない」というエラーが表示される．</p>
+<p>このように，関数の中で定義された変数は <strong>ローカル変数</strong> と呼ばれ，その関数内でしか参照できない（なので関数の外では「定義されていない」ことになる）．</p>
+<p>また，関数の引数も同様にローカル変数となるため，やはり関数の外からは参照できない．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">show_number</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>これに対し，関数の外で宣言された変数は関数の中でも参照することができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">100</span> <span class="c1"># グローバル変数としてxを定義</span>
+
+<span class="k">def</span> <span class="nf">show_number</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">show_number</span><span class="p">()</span> <span class="c1"># 関数内でxを参照</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="c1"># 関数外でxを参照</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>関数内で <code class="docutils literal notranslate"><span class="pre">x</span></code> を参照した場合でも，関数外で <code class="docutils literal notranslate"><span class="pre">x</span></code> を参照した場合でも，正しく100が表示されていることがわかる．</p>
+<p>このように，関数の外で定義された変数は <strong>グローバル変数</strong> と呼ばれる．</p>
+<p>ローカル変数が参照可能な範囲を <strong>ローカルスコープ</strong>，グローバル変数が参照可能な範囲を <strong>グローバルスコープ</strong> と呼ぶ．
+ここで注意すべきポイントは，</p>
+<ul class="simple">
+<li><p>ローカルスコープからグローバルスコープは見える</p></li>
+<li><p>グローバルスコープからローカルスコープは見えない</p></li>
+</ul>
+<p>ということである．</p>
+<p>特に，グローバル変数と同名のローカル変数を使用する場合などは注意が必要である．以下のコードを考えてみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="mi">300</span>
+
+<span class="k">def</span> <span class="nf">show_number</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">150</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>流れとしては，グローバル変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> に300を代入した後，内部で変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> に150を代入して表示する関数 <code class="docutils literal notranslate"><span class="pre">show_number</span></code> を実行している．</p>
+<p>この関数を実行すると，グローバル変数 <code class="docutils literal notranslate"><span class="pre">x</span></code> に150が代入されると期待するかもしれないが，実際にはそうはならない．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">show_number</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>このように，関数 <code class="docutils literal notranslate"><span class="pre">show_number</span></code> を実行しても，グローバル変数の値は変更されない．
+これは，関数内における <code class="docutils literal notranslate"><span class="pre">x</span></code> はローカル変数として機能しているためである．</p>
+<p>このようにローカルとグローバルで同名の変数を定義することはバグの元となってしまうため，推奨されない．
+名前の衝突が起きないように注意しよう．</p>
+<div class="attention admonition">
+<p class="admonition-title">セルとスコープ</p>
+<p>Google ColabおよびJupyter Notebookでは，セルという単位でプログラムを作成するが，この場合のスコープはどうなるだろうか？</p>
+<p>これまでの教材を動かしていればわかると思うが，同じノートブック内の全てのセルに対してグローバルスコープが設定される．
+つまり，セルが分かれていても，関数の外で変数を定義したら，その変数は他のセルから参照できることになる（ただし，あらかじめ変数を定義するセルが実行されている必要がある）．</p>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">スコープのまとめ</p>
+<ul class="simple">
+<li><p>関数の引数や関数内で宣言された変数はローカル変数と呼ばれ，その関数内でのみ使用できる．</p></li>
+<li><p>一方，関数の外で定義された変数はグローバル変数と呼ばれ，プログラム全体で参照できる．</p></li>
+<li><p>ローカル変数とグローバル変数で名前が重複しないように注意する．</p></li>
+</ul>
+</div>
+</section>
+<section id="id12">
+<h2>【発展】何もしない関数<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
+<p>通常，Pythonでは中身を省略した関数を定義することができず，必ず処理内容を記載する必要がある．
+しかし，大規模なプログラムを書いていると，とりあえず関数の枠組みだけ定義しておいて，後で中身の処理を実装したい，といったケースが生じ得る．</p>
+<p>そんなとき，Pythonの <code class="docutils literal notranslate"><span class="pre">pass</span></code> 文を利用することで，何もしない関数を作ることができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">empty_function</span><span class="p">():</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>文法的にはなにかを記述する必要があるが，コードとしては何も実行したくない場合に，<code class="docutils literal notranslate"><span class="pre">pass</span></code> 文を利用する．
+<code class="docutils literal notranslate"><span class="pre">pass</span></code> が実行されても何も起きないため，上記の <code class="docutils literal notranslate"><span class="pre">empty_function</span></code> 関数はまさに実質的に「何もしない」．</p>
+<p>ちなみに，条件分岐においても <code class="docutils literal notranslate"><span class="pre">pass</span></code> 文を利用することができる．</p>
+</section>
+<section id="id13">
+<h2>【発展】高階関数<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h2>
+<p>第2回で，さまざまなデータを格納するための変数の型を学んだ．
+Pythonでは，これらすべてのデータは <strong>オブジェクト</strong> として定義されている．</p>
+<p>オブジェクトの概念を説明するとかなり発展的な内容になるのでここでは省略するが，これまでの講義で見てきた数値，文字列，リスト，辞書などは全てオブジェクトである．
+同様に，今回学んだ <strong>関数もオブジェクト</strong> である．
+簡潔にいうと，関数もこれまで登場した様々な変数と同じように扱われる．</p>
+<p>では，第2回で学んだ <code class="docutils literal notranslate"><span class="pre">type</span></code> 関数を使ってユーザー定義関数の型を調べてみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">test_function</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;This is a test function.&#39;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">test_function</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記から分かるように，関数は <code class="docutils literal notranslate"><span class="pre">function</span></code> 型のオブジェクトである．</p>
+<p>前置きが長くなったが，関数を他のオブジェクト（変数）と同じように扱うことができるということは，<strong>関数を別の関数の引数にすることができる</strong>．
+このような関数のことを <strong>高階関数</strong> と呼ぶ．</p>
+<p>以下に，高階関数を使った例を示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>        <span class="c1"># 3番目の引数で関数を受け取っている</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;計算結果：</span><span class="si">{</span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># 受け取った関数を呼び出し，その戻り値を出力している  </span>
+
+<span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span>
+
+<span class="k">def</span> <span class="nf">minus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>冒頭で定義されている <code class="docutils literal notranslate"><span class="pre">calculation</span></code> 関数は，2つの値と関数を受け取る高階関数である．
+第1，第2引数として受け取った <code class="docutils literal notranslate"><span class="pre">a</span></code> と <code class="docutils literal notranslate"><span class="pre">b</span></code> の値を，第3引数で受け取った関数（<code class="docutils literal notranslate"><span class="pre">func</span></code>）に渡し，その戻り値を使って計算結果を表示している．</p>
+<p>ここでは，<code class="docutils literal notranslate"><span class="pre">calculation</span></code> 関数に渡す関数として，<code class="docutils literal notranslate"><span class="pre">plus</span></code> 関数と <code class="docutils literal notranslate"><span class="pre">minus</span></code> 関数を用意している．
+<code class="docutils literal notranslate"><span class="pre">plus</span></code> 関数は，与えられた2つの数字の和を計算し，その結果を含む <code class="docutils literal notranslate"><span class="pre">'○</span> <span class="pre">+</span> <span class="pre">△</span> <span class="pre">=</span> <span class="pre">×'</span></code> という文字列を返す．
+<code class="docutils literal notranslate"><span class="pre">minus</span></code> 関数は，与えられた2つの数字の差を計算し，その結果を含む <code class="docutils literal notranslate"><span class="pre">'○</span> <span class="pre">-</span> <span class="pre">△</span> <span class="pre">=</span> <span class="pre">×'</span></code> という文字列を返す．</p>
+<p>実際に，<code class="docutils literal notranslate"><span class="pre">calculation</span></code> 関数の引数として値と関数を与え，結果を見てみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">calculation</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">plus</span><span class="p">)</span> <span class="c1"># calculation関数の3番目の引数に，plus関数を渡している</span>
+<span class="n">calculation</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">minus</span><span class="p">)</span> <span class="c1"># calculation関数の3番目の引数に，minus関数を渡している</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">calculation</span></code> 関数に <code class="docutils literal notranslate"><span class="pre">5</span></code>, <code class="docutils literal notranslate"><span class="pre">3</span></code> という2つの数字と，<code class="docutils literal notranslate"><span class="pre">plus</span></code> 関数を渡すと，和の計算結果が出力されていることがわかる．
+同様に，<code class="docutils literal notranslate"><span class="pre">minus</span></code> 関数を渡すと，差が出力されていることがわかる．</p>
+<p>以上のように，引数に渡す関数によって，処理の内容を切り替えることができるようになる．</p>
+</section>
+<section id="id14">
+<h2>【発展】ラムダ式<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h2>
+<p>高階関数において，引数として渡される関数が1行で書ける場合，わざわざ関数の定義をせずに， <strong>ラムダ式</strong> という簡潔な記述を用いると便利なことがある．
+ラムダ式は <strong>無名関数</strong> とも呼ばれ，次の形式で記述することができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">引数</span><span class="p">:</span> <span class="n">戻り値</span>
+</pre></div>
+</div>
+<p>関数を定義するより，かなり簡潔にかけることがわかる．</p>
+<p>前述の<a class="reference external" href="#id12">【発展】高階関数</a>において，2つの数字の和を計算する <code class="docutils literal notranslate"><span class="pre">plus</span></code> 関数は次のように定義されていた．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>引数は <code class="docutils literal notranslate"><span class="pre">a,</span> <span class="pre">b</span></code>，戻り値は <code class="docutils literal notranslate"><span class="pre">f'{a}</span> <span class="pre">+</span> <span class="pre">{b}</span> <span class="pre">=</span> <span class="pre">{a</span> <span class="pre">+</span> <span class="pre">b}'</span></code> である．
+これをラムダ式で表すと，以下のように書くことができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span>
+</pre></div>
+</div>
+<p>つまり，ラムダ式とは，わざわざ関数に名前をつけて定義せず，引数と戻り値だけ書いて済ませてしまうという表現方法である．</p>
+<p>ラムダ式を使って，<a class="reference external" href="#id12">【発展】高階関数</a>で作成したプログラムを書き直してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">func</span><span class="p">):</span>        <span class="c1"># 3番目の引数で関数を受け取っている</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;計算結果：</span><span class="si">{</span><span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>  <span class="c1"># 受け取った関数を呼び出し，その戻り値を出力している  </span>
+
+<span class="n">calculation</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> + </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="n">calculation</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> - </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> = </span><span class="si">{</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">calculation</span></code> 関数はそのまま利用できる．
+ラムダ式を利用することで，<code class="docutils literal notranslate"><span class="pre">plus</span></code> 関数と <code class="docutils literal notranslate"><span class="pre">minus</span></code> 関数の定義がなくなり，短いプログラムコードで済んでいることがわかる．</p>
+</section>
+<section id="id15">
+<h2>【発展】可変長引数<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h2>
+<p>これまで見てきたユーザ定義関数は全て，あらかじめ指定した数の引数を定義するものであった．
+これに対して，引数として受け取れる数が固定されていない引数のことを <strong>可変長引数</strong> と呼ぶ．</p>
+<p>代表的な例としては，組み込み関数である <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数も可変長引数を有している．
+本稿では主にf-string表記を用いているが，<a class="reference external" href="../02/variables_and_data_types.html#id48">第2回</a> で紹介したように <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数にカンマ区切りで変数や文字列を与えると繋げて表示することができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">)</span> <span class="c1"># 引数が1つ</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">)</span> <span class="c1"># 引数が2つ</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;abc&#39;</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="s1">&#39;def&#39;</span><span class="p">,</span> <span class="mi">456</span><span class="p">)</span> <span class="c1"># 引数が4つ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>この書き方はまさに， <code class="docutils literal notranslate"><span class="pre">print</span></code> 関数では引数を任意の数だけ指定できることを意味している．</p>
+<p>さて，ユーザ定義関数でこのような可変長引数を持つ関数を定義するには，次のようにして引数内の変数名にアスタリスク <code class="docutils literal notranslate"><span class="pre">*</span></code> をつければよい．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">関数名</span><span class="p">(</span><span class="o">*</span><span class="n">変数名</span><span class="p">):</span>
+    <span class="n">処理内容</span>
+</pre></div>
+</div>
+<p>このときの変数には，引数として渡された複数の値を格納した<strong>タプル</strong>が代入される（タプルの復習は<a class="reference external" href="../02/variables_and_data_types.html#id30">第2回</a>）．</p>
+<p>次の例は，与えられた数値の総和を計算する関数 <code class="docutils literal notranslate"><span class="pre">summation</span></code> を，可変長引数を用いて記述したものである．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">summation</span><span class="p">(</span><span class="o">*</span><span class="n">numbers</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">numbers</span><span class="p">:</span>
+        <span class="n">total</span> <span class="o">+=</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">total</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">summation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>引数の数を変えても，同様に計算できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">summation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/08"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../07/exercise_loops.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第7回：繰り返し処理（演習）</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../09/exercise_functions_and_scope.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第9回：関数とスコープ（演習）</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

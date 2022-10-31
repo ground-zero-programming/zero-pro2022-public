@@ -25,7 +25,7 @@
 
 ## 講義資料
 
-教材中の `【発展】` で始まる項目は講義では扱いません．
+教材中の `【発展】` で始まる項目は必修ではありません．
 各自の興味に応じて学習してください．
 
 | 教材 | ビデオ | 課題提出〆切 | 課題の解答 |
@@ -37,7 +37,7 @@
 | [第5回：条件分岐（演習）](docs/05/exercise_conditional_branch.ipynb) | - | <del>10/27</del> | [Open](docs/05_ans/answer_conditional_branch.ipynb) |
 | [第6回：繰り返し処理（講義）](docs/06/loops.ipynb) | [Play](https://web.microsoftstream.com/video/98820113-4ad5-434d-8530-4bf93a934668) | - | - |
 | [第7回：繰り返し処理（演習）](docs/07/exercise_loops.ipynb)  | - | 11/3 | 11/4公開 |
-| [第8回：関数とスコープ（講義）](docs/08/functions_and_scope.ipynb) | 準備中 | - | - |
+| [第8回：関数とスコープ（講義）](docs/08/functions_and_scope.ipynb) | [Play](https://web.microsoftstream.com/video/7d7ad00c-69f0-4223-8069-0521f23d12b1) | - | - |
 | [第9回：関数とスコープ（演習）](docs/09/exercise_functions_and_scope.ipynb) |- | 11/10 | 11/11公開 |
 | [第10回：アプリケーションの作成（講義）](docs/10/application.ipynb) | 準備中 | - | - |
 | [第11回：アプリケーションの作成（演習）](docs/11/exercise_application.ipynb)  | - | 11/17 | 11/18公開 |
