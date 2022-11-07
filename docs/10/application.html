@@ -1080,7 +1080,40 @@ GiraffeのNewtonはCage Cで飼育されています．
 </section>
 <section id="id12">
 <h2>画像表示機能の追加<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h2>
-<p>作成した <code class="docutils literal notranslate"><span class="pre">Animal</span></code> クラスに画像表示機能を追加する．画像を管理・読み込み・表示するために <code class="docutils literal notranslate"><span class="pre">os</span></code>，<code class="docutils literal notranslate"><span class="pre">PIL</span></code>，<code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>というライブラリを利用する．ライブラリは便利な関数やクラスをまとめたものであり，例えば，<code class="docutils literal notranslate"><span class="pre">PIL</span></code>は画像を読み込んだり，編集したり，保存したりするための関数やクラスが提供されている．ライブラリにまとめられている関数やクラスは <strong>モジュール</strong> として扱われ，後述するセルのように簡単に利用することができる．ライブラリ，モジュール，<code class="docutils literal notranslate"><span class="pre">import</span></code>に関する説明は次回の講義で紹介するので，ここでは，これらのライブラリを使って画像を読み込み，表示するサンプルコードをコピー&amp;ペーストでいいので動かしてほしい．</p>
+<p>作成した <code class="docutils literal notranslate"><span class="pre">Animal</span></code> クラスに画像表示機能を追加する．</p>
+<p>まずは表示する画像をダウンロードする．Google ColabではLinuxのコマンドが利用できるので以下のセルを実行すると <code class="docutils literal notranslate"><span class="pre">data</span></code> フォルダの中に画像ファイルがダウンロードされる．また，以下のセルは講義資料上では，<code class="docutils literal notranslate"><span class="pre">mkdir:</span> <span class="pre">data:</span> <span class="pre">File</span> <span class="pre">exists</span></code>や<code class="docutils literal notranslate"><span class="pre">zsh:1:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found:</span> <span class="pre">wget</span></code>とエラーが表示されているが，Google Colab上で実行すると正しく実行される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir data
+<span class="o">!</span>wget -P data https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/11/data/elephant.jpg
+<span class="o">!</span>wget -P data https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/11/data/giraffe.jpg
+<span class="o">!</span>wget -P data https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/11/data/lion.jpg
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mkdir: data: File exists
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+</div>
+</div>
+<p>Linuxコマンドを覚えるとファイルやフォルダの操作などをCharacter-based User Interface（CUI）で行うことができる．発展的な内容なので上記のセルは実行するだけでいいが，セル内では，<code class="docutils literal notranslate"><span class="pre">!mkdir</span> <span class="pre">data</span></code>でGoogle Colab内に<code class="docutils literal notranslate"><span class="pre">data</span></code>という名前がついたフォルダを作成し，以降の<code class="docutils literal notranslate"><span class="pre">!wget</span> <span class="pre">-P</span> <span class="pre">data</span> <span class="pre">{URL}</span></code>で<code class="docutils literal notranslate"><span class="pre">URL</span></code>にある画像ファイルを先ほど作成した<code class="docutils literal notranslate"><span class="pre">data</span></code>フォルダにダウンロードするという操作をしている．</p>
+<p>ダウンロードされたファイルは下の画像のフォルダアイコンをクリックすると確認できる．</p>
+<p><img alt="" src="../../_images/download.png" /></p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>上記のセルは一度だけセルを実行すれば良い．複数回実行すると <code class="docutils literal notranslate"><span class="pre">elephant</span> <span class="pre">2.jpg</span></code>と複数の画像が保存される（複数枚画像があっても問題はありません）．</p>
+</div>
+<p>続いて，Pythonで画像を表示する機能を追加する．画像を管理・読み込み・表示するために <code class="docutils literal notranslate"><span class="pre">os</span></code>，<code class="docutils literal notranslate"><span class="pre">PIL</span></code>，<code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code>というライブラリを利用する．ライブラリは便利な関数やクラスをまとめたものであり，例えば，<code class="docutils literal notranslate"><span class="pre">PIL</span></code>は画像を読み込んだり，編集したり，保存したりするための関数やクラスが提供されている．ライブラリにまとめられている関数やクラスは <strong>モジュール</strong> として扱われ，後述するセルのように簡単に利用することができる．ライブラリ，モジュール，<code class="docutils literal notranslate"><span class="pre">import</span></code>に関する説明は次回の講義で紹介するので，ここでは，これらのライブラリを使って画像を読み込み，表示するサンプルコードをコピー&amp;ペーストでいいので動かしてほしい．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 必要なライブラリのインポート</span>
@@ -1147,7 +1180,7 @@ GiraffeのNewtonはCage Cで飼育されています．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/application_75_0.png" src="../../_images/application_75_0.png" />
+<img alt="../../_images/application_80_0.png" src="../../_images/application_80_0.png" />
 </div>
 </div>
 <p>画像を表示することができた．しかしながら，機能や変数を追加する度に，クラスをコピー&amp;ペーストして再定義するのは大変である．そこで，次は，<strong>継承</strong> という機能を使って<code class="docutils literal notranslate"><span class="pre">Animal</span></code>クラスの情報を引き継いで同様の<code class="docutils literal notranslate"><span class="pre">AnimalImage</span></code>クラスを実装することを試みる．</p>
@@ -1276,9 +1309,9 @@ ElephantのEulerはCage Bで飼育されています．
 GiraffeのNewtonはCage Cで飼育されています．
 </pre></div>
 </div>
-<img alt="../../_images/application_86_1.png" src="../../_images/application_86_1.png" />
-<img alt="../../_images/application_86_2.png" src="../../_images/application_86_2.png" />
-<img alt="../../_images/application_86_3.png" src="../../_images/application_86_3.png" />
+<img alt="../../_images/application_91_1.png" src="../../_images/application_91_1.png" />
+<img alt="../../_images/application_91_2.png" src="../../_images/application_91_2.png" />
+<img alt="../../_images/application_91_3.png" src="../../_images/application_91_3.png" />
 </div>
 </div>
 <p>継承元のメソッドと新たに追加したメソッドの両方を呼び出せることが確認できた．</p>
