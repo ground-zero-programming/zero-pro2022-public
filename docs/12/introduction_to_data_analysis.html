@@ -2100,7 +2100,7 @@ s = \sqrt{s^2}
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
 <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meirio&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meiryo&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -2200,6 +2200,16 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 <img alt="../../_images/introduction_to_data_analysis_84_0.png" src="../../_images/introduction_to_data_analysis_84_0.png" />
 </div>
 </div>
+<div class="attention dropdown admonition">
+<p class="admonition-title">タイトルなどが文字化けする場合</p>
+<p>PC環境によっては，日本語フォント表示用コードを実行してもグラフ中に日本語がうまく表示されず，文字が <code class="docutils literal notranslate"><span class="pre">□</span></code> のように表示されることがある．</p>
+<p>その場合は，以下のコードをコードセルに貼り付け，実行してからグラフを描画せよ．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install japanize-matplotlib
+import japanize_matplotlib
+japanize_matplotlib.japanize()
+</pre></div>
+</div>
+</div>
 <p>同様に，「日付」によって「最高気温」がどう変わるかを線グラフで描画してみよう．</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -2211,7 +2221,7 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/introduction_to_data_analysis_86_0.png" src="../../_images/introduction_to_data_analysis_86_0.png" />
+<img alt="../../_images/introduction_to_data_analysis_87_0.png" src="../../_images/introduction_to_data_analysis_87_0.png" />
 </div>
 </div>
 <p>さて，では「日付と客数」のグラフと，「日付と最高気温」のグラフを交互に見てみましょう．
@@ -2240,7 +2250,7 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/introduction_to_data_analysis_89_0.png" src="../../_images/introduction_to_data_analysis_89_0.png" />
+<img alt="../../_images/introduction_to_data_analysis_90_0.png" src="../../_images/introduction_to_data_analysis_90_0.png" />
 </div>
 </div>
 <p>このグラフをみると，最高気温と客数の間には，右肩上がりの関係があるように見える．
@@ -2265,7 +2275,7 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/introduction_to_data_analysis_92_0.png" src="../../_images/introduction_to_data_analysis_92_0.png" />
+<img alt="../../_images/introduction_to_data_analysis_93_0.png" src="../../_images/introduction_to_data_analysis_93_0.png" />
 </div>
 </div>
 <div class="admonition- admonition">
@@ -2302,7 +2312,7 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/introduction_to_data_analysis_95_0.png" src="../../_images/introduction_to_data_analysis_95_0.png" />
+<img alt="../../_images/introduction_to_data_analysis_96_0.png" src="../../_images/introduction_to_data_analysis_96_0.png" />
 </div>
 </div>
 <p>このグラフより，客数は300人から450人くらいの範囲に主に分布しており，客数が500人を超えることは稀であることがわかる．</p>
@@ -2318,7 +2328,7 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/introduction_to_data_analysis_97_0.png" src="../../_images/introduction_to_data_analysis_97_0.png" />
+<img alt="../../_images/introduction_to_data_analysis_98_0.png" src="../../_images/introduction_to_data_analysis_98_0.png" />
 </div>
 </div>
 </section>
@@ -2342,7 +2352,7 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/introduction_to_data_analysis_99_0.png" src="../../_images/introduction_to_data_analysis_99_0.png" />
+<img alt="../../_images/introduction_to_data_analysis_100_0.png" src="../../_images/introduction_to_data_analysis_100_0.png" />
 </div>
 </div>
 <p>上記からわかるように，線グラフを重ねたい場合は同じセル内で単純に <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> を複数実行すればよいことがわかる．
@@ -2361,7 +2371,7 @@ x軸に日付，y軸に客数を指定してグラフを描画すればよい．
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../../_images/introduction_to_data_analysis_101_0.png" src="../../_images/introduction_to_data_analysis_101_0.png" />
+<img alt="../../_images/introduction_to_data_analysis_102_0.png" src="../../_images/introduction_to_data_analysis_102_0.png" />
 </div>
 </div>
 </section>

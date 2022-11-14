@@ -660,13 +660,21 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
 <span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
-<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meirio&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meiryo&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p><strong>出力例</strong></p>
 <p><img alt="" src="../../_images/kadai2_sample.png" /></p>
+<p><strong>注意：タイトルなどが文字化けする場合</strong></p>
+<p>PC環境によっては，日本語フォント表示用コードを実行してもグラフ中に日本語がうまく表示されず，文字が <code class="docutils literal notranslate"><span class="pre">□</span></code> のように表示されることがある．</p>
+<p>その場合は，以下のコードをコードセルに貼り付け，実行してからグラフを描画せよ．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip install japanize-matplotlib
+import japanize_matplotlib
+japanize_matplotlib.japanize()
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答用セル</span>
