@@ -1,0 +1,2562 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第12回：データ分析入門（講義） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="第13回：データ分析入門（演習）" href="../13/exercise_introduction_to_data_analysis.html" />
+    <link rel="prev" title="第11回：アプリケーションの作成（演習）" href="../11/exercise_application.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/variables_and_data_types.html">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/conditional_branch.html">
+   第4回：条件分岐（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/exercise_conditional_branch.html">
+   第5回：条件分岐（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/loops.html">
+   第6回：繰り返し処理（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/exercise_loops.html">
+   第7回：繰り返し処理（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/functions_and_scope.html">
+   第8回：関数とスコープ（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/exercise_functions_and_scope.html">
+   第9回：関数とスコープ（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/application.html">
+   第10回：アプリケーションの作成（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/exercise_application.html">
+   第11回：アプリケーションの作成（演習）
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第12回：データ分析入門（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/exercise_introduction_to_data_analysis.html">
+   第13回：データ分析入門（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/12/introduction_to_data_analysis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/12/introduction_to_data_analysis.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/12/introduction_to_data_analysis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python">
+   Pythonにおけるモジュール，パッケージ，ライブラリ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Pythonの標準ライブラリ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Pythonの外部ライブラリ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     モジュール／ライブラリのインポート
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     モジュールに別名をつける
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     【発展】特定の関数だけを読み込む
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pandas">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Pandas
+    </span>
+   </code>
+   によるデータ操作
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#series-dataframe">
+     Series と DataFrame
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     データの読み込み
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     列の抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     行の抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iloc">
+     【発展】
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       iloc
+      </span>
+     </code>
+     を用いて特定の行・列を抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     条件による抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     複数条件による抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     要約統計量の算出
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matplotlib">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Matplotlib
+    </span>
+   </code>
+   によるデータの可視化
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     線グラフ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     散布図
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     棒グラフ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     【発展】ヒストグラム
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     複数のグラフの重ね合わせ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id19">
+     グラフから読み取れる相関関係
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第12回：データ分析入門（講義）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   内容
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#python">
+   Pythonにおけるモジュール，パッケージ，ライブラリ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     Pythonの標準ライブラリ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     Pythonの外部ライブラリ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     モジュール／ライブラリのインポート
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     モジュールに別名をつける
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     【発展】特定の関数だけを読み込む
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#pandas">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Pandas
+    </span>
+   </code>
+   によるデータ操作
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#series-dataframe">
+     Series と DataFrame
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     データの読み込み
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     列の抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     行の抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#iloc">
+     【発展】
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       iloc
+      </span>
+     </code>
+     を用いて特定の行・列を抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     条件による抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     複数条件による抽出
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     要約統計量の算出
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#matplotlib">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Matplotlib
+    </span>
+   </code>
+   によるデータの可視化
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     線グラフ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     散布図
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     棒グラフ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     【発展】ヒストグラム
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     複数のグラフの重ね合わせ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id19">
+     グラフから読み取れる相関関係
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第12回：データ分析入門（講義）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>担当：古居彬</p>
+<section id="id2">
+<h2>内容<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>第12回では，Pythonを用いた基礎的なデータ分析を体験する．
+本講義の初回で述べたように，Pythonはデータ分析や機械学習，Webサービスなど幅広い分野で利用されている．
+その大きな理由として，さまざまな処理を実現するための機能が豊富に準備されていることが挙げられる．
+このような機能を管理しているのが，<strong>モジュール</strong> と呼ばれる単位である．モジュールには，さまざまな関数が含まれている．
+データ解析や画像処理といった高度な処理も，それぞれの用途に特化したモジュールを組み合わせることで比較的簡単に実行することができる．
+また，モジュールを複数集めたものを <strong>ライブラリ</strong> や <strong>パッケージ</strong> と呼ぶ．
+今回は実践編として，いくつかのモジュールを用いてPythonによる簡単なデータ分析を行っていこう．</p>
+<ul class="simple">
+<li><p>モジュール，ライブラリ，パッケージとその使い方を理解する</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Pandas</span></code> によるデータ操作を学ぶ</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> によるデータの可視化を学ぶ</p></li>
+</ul>
+</section>
+<section id="python">
+<h2>Pythonにおけるモジュール，パッケージ，ライブラリ<a class="headerlink" href="#python" title="Permalink to this headline">#</a></h2>
+<p>前述の通り，Pythonの強みの一つは，さまざまな処理を実現するための機能が準備されており，幅広い分野に応用できることである．
+このような機能を管理する単位は <strong>モジュール</strong> と呼ばれ，その中にはいくつかの関数やクラスが含まれている．</p>
+<p>また，複数のモジュールをまとめたものを <strong>パッケージ</strong> と呼ぶ．</p>
+<p>さらに，いくつかのパッケージをまとめて，一括でインストールできるようにしたものを <strong>ライブラリ</strong> と呼ぶ．
+ライブラリには大きく2種類があり，Pythonにはじめから付属していてすぐに使える <strong>標準ライブラリ</strong> と，追加でインストールすることで利用可能な <strong>外部ライブラリ</strong> がある．</p>
+<p>以上をまとめた概念図は以下の通りである．</p>
+<p><img alt="" src="../../_images/module_library.png" /></p>
+<p>ざっくり「モジュールやライブラリを利用することで，データ解析や画像処理など，高度な機能が利用できるようになる」と理解してもらえれば大丈夫だ．</p>
+<section id="id3">
+<h3>Pythonの標準ライブラリ<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>前述の通り，標準ライブラリとはあらかじめ用意されているライブラリである．
+<a class="reference internal" href="../08/functions_and_scope.html"><span class="doc std std-doc">第8回 関数とスコープ</span></a> で紹介した組み込み関数も，この標準ライブラリの中に含まれている．</p>
+<p>組み込み関数は何もせずそのまま使うことができたが，特殊な機能を持つモジュールは後述する <code class="docutils literal notranslate"><span class="pre">import</span></code> 文で読み込む必要がある．</p>
+<p>Pythonの標準ライブラリで提供されている関数・モジュールの一覧は以下の公式ページから参照することができる．</p>
+<p><a class="reference external" href="https://docs.python.org/ja/3/library/index.html">https://docs.python.org/ja/3/library/index.html</a></p>
+</section>
+<section id="id4">
+<h3>Pythonの外部ライブラリ<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>標準ライブラリだけでもかなり幅広い処理が実現できるが，データ分析や画像処理，統計解析や科学技術計算など，特定の分野に特化した機能を利用するためには，外部ライブラリを利用する必要がある．</p>
+<p>外部ライブラリは，その名の通り外部の団体や個人によって開発，提供されているライブラリである．
+外部ライブラリを利用するためには，まず初めにインストールが必要である．
+インストールされた外部ライブラリは，後述する <code class="docutils literal notranslate"><span class="pre">import</span></code> 文で読み込むことができる．</p>
+<p>なお，Google Colaboratoryでは既に主要な外部ライブラリがインストールされており，これらは最初から <code class="docutils literal notranslate"><span class="pre">import</span></code> 文で読み込みが可能である．</p>
+<div class="admonition- admonition">
+<p class="admonition-title">インストール済ライブラリの表示</p>
+<p>Google Colaboratoryにインストールされているライブラリ一覧を表示したい場合は，コードセルにて以下のコマンドを実行すればよい．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span>!pip list
+</pre></div>
+</div>
+<p>以下のように，大量のパッケージが表示されるはずだ．</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>Package                       Version
+----------------------------- ----------------------
+absl-py                       <span class="m">1</span>.3.0
+aeppl                         <span class="m">0</span>.0.33
+aesara                        <span class="m">2</span>.7.9
+aiohttp                       <span class="m">3</span>.8.3
+aiosignal                     <span class="m">1</span>.2.0
+alabaster                     <span class="m">0</span>.7.12
+albumentations                <span class="m">1</span>.2.1
+altair                        <span class="m">4</span>.2.0
+appdirs                       <span class="m">1</span>.4.4
+arviz                         <span class="m">0</span>.12.1
+… <span class="o">(</span>以下省略<span class="o">)</span> …
+</pre></div>
+</div>
+</div>
+<p>なお，本講義で利用する外部ライブラリについても，上記インストール済リストに含まれるため，新たにインストールの手順を踏む必要はない．
+外部ライブラリを自分で追加インストールする方法を学びたい人は，以下の発展項目を参照されたい．</p>
+<div class="tip dropdown admonition">
+<p class="admonition-title">【発展】外部ライブラリをインストールする方法</p>
+<p>Pythonで利用可能な外部ライブラリは，<strong>Python Package Index（PyPl）</strong> というソフトウェアリポジトリで管理されている．
+ざっくり表現すると，外部ライブラリのカタログのようなものである．</p>
+<p>以下のサイトより，インストール可能な外部ライブラリを検索することができる．</p>
+<p><a class="reference external" href="https://pypi.org">https://pypi.org</a></p>
+<p><strong>pip</strong> などのパッケージ管理システムを利用することで，PyPlに登録されているライブラリやパッケージをダウンロード＆インストールすることができる．
+Google Colaboratoryにおける外部ライブラリも，このpipというシステムによって管理されている．</p>
+<p>Google Colaboratoryで新しい外部ライブラリをインストールしたい場合，コードセルにて次のコマンドを実行すれば良い．</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>!pip install ライブラリ名
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id5">
+<h3>モジュール／ライブラリのインポート<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>前述の通り，モジュールやライブラリに含まれる関数やクラスを使用するためには，対象となるモジュール／ライブラリを読み込む（ <strong>インポート</strong> する）必要がある．
+これには， <code class="docutils literal notranslate"><span class="pre">import</span></code> という文を使う．以下のように記述することでモジュールをインポートできる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">モジュール名</span>
+</pre></div>
+</div>
+<p>または</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ライブラリ名</span>
+</pre></div>
+</div>
+<p>モジュール／ライブラリのインポートは，最初に1回記述すればよい．</p>
+<p>試しに，数学関係の便利な関数をまとめた <code class="docutils literal notranslate"><span class="pre">math</span></code> というモジュールをインポートしてみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>これで，<code class="docutils literal notranslate"><span class="pre">math</span></code> モジュールが使えるようになった．
+<code class="docutils literal notranslate"><span class="pre">math</span></code> モジュールに含まれる関数を使用するためには， <code class="docutils literal notranslate"><span class="pre">math.関数名</span></code> のように記述すればOKである．</p>
+<p>例えば，平方根を計算したいときは <code class="docutils literal notranslate"><span class="pre">math.sqrt()</span></code> のように記述する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4142135623730951
+</pre></div>
+</div>
+</div>
+</div>
+<p>ほかにも <code class="docutils literal notranslate"><span class="pre">math</span></code> モジュールには様々な関数が用意されている．
+以下に，いくつかの例を示す．</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>関数</p></th>
+<th class="head"><p>説明</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">sin(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> のサイン（正弦）を返す</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cos(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> のコサイン（余弦）を返す</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">tan(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> のタンジェント（正接）を返す</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">exp(x)</span></code></p></td>
+<td><p>自然対数の底（ネイピア数）の <code class="docutils literal notranslate"><span class="pre">x</span></code> 乗を返す</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">log(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> の自然対数を返す</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">sqrt(x)</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">x</span></code> の平方根を返す</p></td>
+</tr>
+</tbody>
+</table>
+<p>そのうちいくつかを実行してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="mi">13</span><span class="p">))</span> <span class="c1"># 自然対数</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="o">/</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># 正弦（サイン）</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.5649493574615367
+0.7071067811865475
+</pre></div>
+</div>
+</div>
+</div>
+<p>また，<code class="docutils literal notranslate"><span class="pre">math</span></code> モジュールには関数の他にも，数学で多用される <strong>定数</strong> も含まれている．
+以下に代表例を表示してみる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="c1"># 円周率</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">e</span><span class="p">)</span> <span class="c1"># 自然対数の底（ネイピア数）</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3.141592653589793
+2.718281828459045
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>モジュールに別名をつける<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>モジュールをインポートする際，別の名前（例えば短縮名）を付けることが可能である．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">モジュール名</span> <span class="k">as</span> <span class="nn">短縮名</span>
+</pre></div>
+</div>
+<p>例えば，以下のように書くことで，モジュール <code class="docutils literal notranslate"><span class="pre">math</span></code> に短縮名 <code class="docutils literal notranslate"><span class="pre">m</span></code> を付けてインポートすることができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span> <span class="k">as</span> <span class="nn">m</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>このようにインポートすることで，<code class="docutils literal notranslate"><span class="pre">math</span></code> モジュールに含まれる関数を使用する際， <code class="docutils literal notranslate"><span class="pre">m.関数名</span></code> のように簡潔に書けるようになる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.4142135623730951
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3>【発展】特定の関数だけを読み込む<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>モジュールやライブラリを用いる際，特定の関数だけを読み込みたいことがある．
+そのような場合は，以下の表記を用いて指定した関数・クラスだけをインポートすることができる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">モジュール名</span> <span class="kn">import</span> <span class="n">関数名</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">from</span></code> でモジュール名を指定し，続く <code class="docutils literal notranslate"><span class="pre">import</span></code> に読み込みたい関数・クラスを指定する（複数の関数・クラスを指定したい場合は，カンマ区切りで並べて書く）．</p>
+<p>このようにしてインポートした場合，モジュール名を記述しなくとも，関数・クラスをそのまま呼び出すことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+
+<span class="n">sqrt</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1.7320508075688772
+</pre></div>
+</div>
+</div>
+</div>
+<div class="attention admonition">
+<p class="admonition-title">ワイルドカードを用いたインポート</p>
+<p>なお，次のようにアスタリスク（<code class="docutils literal notranslate"><span class="pre">*</span></code>）を用いると，対象のモジュールに含まれるすべての関数やクラスを一気にインポートできる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">モジュール名</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+<p>なお，この際の <code class="docutils literal notranslate"><span class="pre">*</span></code> は <strong>ワイルドカード</strong> と呼ばれ，任意の文字列を意味している．
+したがって，対象のモジュール内の任意の文字列を名前として持つ関数やクラス（つまり，すべての関数やクラス）をインポートする，という表記法である．</p>
+<p>上記のようなインポートの方法は <strong>ワイルドカードインポート</strong> とも呼ばれ，一見楽な方法に思えるが，一般的なPythonプログラミングにおいては <strong>推奨されない</strong> ことが多い．</p>
+<p>理由はいくつかあるが，最も多いトラブルは関数や変数の名前衝突である．</p>
+<p>通常，外部モジュールや外部ライブラリに含まれている関数やクラス，定数を全て把握していることは少ない．
+ワイルドカードインポートではそれら把握できていない物も含め全てがインポートされてしまうため，自分が別で定義した関数やクラスの名前がインポートした関数やクラスの名前と衝突する危険がある．</p>
+<p>名前の衝突が起こると，変数や関数が上書きされてしまうリスクがあるため，基本的にはワイルドカードインポートは使わない方がよいだろう．</p>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">モジュール，パッケージ，ライブラリのまとめ</p>
+<ul class="simple">
+<li><p>複数の関数やクラスをまとめたものをモジュールと呼ぶ</p></li>
+<li><p>モジュールをさらにまとめたものをパッケージやライブラリと呼ぶ</p></li>
+<li><p>外部ライブラリを追加インストールすることで，様々な追加機能が使えるようにある</p></li>
+<li><p>モジュールやライブラリは <code class="docutils literal notranslate"><span class="pre">import</span></code> 文で読み込むことができる</p></li>
+</ul>
+</div>
+<p>なお，これ以降は代表的な外部ライブラリである <code class="docutils literal notranslate"><span class="pre">pandas</span></code> と <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> を用いてデータ分析に取り組んでいく．
+これら2つのライブラリはそれぞれ膨大な数のモジュールを含んでおり，それらの網羅的な紹介は本講義では行わず，各ライブラリの機能を体験する上で最小限の説明にとどめる．</p>
+<p>将来的にPythonでプログラミングをする機会が生じたときに，各自で検索しながら様々な具体的な機能を学んで行って欲しい．
+プログラミングにおいては，網羅的な知識を有しておくよりも，必要に応じて適切に情報を検索し利用する能力の方が重要である．</p>
+</section>
+</section>
+<section id="pandas">
+<h2><code class="docutils literal notranslate"><span class="pre">Pandas</span></code> によるデータ操作<a class="headerlink" href="#pandas" title="Permalink to this headline">#</a></h2>
+<p>では，実際にデータ分析の本題に入っていこう．
+今回は，<strong>Pandas</strong> というライブラリを用いる．
+Pandasは，データ解析を容易に行うための機能を提供しており，データの操作や加工，分析などさまざまな処理を行うことができる．</p>
+<p>以下のコマンドで，まずはPandasをインポートしよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>なお，簡単のため <code class="docutils literal notranslate"><span class="pre">as</span></code> を用いて <code class="docutils literal notranslate"><span class="pre">pd</span></code> という短縮名でインポートした．</p>
+<section id="series-dataframe">
+<h3>Series と DataFrame<a class="headerlink" href="#series-dataframe" title="Permalink to this headline">#</a></h3>
+<p>Pandasでは，<strong>Series（シリーズ）</strong> や <strong>DataFrame（データフレーム）</strong> といった特殊なデータ構造が使用される．
+Seriesは1次元（列形式）のデータ，DataFrameは2次元（行列形式）のデータを扱うための構造である．</p>
+<p>実際のデータ分析の場面では2次元のデータを扱うことが多いため，本講義では2次元のデータ構造であるDataFrameを主に扱っていく．</p>
+<p>DataFrameは前述の通り，行と列の2次元で表現され，表のような構造となっている．
+それぞれの列に対して，文字列型や数値型など，一様な型のデータが格納されている．</p>
+<p>列と行にはそれぞれ列名と行名（またはインデックス）が付けられており，これらを指定することで，データの集計や抽出，加工に利用することができる．</p>
+<div class="tip admonition">
+<p class="admonition-title">DataFrameからSeriesを抽出する</p>
+<p>DataFrameから抽出した1行または1列の情報は，1次元のデータ構造であるSeriesとなる．
+逆に，複数のSeriesを結合してDataFrameとして扱うこともできる．</p>
+<p>このように，DataFrameは複数のSeriesの集合と考えることができる．</p>
+</div>
+<p>DataFrameを作成するには，以下のようなコードを書けば良い．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">格納するデータ</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">行名</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">列名</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>このとき，引数の <code class="docutils literal notranslate"><span class="pre">data</span></code> には，リスト型や辞書型の変数を指定することができる（復習 → <a class="reference internal" href="../02/variables_and_data_types.html"><span class="doc std std-doc">第2回</span></a>）．</p>
+<p>本講義では，ファイルに格納された情報をDataFrameに取り込んで解析に利用していくこととする．</p>
+</section>
+<section id="id8">
+<h3>データの読み込み<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>今回は，<a class="reference external" href="http://kogolab.chillout.jp/elearn/icecream/index.html">アイスクリーム屋さんで学ぶ楽しい統計学</a> というサイトで公開されている架空のデータを用いてデータ分析に取り組んでいく．</p>
+<p>まず，第10回の時と同じ手順で，当該データをダウンロードしよう．
+以下のセルを実行すると，<code class="docutils literal notranslate"><span class="pre">data</span></code> フォルダの中に <code class="docutils literal notranslate"><span class="pre">ice_cream.csv</span></code> というファイルがダウンロードされる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir data
+<span class="o">!</span>wget -P data https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/12/data/ice_cream.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mkdir: data: File exists
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ice_cream.csv</span></code>には，あるアイスクリームチェーン店における8月の客数データ（2週間 = 14日分）が格納されている．
+このファイルは <strong>CSVファイル</strong> と呼ばれ，以下のように各データの間がコンマ <code class="docutils literal notranslate"><span class="pre">,</span></code> で区切られている．</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>日付, 最高気温, 客数
+1, 29, 312
+2, 30, 348
+3, 29, 284
+...
+</pre></div>
+</div>
+<p>1行目は列のタイトル（ヘッダとも呼ばれる）となっており，2行目から各日付におけるデータが格納されている．
+また，暑い日にはアイスクリームを食べたいと思う人が増えるかもしれない．
+そこで，このファイルには各日付における客数以外に，その日の最高気温も含まれている．</p>
+<p>CSVファイルを読み込むには，Pandasに含まれる <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> という関数が便利である．</p>
+<p><code class="docutils literal notranslate"><span class="pre">read_csv</span></code> 関数は，目的とするファイルの保存場所までの経路（これを <strong>パス</strong> といいます）を文字列として引数に渡すことで，そのファイルを開くことができる．
+今回は <code class="docutils literal notranslate"><span class="pre">data</span></code> というフォルダに入っている <code class="docutils literal notranslate"><span class="pre">ice_cream.csv</span></code> を開きたいので，<code class="docutils literal notranslate"><span class="pre">'data/ice_cream.csv'</span></code> という文字列を渡せばOK．
+ここで，スラッシュ <code class="docutils literal notranslate"><span class="pre">/</span></code> はパスを記述する際の区切り文字で， <code class="docutils literal notranslate"><span class="pre">A/B</span></code> と書くとフォルダ <code class="docutils literal notranslate"><span class="pre">A</span></code> の中に <code class="docutils literal notranslate"><span class="pre">B</span></code> があることを意味する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ファイルを `df` という変数に読み込む</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/ice_cream.csv&#39;</span><span class="p">)</span> 
+
+<span class="c1"># dfの中身を表示</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>29</td>
+      <td>312</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>30</td>
+      <td>348</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>29</td>
+      <td>284</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>32</td>
+      <td>369</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>33</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>32</td>
+      <td>536</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>34</td>
+      <td>652</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>27</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>28</td>
+      <td>294</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>32</td>
+      <td>368</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>34</td>
+      <td>451</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>32</td>
+      <td>405</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>13</td>
+      <td>30</td>
+      <td>458</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>28</td>
+      <td>422</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>上の出力の結果から，「日付」，「最高気温」，「客数」の3つの列で構成されるデータが読み込まれていることがわかる．
+なお，一番左の列はPandasによって付けられた行のインデックスである．このインデックスは0からスタートしていることに気をつけよう．</p>
+<div class="tip admonition">
+<p class="admonition-title">列名（ヘッダ）の認識</p>
+<p><code class="docutils literal notranslate"><span class="pre">read_csv</span></code> 関数では，デフォルトでCSVファイル中の1行目の情報を列名（ヘッダ）として解釈してくれる．
+先ほど読み込んだ <code class="docutils literal notranslate"><span class="pre">ice_cream.csv</span></code> はまさに1行目にヘッダが入っていたため上手くいったが，場合によってはヘッダのないCSVファイルを読み込むこともあるだろう．</p>
+<p>そのような場合は，<code class="docutils literal notranslate"><span class="pre">read_csv</span></code> 関数の引数として <code class="docutils literal notranslate"><span class="pre">header=None</span></code> とすればよい．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/sample_no_header.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span> 
+</pre></div>
+</div>
+<p>また，列名を自分で設定したい場合は，引数 <code class="docutils literal notranslate"><span class="pre">names</span></code> で指定できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/sample_no_header.csv&#39;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;D&#39;</span><span class="p">])</span> 
+</pre></div>
+</div>
+</div>
+</section>
+<section id="id9">
+<h3>列の抽出<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>データフレームから任意の列を抽出したい場合，<code class="docutils literal notranslate"><span class="pre">DataFrame['列名']</span></code> のように書けばよい（文字列として指定するため，クォーテーション <code class="docutils literal notranslate"><span class="pre">'</span></code> で囲っていることに注意）．
+例えば上記 <code class="docutils literal notranslate"><span class="pre">df</span></code> から「最高気温」の列を取り出したい場合は，以下の通りである．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     29
+1     30
+2     29
+3     32
+4     33
+5     32
+6     34
+7     27
+8     28
+9     32
+10    34
+11    32
+12    30
+13    28
+Name: 最高気温, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>同様にして，「客数」の列を取り出してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     312
+1     348
+2     284
+3     369
+4     420
+5     536
+6     652
+7     275
+8     294
+9     368
+10    451
+11    405
+12    458
+13    422
+Name: 客数, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>なお，複数の列を取り出したい場合は，取り出したい列名のリスト <code class="docutils literal notranslate"><span class="pre">['列1',</span> <span class="pre">'列2',</span> <span class="pre">'列3',</span> <span class="pre">...]</span></code> を <code class="docutils literal notranslate"><span class="pre">DataFrame[</span> <span class="pre">]</span></code> の括弧 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> の中に記述すればよい．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DataFrame</span><span class="p">[[</span><span class="s1">&#39;列1&#39;</span><span class="p">,</span> <span class="s1">&#39;列2&#39;</span><span class="p">,</span> <span class="s1">&#39;列3&#39;</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span> <span class="p">]</span>
+</pre></div>
+</div>
+<p>括弧 <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> が二重になっていることに注意すること．</p>
+<p>例えば最高気温と客数の両方を取り出したい場合は，以下のような書き方になる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">,</span> <span class="s1">&#39;客数&#39;</span><span class="p">]]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>29</td>
+      <td>312</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>30</td>
+      <td>348</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>29</td>
+      <td>284</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>32</td>
+      <td>369</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>33</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>32</td>
+      <td>536</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>34</td>
+      <td>652</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>27</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>28</td>
+      <td>294</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>32</td>
+      <td>368</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>34</td>
+      <td>451</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>32</td>
+      <td>405</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>30</td>
+      <td>458</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>28</td>
+      <td>422</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id10">
+<h3>行の抽出<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>コロン（<code class="docutils literal notranslate"><span class="pre">:</span></code>）で行のインデックスを指定することで，特定の区間の行を抽出することができる．</p>
+<p>例えば，2行目から5行目までを抽出したい場合は，スライシングを用いて以下のように書けば良い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>29</td>
+      <td>284</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>32</td>
+      <td>369</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>33</td>
+      <td>420</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="iloc">
+<h3>【発展】 <code class="docutils literal notranslate"><span class="pre">iloc</span></code> を用いて特定の行・列を抽出<a class="headerlink" href="#iloc" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">iloc</span></code> を利用すると，DataFrameに対して行番号と列番号を指定してデータを抽出することが可能である．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DataFrame</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">行番号</span><span class="p">,</span> <span class="n">列番号</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>例えば1行目を抽出する場合は，以下のように書けば良い．なお，行番号のみを指定する場合，列番号の指定は省略できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>日付        2
+最高気温     30
+客数      348
+Name: 1, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>また，3行目から6行目を抽出したい場合は，スライシング（復習 → <a class="reference internal" href="../02/variables_and_data_types.html"><span class="doc std std-doc">第2回</span></a>）を利用して以下のように書くことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>32</td>
+      <td>369</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>33</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>32</td>
+      <td>536</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>今度は列を考える．
+例えば2列目を抽出したい場合は，行の指定を <code class="docutils literal notranslate"><span class="pre">:</span></code> （すべての行という意味）とし，列の指定を <code class="docutils literal notranslate"><span class="pre">2</span></code> とする．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     312
+1     348
+2     284
+3     369
+4     420
+5     536
+6     652
+7     275
+8     294
+9     368
+10    451
+11    405
+12    458
+13    422
+Name: 客数, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+<p>これらを組み合わせ，例えば2列目の3行目から6行目を抽出したい場合は，以下のように書けばよい，</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3    369
+4    420
+5    536
+Name: 客数, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id11">
+<h3>条件による抽出<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">True</span></code> または <code class="docutils literal notranslate"><span class="pre">False</span></code> を返す条件式を指定することで，データフレームから条件を満たす任意の行を抽出することができる．</p>
+<p>例えば，データフレーム <code class="docutils literal notranslate"><span class="pre">df</span></code> から，「最高気温が30度より大きい」の行だけ抜き出したいとしよう．
+これを表す条件式は， <code class="docutils literal notranslate"><span class="pre">df['最高気温']</span> <span class="pre">&gt;</span> <span class="pre">30</span></code> となる．
+実際に実行してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     False
+1     False
+2     False
+3      True
+4      True
+5      True
+6      True
+7     False
+8     False
+9      True
+10     True
+11     True
+12    False
+13    False
+Name: 最高気温, dtype: bool
+</pre></div>
+</div>
+</div>
+</div>
+<p>縦に <code class="docutils literal notranslate"><span class="pre">True</span></code> と <code class="docutils literal notranslate"><span class="pre">False</span></code> がズラッと並んでいるが，これはデータフレーム <code class="docutils literal notranslate"><span class="pre">df</span></code> のうち，どの行が条件式 <code class="docutils literal notranslate"><span class="pre">df['最高気温']</span> <span class="pre">&gt;</span> <span class="pre">30</span></code> を満たすかを表している．
+上記の出力で条件式が満たされる（つまり <code class="docutils literal notranslate"><span class="pre">True</span></code> になっている）のは，行インデックスが「3, 4, 5, 6, 9, 10, 11」の場合であることがわかる．</p>
+<p>実際に上の方で出力した <code class="docutils literal notranslate"><span class="pre">df</span></code> の中身と照らし合わせてみよう．
+<code class="docutils literal notranslate"><span class="pre">True</span></code> となっている行における最高気温が30度よりも大きくなっているはずだ．</p>
+<p>最終的には， <code class="docutils literal notranslate"><span class="pre">DataFrame[条件式]</span></code> のように書くことで，条件式を満たす行のみを取り出すことができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">30</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>32</td>
+      <td>369</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>33</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>32</td>
+      <td>536</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>34</td>
+      <td>652</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>32</td>
+      <td>368</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>34</td>
+      <td>451</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>32</td>
+      <td>405</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>同様に，「客数が400より少ない」行だけを抜き出してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">400</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>29</td>
+      <td>312</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>30</td>
+      <td>348</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>29</td>
+      <td>284</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>32</td>
+      <td>369</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>27</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>28</td>
+      <td>294</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>32</td>
+      <td>368</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>このうち，さらに「客数が400より少ない」行について，「最高気温」だけを抜き出したい場合は，<code class="docutils literal notranslate"><span class="pre">DataFrame[条件式]['列名']</span></code> のように，列名を指定する <code class="docutils literal notranslate"><span class="pre">[</span> <span class="pre">]</span></code> を後ろにくっ付ければよい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">400</span><span class="p">][</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    29
+1    30
+2    29
+3    32
+7    27
+8    28
+9    32
+Name: 最高気温, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id12">
+<h3>複数条件による抽出<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<p>単一の条件ではなく，複数の条件を使って行を抽出することもできる．</p>
+<p>そのためには，条件分岐の回で学んだ論理演算子の考え方で各条件を繋げればよい．</p>
+<p>ただし，条件分岐の際とは以下の2点が異なる．</p>
+<ul class="simple">
+<li><p>条件分岐のときに用いた <code class="docutils literal notranslate"><span class="pre">and</span></code> と <code class="docutils literal notranslate"><span class="pre">or</span></code> は使えない．DataFrameに対して複数の条件を設定する際は，<code class="docutils literal notranslate"><span class="pre">and</span></code> の代わりに <code class="docutils literal notranslate"><span class="pre">&amp;</span></code>， <code class="docutils literal notranslate"><span class="pre">or</span></code> の代わりに <code class="docutils literal notranslate"><span class="pre">|</span></code> を使う必要がある．</p></li>
+<li><p>各条件は括弧 <code class="docutils literal notranslate"><span class="pre">()</span></code> で囲む必要がある．</p></li>
+</ul>
+<p>例えば，「客数が400より少ない」かつ「最高気温が30度以上」の行だけを抽出したい場合は，以下のように書く．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">400</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">30</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>30</td>
+      <td>348</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>32</td>
+      <td>369</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>32</td>
+      <td>368</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>同様に，「最高気温が30度未満」または「最高気温が33度以上」の行だけを抽出したい場合は，以下のように書く．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">30</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span> <span class="o">&gt;=</span><span class="mi">33</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>29</td>
+      <td>312</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>29</td>
+      <td>284</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>33</td>
+      <td>420</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>34</td>
+      <td>652</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>27</td>
+      <td>275</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>28</td>
+      <td>294</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>34</td>
+      <td>451</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>14</td>
+      <td>28</td>
+      <td>422</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id13">
+<h3>要約統計量の算出<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p>データが与えられた時，生の数字だけを見てもなかなか情報は得られない．
+多くの場合，データの特徴を要約した数値を計算し，全体の傾向の掴んだり，さまざまな条件で比較したりする．</p>
+<p>このとき計算される数値のことを <strong>要約統計量</strong> や <strong>記述統計量</strong> と呼ぶ．
+これには様々な種類があるが，今回は最も基本的な5つの要約統計量を計算してみよう．</p>
+<p>各統計量は，データフレームに対して以下のように書くことで計算できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DataFrame</span><span class="o">.</span><span class="n">統計量</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>今回はデータ中の最高気温に対して，各種統計量を計算してみる．</p>
+<p><strong>最小値</strong>（<code class="docutils literal notranslate"><span class="pre">min</span></code>）：データに含まれる最も小さい数．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span> <span class="c1"># 最小値の計算</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>27
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>最大値</strong>（<code class="docutils literal notranslate"><span class="pre">max</span></code>）：データに含まれる最も大きい数．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="c1"># 最大値の計算</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>34
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>平均値</strong>（<code class="docutils literal notranslate"><span class="pre">mean</span></code>）：データの中間的な値を表す統計量．<span class="math notranslate nohighlight">\(N\)</span> 個のデータ <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_N\)</span> に対して，以下のようにデータの合計を個数で割ることで計算される．</p>
+<div class="math notranslate nohighlight">
+\[
+\bar{x} = \frac{1}{N} \sum_{i=1}^N x_i
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="c1"># 平均値の計算</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30.714285714285715
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>分散</strong>（<code class="docutils literal notranslate"><span class="pre">var</span></code>）：データのばらつき具合を表す統計量．以下の式で計算される．</p>
+<div class="math notranslate nohighlight">
+\[
+s^2 = \frac{1}{N} \sum_{i=1}^N (x_i - \bar{x})^2
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">var</span><span class="p">()</span> <span class="c1"># 分散の計算</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.296703296703297
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>標準偏差</strong>（<code class="docutils literal notranslate"><span class="pre">std</span></code>）：分散 <span class="math notranslate nohighlight">\(s^2\)</span> の平方根で計算される．分散は各データを2乗した値から求めているため，平均と比較することができない．分散の平方根を計算することで，データのばらつきを平均を比較できるようになる．</p>
+<div class="math notranslate nohighlight">
+\[
+s = \sqrt{s^2}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span> <span class="c1"># 標準偏差の計算</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.3014567770660603
+</pre></div>
+</div>
+</div>
+</div>
+<p>以上をまとめると，14日間における最高気温は27度から34度の範囲で変化し，平均値は約30.7度，標準偏差は約2.3度なので，値のばらつきはそこまで大きくないことがわかった．</p>
+<p>なお，上記の例では一つ一つ記述統計量を算出したが，<code class="docutils literal notranslate"><span class="pre">describe()</span></code> メソッドを用いることで，DataFrameの各列に対して複数の要約統計量を一気に計算することもできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>日付</th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>14.0000</td>
+      <td>14.000000</td>
+      <td>14.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>7.5000</td>
+      <td>30.714286</td>
+      <td>399.571429</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>4.1833</td>
+      <td>2.301457</td>
+      <td>104.374116</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>1.0000</td>
+      <td>27.000000</td>
+      <td>275.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>4.2500</td>
+      <td>29.000000</td>
+      <td>321.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>7.5000</td>
+      <td>31.000000</td>
+      <td>387.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>10.7500</td>
+      <td>32.000000</td>
+      <td>443.750000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>14.0000</td>
+      <td>34.000000</td>
+      <td>652.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="admonition-pandas admonition">
+<p class="admonition-title">Pandasによるデータ分析のまとめ</p>
+<ul class="simple">
+<li><p>Pandasというライブラリを用いることで，データの収集や整理，加工が容易となる</p></li>
+<li><p>PandasではDataFrameやSeriesといったデータ構造が利用される</p></li>
+<li><p>DataFrameの列や行に対してに対して条件式などを用いた用いた抽出が可能である</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="matplotlib">
+<h2><code class="docutils literal notranslate"><span class="pre">Matplotlib</span></code> によるデータの可視化<a class="headerlink" href="#matplotlib" title="Permalink to this headline">#</a></h2>
+<p>データ分析において，集計した結果を図やグラフなどを用いて視覚的に表示してみることは非常に重要である．
+そのデータから読み取ることができる情報と，それに基づく意思決定にまで影響を及ぼす．
+このような操作を，データの <strong>可視化（visualization）</strong> と呼ぶ．</p>
+<p>ここでは，グラフ描画用ライブラリである <strong>Matplotlib</strong> のモジュールを使用して，データを可視化するためのグラフを作成していく．</p>
+<p>Matplotlibライブラリを使用するためには，まず <code class="docutils literal notranslate"><span class="pre">matplotlib</span></code> のモジュールをインポートする．
+ここでは，基本的なグラフを描画するための <code class="docutils literal notranslate"><span class="pre">matplotlib.pyplot</span></code> というモジュールを使用する．
+慣例として，同モジュールに <code class="docutils literal notranslate"><span class="pre">plt</span></code> という短縮名を付けて利用しよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<p>なお，<code class="docutils literal notranslate"><span class="pre">%matplotlib</span> <span class="pre">inline</span></code> は，ノートブック内でグラフを表示するために必要なコードである．</p>
+<p>なお，以下はMatplotlibで日本語フォントを扱うための設定用コードなので，実行だけして中身は無視して構わない．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meirio&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="note dropdown admonition">
+<p class="admonition-title">【補足】上記コードが気になる人向けの解説</p>
+<p>上記のコードについて簡単に解説する（気にならない人はスルーしてよい）．</p>
+<p>まず一行目では，Matplotlibに含まれる <code class="docutils literal notranslate"><span class="pre">rcParams</span></code> という辞書形式のオブジェクトをインポートしている．
+ここにはさまざまなデフォルト設定値が格納されており，この設定値を変更することで，プログラム全体のグラフに対して見た目などの変更が可能である．</p>
+<p><code class="docutils literal notranslate"><span class="pre">rcParams['font.family']</span></code> を変更することで，グラフ中のフォントを任意に設定できる．
+ただし，使用しているPC環境（OSやブラウザ）によっては特定のフォントが使えたり使えなかったりするため，フォントの大きなカテゴリ（総称フォントと呼ばれる）である <code class="docutils literal notranslate"><span class="pre">sans-serif</span></code> を設定している．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">sans-serif</span></code> とは日本語フォントでいうところのゴシック体である．</p>
+<p>また，<code class="docutils literal notranslate"><span class="pre">rcParams['font.sans-serif']</span></code> を変更することで，<code class="docutils literal notranslate"><span class="pre">sans-serif</span></code> として利用可能なフォントの選択肢を具体的に指定している．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meirio&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>このうち，使用しているPC環境が利用可能なものがグラフ中のフォントとして使用される．
+例えば，Macであれば必ず <code class="docutils literal notranslate"><span class="pre">Hiragino</span> <span class="pre">Sans</span></code> が利用可能であり，Windowsであれば <code class="docutils literal notranslate"><span class="pre">Yu</span> <span class="pre">Gothic</span></code> や <code class="docutils literal notranslate"><span class="pre">Meirio</span></code> が，Ubuntuであれば <code class="docutils literal notranslate"><span class="pre">Noto</span> <span class="pre">Sans</span> <span class="pre">CJK</span> <span class="pre">JP</span></code> が使えるはずである．
+そのため，一般的なPC環境であれば，OSやブラウザを問わず正しく日本語フォントでグラフを出力できるようになっている．</p>
+</div>
+<section id="id14">
+<h3>線グラフ<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">pyplot</span></code>モジュールに含まれている <code class="docutils literal notranslate"><span class="pre">plot</span></code> 関数を用いて，線グラフを描画していこう．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>と書くことで，x軸に変数 <code class="docutils literal notranslate"><span class="pre">X</span></code>，y軸に変数 <code class="docutils literal notranslate"><span class="pre">Y</span></code> を取った線グラフを表示することができる．
+このとき，<code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">Y</span></code> にはリストやPandasのSeries，DataFrameなど様々指定できる．</p>
+<p>まずは，「日付」によって「客数」がどう変わるかをグラフ化してみよう．
+x軸に日付，y軸に客数を指定してグラフを描画すればよい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">]);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_75_0.png" src="../../_images/introduction_to_data_analysis_75_0.png" />
+</div>
+</div>
+<p>なお，セルの最後に実行されたオブジェクトの出力表示を無くすため，これ以降グラフを描画する際は，セルの最後の行にセミコロン（<code class="docutils literal notranslate"><span class="pre">;</span></code>）をつけていることに注意されたい（セミコロンが無くてもグラフ自体は問題なく描画できる）．</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot</span></code> 関数ではグラフの線の種類や色，データポイントのマーカの種類を，様々な引数で指定できる．</p>
+<p>例えば，先ほど作成した線グラフにデータポイントの丸型マーカを加えたい場合，<code class="docutils literal notranslate"><span class="pre">plot</span></code> 関数の引数に <code class="docutils literal notranslate"><span class="pre">marker='o'</span></code> を追加する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_78_0.png" src="../../_images/introduction_to_data_analysis_78_0.png" />
+</div>
+</div>
+<p>引数 <code class="docutils literal notranslate"><span class="pre">marker</span></code> に違う値を指定するとマーカの形状が変わる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_80_0.png" src="../../_images/introduction_to_data_analysis_80_0.png" />
+</div>
+</div>
+<p>他にも，<code class="docutils literal notranslate"><span class="pre">linestyle</span></code> で線の種類を変えたり，<code class="docutils literal notranslate"><span class="pre">color</span></code> で線の色を変更したりできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;*&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;green&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_82_0.png" src="../../_images/introduction_to_data_analysis_82_0.png" />
+</div>
+</div>
+<p>それぞれの引数で指定可能な値は以下を参照されたい．</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://matplotlib.org/api/_as_gen/matplotlib.lines.Line2D.html#matplotlib.lines.Line2D.set_linestyle">linestyle</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/api/colors_api.html?highlight=color#module-matplotlib.colors">color</a></p></li>
+<li><p><a class="reference external" href="https://matplotlib.org/api/markers_api.html#module-matplotlib.markers">marker</a></p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">pyplot</span></code> モジュールでは，グラフのタイトルと各軸のラベルを指定して表示することができる．
+タイトルは <code class="docutils literal notranslate"><span class="pre">title</span></code> 関数，x軸のラベルは <code class="docutils literal notranslate"><span class="pre">xlabel</span></code> 関数，y軸のラベルは <code class="docutils literal notranslate"><span class="pre">ylabel</span></code> 関数に文字列を渡すことで指定可能である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span> <span class="c1"># グラフを作成</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;日付と客数の関係&#39;</span><span class="p">)</span> <span class="c1"># タイトルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;日付&#39;</span><span class="p">)</span> <span class="c1"># x軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;客数 (人)&#39;</span><span class="p">);</span> <span class="c1"># y軸のラベルを追加</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_84_0.png" src="../../_images/introduction_to_data_analysis_84_0.png" />
+</div>
+</div>
+<p>同様に，「日付」によって「最高気温」がどう変わるかを線グラフで描画してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">)</span> <span class="c1"># グラフを作成</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;日付と最高気温の関係&#39;</span><span class="p">)</span> <span class="c1"># タイトルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;日付&#39;</span><span class="p">)</span> <span class="c1"># x軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;最高気温（度）&#39;</span><span class="p">);</span> <span class="c1"># y軸のラベルを追加</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_86_0.png" src="../../_images/introduction_to_data_analysis_86_0.png" />
+</div>
+</div>
+<p>さて，では「日付と客数」のグラフと，「日付と最高気温」のグラフを交互に見てみましょう．
+何か気がつくことがないだろうか？</p>
+<p>最高気温が高い日には客数も多く，最高気温が低い日には客数が少ない傾向があるように見える．</p>
+<p>2つの変数の関係を可視化するために，次に <strong>散布図</strong> というグラフで最高気温と客数の関係を見ていこう．</p>
+</section>
+<section id="id15">
+<h3>散布図<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
+<p>散布図とは，横軸と縦軸に異なる要素を設定し，それらの関係性を調べる際に用いられる．</p>
+<p>Matplotlibでは，<code class="docutils literal notranslate"><span class="pre">pyplot</span></code> モジュールの <code class="docutils literal notranslate"><span class="pre">scatter</span></code> 関数を用いて描画することができる．
+次のように，</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>と書くことで，x軸に変数 <code class="docutils literal notranslate"><span class="pre">X</span></code>，y軸に変数 <code class="docutils literal notranslate"><span class="pre">Y</span></code> を取った散布図を作成できる．
+このとき，線グラフの場合と同様に，さまざまな引数を指定することでグラフの見た目を変更できる．
+ここでは例として，引数 <code class="docutils literal notranslate"><span class="pre">s</span></code> と <code class="docutils literal notranslate"><span class="pre">alpha</span></code> を用いて，各マーカの大きさと透明度を指定している．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;最高気温と客数の関係&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;最高気温（度）&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;客数（人）&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_89_0.png" src="../../_images/introduction_to_data_analysis_89_0.png" />
+</div>
+</div>
+<p>このグラフをみると，最高気温と客数の間には，右肩上がりの関係があるように見える．
+つまり，最高気温が高くなればなるほど，客数は多くなるような関係がありそうだ．</p>
+<p>この関係については，後ほど詳しく考えてみるとして，その前に他のグラフをいくつか紹介する．</p>
+</section>
+<section id="id16">
+<h3>棒グラフ<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
+<p>棒グラフは日常でもよく目にするグラフの一つであり，横軸に項目，縦軸にデータ値をとり，棒の高さでデータの大きさを表している．</p>
+<p>Matplotlibでは，<code class="docutils literal notranslate"><span class="pre">pyplot</span></code> モジュールの <code class="docutils literal notranslate"><span class="pre">bar</span></code> 関数を用いて棒グラフを描画できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>先ほどは線グラフで「日付」ごとの「客数」を可視化したが，同じものを棒グラフで表現してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;日付と客数の関係&#39;</span><span class="p">)</span> <span class="c1"># タイトルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;日付&#39;</span><span class="p">)</span> <span class="c1"># x軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;客数 (人)&#39;</span><span class="p">);</span> <span class="c1"># y軸のラベルを追加</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_92_0.png" src="../../_images/introduction_to_data_analysis_92_0.png" />
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">線グラフと棒グラフの使い分け</p>
+<p>上記の通り，今回は「日付」と「客数」の関係を，線グラフと棒グラフという2種類の方法で可視化した．
+グラフより，どちらも同じような情報を表しているが，どんな時に使い分ければよいだろうか？</p>
+<p>線グラフの場合は，データ点同士が線で結ばれているため，より日付に応じた変化が強調されているような印象である．
+一方，棒グラフの場合は，ある日付と別の日付との間の値の差がより分かりやすい印象である．
+つまり，線グラフは「変化」が強調されており，棒グラフは「大小の違い」が強調されているわけである．</p>
+<p>このことから，横軸の値が連続したデータ（例：年度ごとの売り上げの推移）に関しては，線グラフの方が分かりやすい場面が多い．
+一方，横軸の値が独立しているデータ（例：広島，岡山，島根の3地域の売り上げ）については，棒グラフの方が適切だろう．</p>
+<p>今回の「日付」と「客数」の場合，横軸は連続した「日付」なので，線グラフの方が適切と思われる．</p>
+<p>ただし，「絶対にどちらかを使うべし」という厳密なルールは存在しない．
+むしろ，そのグラフから自分がどのような主張を行いたいか，に応じて適切なグラフを使い分けることが大切である．</p>
+</div>
+</section>
+<section id="id17">
+<h3>【発展】ヒストグラム<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
+<p>ヒストグラムは，データを階級で分割し，横軸に階級，縦軸に各階級の度数をとった統計グラフである．
+簡単にいうと，データをいくつかの均等な区間に分割するとともに，各区間に含まれるデータの個数を計算し，可視化したものである．
+主に，データの分布を調べるために用いられる．</p>
+<p>Matplotlibでは，<code class="docutils literal notranslate"><span class="pre">pyplot</span></code> モジュールの <code class="docutils literal notranslate"><span class="pre">hist</span></code> 関数を用いてヒストグラムを描画できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>本来，ヒストグラムはデータ量がある程度多くないと描画が難しいが，今回はひとまず「客数」のデータのヒストグラムを表示してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;客数のヒストグラム&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;客数&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;度数&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_95_0.png" src="../../_images/introduction_to_data_analysis_95_0.png" />
+</div>
+</div>
+<p>このグラフより，客数は300人から450人くらいの範囲に主に分布しており，客数が500人を超えることは稀であることがわかる．</p>
+<p>なお，<code class="docutils literal notranslate"><span class="pre">hist</span></code> 関数ではデフォルトの分割数として <code class="docutils literal notranslate"><span class="pre">10</span></code> が設定されているが，ここを手動で設定したい場合は引数 <code class="docutils literal notranslate"><span class="pre">bins</span></code> に分割数を指定すれば良い．
+例えば分割数により大きな <code class="docutils literal notranslate"><span class="pre">15</span></code> を設定すると，ヒストグラムの各棒が細くなり，分布の表現がより細かくなる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">bins</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;客数のヒストグラム&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;客数&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;度数&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_97_0.png" src="../../_images/introduction_to_data_analysis_97_0.png" />
+</div>
+</div>
+</section>
+<section id="id18">
+<h3>複数のグラフの重ね合わせ<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h3>
+<p>Matplotlibでは，グラフ作成用関数を繰り返し実行することで，各グラフを重ねて表示することが可能である．</p>
+<p>例として，<code class="docutils literal notranslate"><span class="pre">df</span></code> のデータを第1週目（日付1〜7）と第2週目（日付8〜14）に分け，それぞれ対応する曜日と「客数」の線グラフを重ねて描画してみる．</p>
+<p>ここで，日付は月曜始まりとして扱う．つまり，日付1と8は月曜，日付2と9は火曜, …, 日付7と14は日曜となる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_1st_week</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">]</span> <span class="c1"># 第1週目のDataFrameを抽出</span>
+<span class="n">df_2nd_week</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;日付&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">]</span> <span class="c1"># 第2週目のDataFrameを抽出</span>
+<span class="n">days</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">,</span> <span class="s1">&#39;火&#39;</span><span class="p">,</span> <span class="s1">&#39;水&#39;</span><span class="p">,</span> <span class="s1">&#39;木&#39;</span><span class="p">,</span> <span class="s1">&#39;金&#39;</span><span class="p">,</span> <span class="s1">&#39;土&#39;</span><span class="p">,</span> <span class="s1">&#39;日&#39;</span><span class="p">]</span> <span class="c1"># 横軸となる曜日のリストを作っておく</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">df_1st_week</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">])</span> <span class="c1"># 第1週目の線グラフ作成</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">df_2nd_week</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">])</span> <span class="c1"># 第2週目の線グラフ作成</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;曜日ごとの客数&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;曜日&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;客数（人）&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_99_0.png" src="../../_images/introduction_to_data_analysis_99_0.png" />
+</div>
+</div>
+<p>上記からわかるように，線グラフを重ねたい場合は同じセル内で単純に <code class="docutils literal notranslate"><span class="pre">plt.plot</span></code> を複数実行すればよいことがわかる．
+また，各グラフは自動で色分けされている（もちろん，引数で任意の色を指定することもできる）．</p>
+<p>ただし，上記のグラフだけだと青色と橙色のどちらが1週目と2週目なのか判断がつかない．そのような場合は凡例を表示する必要がある．</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot</span></code> 関数の <code class="docutils literal notranslate"><span class="pre">label</span></code> 引数にグラフの各線の凡例として表示したい文字列を指定した上で，<code class="docutils literal notranslate"><span class="pre">legend</span></code> 関数を呼び出すことで，グラフ中に凡例を表示することができる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">df_1st_week</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;第1週&#39;</span><span class="p">)</span> <span class="c1"># 第1週目の線グラフ作成</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">days</span><span class="p">,</span> <span class="n">df_2nd_week</span><span class="p">[</span><span class="s1">&#39;客数&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;第2週&#39;</span><span class="p">)</span> <span class="c1"># 第2週目の線グラフ作成</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;曜日ごとの客数&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;曜日&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;客数（人）&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/introduction_to_data_analysis_101_0.png" src="../../_images/introduction_to_data_analysis_101_0.png" />
+</div>
+</div>
+</section>
+<section id="id19">
+<h3>グラフから読み取れる相関関係<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h3>
+<p>さて，話を少し戻そう．
+散布図の説明をした際に，「最高気温」と「客数」の間に，右肩上がりの関係が確認された．</p>
+<p>このように，「x軸の値が大きくなるほど，y軸の値も大きくなる」ような関係性を，<strong>正の相関</strong> という．
+相関とは，「互いに関係がある」という意味である．</p>
+<p>逆に，「x軸の値が大きくなるほど，y軸の値は小さくなる」ことを <strong>負の相関</strong> という．
+この場合，散布図は右肩下がりになるはずである．</p>
+<p>「x軸の値とy軸の値の間に明確な関係がない」場合，<strong>無相関</strong> と呼ばれる．
+この場合，散布図に傾きはみられない．</p>
+<p>このような2つの値の相関関係の強さを表す指標として， <strong>相関係数</strong> というものがある．
+相関係数は-1から1の値をとり，絶対値が大きいほど関係性が強いことを意味する．
+相関係数にはいくつかの定義がありますが，最も代表的なピアソンの積率相関係数 <span class="math notranslate nohighlight">\(r\)</span> は以下の式で計算される．</p>
+<div class="math notranslate nohighlight">
+\[
+r = \frac{\sum_{i=1}^N (x_i - \bar{x}) (y_i - \bar{y})}{\sqrt{\sum_{i=1}^N(x_i - \bar{x})^2 \sum_{i=1}^N(y_i - \bar{y})^2}}
+\]</div>
+<div class="admonition- admonition">
+<p class="admonition-title">相関係数の目安</p>
+<p>相関係数の値と相関の強さに関して，よく使われる目安は以下の通りである．</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>相関係数の絶対値</p></th>
+<th class="head"><p>目安</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>0.7〜1.0</p></td>
+<td><p>強い相関</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.4〜0.7</p></td>
+<td><p>中程度の相関</p></td>
+</tr>
+<tr class="row-even"><td><p>0.2〜0.4</p></td>
+<td><p>弱い相関</p></td>
+</tr>
+<tr class="row-odd"><td><p>0.0〜0.2</p></td>
+<td><p>ほとんど相関がない</p></td>
+</tr>
+</tbody>
+</table>
+<p>ただしこれは絶対的な基準ではないことに注意されたい．</p>
+</div>
+<p>相関係数も要約統計量と同様に，Pandasの機能を用いて計算することができる．</p>
+<p>相関係数を計算したい列を含むデータフレームに対し，</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">DataFrame</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>とすれば計算結果が返ってくる．
+「最高気温」と「客数」の間の相関係数を計算してみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">[[</span><span class="s1">&#39;最高気温&#39;</span><span class="p">,</span> <span class="s1">&#39;客数&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>最高気温</th>
+      <th>客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>最高気温</th>
+      <td>1.000000</td>
+      <td>0.697871</td>
+    </tr>
+    <tr>
+      <th>客数</th>
+      <td>0.697871</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>ここで返されるのは相関行列というものである．この行列の対角成分は同じ変数間の相関係数なので，「1」となる．
+「最高気温」と「客数」の間の相関係数を確認するためには，非対角成分の部分に着目すれば良い．</p>
+<p>これより，「最高気温」と「客数」の間の相関係数は約0.698であることがわかった．
+さきほどの目安と照らし合わせると，中程度〜強い正の相関関係があるといえる．</p>
+<div class="attention admonition">
+<p class="admonition-title">注意</p>
+<p>上記の相関行列において，非対角成分は2つあるが，どちらを見ればよいだろうか．
+正解は，「どちらでも良い」である．</p>
+<p>「最高気温」と「客数」の間の相関も，その逆である「客数」と「最高気温」の間の相関も，同じ意味を持つ．
+これは，上述の相関係数において <span class="math notranslate nohighlight">\(x\)</span> と <span class="math notranslate nohighlight">\(y\)</span> を入れ替えても本質的な計算は変わらないことからも明らかである．
+つまり，相関行列は相関行列は対称行列の一種である．</p>
+</div>
+<p>このように，データから平均値など要約統計量を計算したり，散布図などを描画して可視化してみたり，相関係数を計算したりすることで，データの中の性質や関係性を理解したり分析したりすることができる．
+今回紹介したPandasやMatplotlibのように，Pythonにはこのようなデータ分析を実現するための様々なモジュール・ライブラリが揃っているため，それらを駆使することで幅広い応用に展開可能である．</p>
+<div class="dropdown admonition">
+<p class="admonition-title">【補足】相関関係と因果関係</p>
+<p>相関係数は，あくまで2つの変数の間の関係性の強さを示す指標に過ぎない
+今回の分析で「最高気温」と「客数」の間に正の相関があることは分かった．
+これは，「最高気温が高いとき，アイスクリーム屋の客数も多い」ことを意味している．</p>
+<p>しかし，この結果から「最高気温が高いことが <strong>原因</strong> で，<strong>結果</strong> としてアイスクリーム屋の客数が増えた」と結論付けることはできないことに注意すること（なぜなら，もしかしたら他にも関係する変数が存在するかもしれないからである）．
+因果関係があるかどうかを示すためには，より複雑な別の分析を行う必要がある．</p>
+</div>
+<div class="admonition-matplotlib admonition">
+<p class="admonition-title">Matplotlibによるデータの可視化のまとめ</p>
+<ul class="simple">
+<li><p>データを様々な方法で視覚的わかりやすく提示することを可視化と呼ぶ</p></li>
+<li><p>Matplotlibは，Pythonでよく用いられるグラフ描画ライブラリである</p></li>
+<li><p>線グラフや棒グラフ，ヒストグラムなど，さまざまなグラフを描画できる</p></li>
+</ul>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/12"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../11/exercise_application.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第11回：アプリケーションの作成（演習）</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../13/exercise_introduction_to_data_analysis.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第13回：データ分析入門（演習）</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
