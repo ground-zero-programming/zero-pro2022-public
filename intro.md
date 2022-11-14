@@ -5,7 +5,7 @@
 担当教員：相澤宏旭，古居彬
 
 ````{card} お知らせ
-
+- 近日中に期末試験に関する情報を本ページに掲載します（2022/11/14）
 - [課題提出方法](docs/submission/submission.md) と [さらに勉強したい人へ](docs/advanced_materials.md) を追加しました（2022/10/06）
 - 本ページを公開しました（2022/10/02）
 
@@ -38,10 +38,10 @@
 | [第6回：繰り返し処理（講義）](docs/06/loops.ipynb) | [Play](https://web.microsoftstream.com/video/98820113-4ad5-434d-8530-4bf93a934668) | - | - |
 | [第7回：繰り返し処理（演習）](docs/07/exercise_loops.ipynb)  | - | <del>11/3</del> | [Open](docs/07_ans/answer_loops.ipynb) |
 | [第8回：関数とスコープ（講義）](docs/08/functions_and_scope.ipynb) | [Play](https://web.microsoftstream.com/video/7d7ad00c-69f0-4223-8069-0521f23d12b1) | - | - |
-| [第9回：関数とスコープ（演習）](docs/09/exercise_functions_and_scope.ipynb) |- | 11/10 | [Open](docs/09_ans/answer_functions_and_scope.ipynb) |
+| [第9回：関数とスコープ（演習）](docs/09/exercise_functions_and_scope.ipynb) |- | <del>11/10</del> | [Open](docs/09_ans/answer_functions_and_scope.ipynb) |
 | [第10回：アプリケーションの作成（講義）](docs/10/application.ipynb) | [Play](https://web.microsoftstream.com/video/8f977ff9-a30d-4f28-bb86-0037f57d00c3) | - | - |
 | [第11回：アプリケーションの作成（演習）](docs/11/exercise_application.ipynb)  | - | 11/17 | 11/18公開 |
-| [第12回：データ分析入門（講義）](docs/12/introduction_to_data_analysis.ipynb) | 準備中 | - | - |
+| [第12回：データ分析入門（講義）](docs/12/introduction_to_data_analysis.ipynb) | [Play](https://web.microsoftstream.com/video/248c5345-586a-4bb5-b5ab-de644181c553) | - | - |
 | [第13回：データ分析入門（演習）](docs/13/exercise_introduction_to_data_analysis.ipynb)  | - | 11/24 | 11/25公開 |
 | [第14回：機械学習入門（講義）](docs/14/introduction_to_machine_learning.ipynb) | 準備中 | - | - |
 | [第15回：機械学習入門（演習）](docs/15/exercise_introduction_to_machine_learning.ipynb)  | - | 11/30 | 12/1公開 |
