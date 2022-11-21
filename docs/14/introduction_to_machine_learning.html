@@ -1,0 +1,2041 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第14回：機械学習入門（講義） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="第15回：機械学習入門（演習）" href="../15/exercise_introduction_to_machine_learning.html" />
+    <link rel="prev" title="第13回：データ分析入門（演習）" href="../13/exercise_introduction_to_data_analysis.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/variables_and_data_types.html">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/conditional_branch.html">
+   第4回：条件分岐（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/exercise_conditional_branch.html">
+   第5回：条件分岐（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/loops.html">
+   第6回：繰り返し処理（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/exercise_loops.html">
+   第7回：繰り返し処理（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/functions_and_scope.html">
+   第8回：関数とスコープ（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/exercise_functions_and_scope.html">
+   第9回：関数とスコープ（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/application.html">
+   第10回：アプリケーションの作成（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/exercise_application.html">
+   第11回：アプリケーションの作成（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../12/introduction_to_data_analysis.html">
+   第12回：データ分析入門（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/exercise_introduction_to_data_analysis.html">
+   第13回：データ分析入門（演習）
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   第14回：機械学習入門（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/exercise_introduction_to_machine_learning.html">
+   第15回：機械学習入門（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../exam.html">
+   期末試験に関する情報
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/14/introduction_to_machine_learning.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/14/introduction_to_machine_learning.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/14/introduction_to_machine_learning.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   はじめに
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   機械学習
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   線形回帰
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scikit-learn">
+   Scikit-Learnによる線形回帰
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     準備
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     データの読み込み
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     データの可視化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     Scikit-Learnによる線形回帰の学習
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     結果の確認
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numpy">
+   【発展】 Numpyの使い方
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     Numpyによるベクトルの定義
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     Numpyによる行列の定義
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     Numpyによる行列計算
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   【発展】 データの生成
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linspace">
+     補足：
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       linspace
+      </span>
+     </code>
+     関数の説明
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     補足：乱数の生成
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   【発展】 Scikit-Learnを利用して生成したデータから線形回帰を解く
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     データの生成と加工
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     線形回帰モデルの当てはめ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     結果の確認と可視化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#np-newaxis">
+     補足：
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       np.newaxis
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id19">
+   【発展】 Scikit-Learnを利用せずに線形回帰を解く
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id20">
+     データの生成と加工
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#np-hstack">
+       補足：
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         np.hstack
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id21">
+     正規方程式からの解析解の導出
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id22">
+       補足：行列の転置
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id23">
+       補足：逆行列の計算
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id24">
+     傾きと切片の確認
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id25">
+     結果のプロット
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第14回：機械学習入門（講義）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   はじめに
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   機械学習
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   線形回帰
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#scikit-learn">
+   Scikit-Learnによる線形回帰
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     準備
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     データの読み込み
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     データの可視化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     Scikit-Learnによる線形回帰の学習
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     結果の確認
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#numpy">
+   【発展】 Numpyの使い方
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     Numpyによるベクトルの定義
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     Numpyによる行列の定義
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     Numpyによる行列計算
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id13">
+   【発展】 データの生成
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#linspace">
+     補足：
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       linspace
+      </span>
+     </code>
+     関数の説明
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id14">
+     補足：乱数の生成
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id15">
+   【発展】 Scikit-Learnを利用して生成したデータから線形回帰を解く
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     データの生成と加工
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id17">
+     線形回帰モデルの当てはめ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id18">
+     結果の確認と可視化
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#np-newaxis">
+     補足：
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       np.newaxis
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id19">
+   【発展】 Scikit-Learnを利用せずに線形回帰を解く
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id20">
+     データの生成と加工
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#np-hstack">
+       補足：
+       <code class="docutils literal notranslate">
+        <span class="pre">
+         np.hstack
+        </span>
+       </code>
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id21">
+     正規方程式からの解析解の導出
+    </a>
+    <ul class="nav section-nav flex-column">
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id22">
+       補足：行列の転置
+      </a>
+     </li>
+     <li class="toc-h4 nav-item toc-entry">
+      <a class="reference internal nav-link" href="#id23">
+       補足：逆行列の計算
+      </a>
+     </li>
+    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id24">
+     傾きと切片の確認
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id25">
+     結果のプロット
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第14回：機械学習入門（講義）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>担当：相澤宏旭</p>
+<section id="id2">
+<h2>はじめに<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>第12回目の講義でPythonを用いてデータを読み込み，可視化し，そしてデータの説明する統計量を算出した．平均や分散といった統計量もデータの性質を我々が分析するうえで重要な手がかりとなるが，このような手がかりをコンピュータ自らがデータから学ぶことができないだろうか？そして，データと手がかりから対象の性質を予測することはできないだろうか？このような動機のもと，<strong>機械学習（Machine Learning）</strong> と呼ばれる研究分野は <strong>人工知能（Artificial Intelligence）</strong> の一分野として発展してきた．</p>
+<p>特に，近年，機械学習技術の進展は著しい．突然だが，ゼロからはじめるプログラミングのサポートページの左上の猫の画像（もしくは静止画とした下の図）をみてほしい．実は，この画像は機械学習技術によってゼロから描き出された画像である．具体的には，<a class="reference external" href="https://huggingface.co/spaces/stabilityai/stable-diffusion">Stable Diffusion</a>と呼ばれる <strong>ニューラルネットワーク</strong> でモデル化された言語から画像を生成する機械学習アルゴリズムで生成している（今回の画像の例では，Enter your prompt に <strong>a painting of a cat programming in front of a laptop computer</strong> と言葉を与えた）．現在の機械学習技術はコンピュータは大量のデータから猫とコンピュータの知識・手がかりを学習し，これらを組み合わせることで画像を描き出すことができるまでに至っている．</p>
+<p><img alt="" src="../../_images/gen_cats.png" /></p>
+<div class="admonition- admonition">
+<p class="admonition-title">手軽に試せる機械学習技術</p>
+<p>新しい最新の機械学習技術は<a class="reference external" href="https://arxiv.org/">arXiv</a>と呼ばれる論文のプレプリントのリポジトリで日々公開されている．ここで公開されている論文を読み解き実装するのは大変であるが，論文によってはPythonのライブラリとして手法をGitHubで公開していたり，<a class="reference external" href="https://huggingface.co/">Hugging Face</a>と呼ばれるサービスで気軽に試すことができる．</p>
+</div>
+<p>このように非常にエキサイティングな研究分野であるが，その仕組みは複雑である．本講義のレベル上，簡略化された説明となってしまうが，まずは機械学習の雰囲気を掴もう．</p>
+</section>
+<section id="id3">
+<h2>機械学習<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>まずは機械学習の雰囲気を掴むために必要最低限の概要と用語を学ぼう．</p>
+<p>機械学習では，<strong>タスク</strong>（例：画像を生成する，気温から客数を予測する）を行うための <strong>モデル</strong> を複数のパラメータ <span class="math notranslate nohighlight">\(\theta\)</span> を持つ関数 <span class="math notranslate nohighlight">\(f_{\theta}\)</span> で考える．
+ここでモデルを関数で考えるとは，下図に示すように，何らかの入力 <span class="math notranslate nohighlight">\(x\)</span> からタスクに対応する出力 <span class="math notranslate nohighlight">\(y\)</span> を計算する関数 <span class="math notranslate nohighlight">\(y=f_{\theta}(x)\)</span> を設計することである（厳密にはパラメータ <span class="math notranslate nohighlight">\(\theta\)</span> を求める．詳細は後述）．</p>
+<p><img alt="" src="../../_images/overview_ml.png" /></p>
+<p>具体例を考えるとわかりやすい．上記の例では入力にハスキーの画像，出力は予測確率を出力する関数を考え，もっとも高い確率を持つ対象が予測された画像中に写る対象の名前とすると画像と対象の名前の関係性を関数 <span class="math notranslate nohighlight">\(f_{\theta}\)</span> でモデル化した <strong>物体認識</strong> モデルとなる．また第12回の例のように入力が気温，出力がアイスクリームの売り上げと考えると，関数 <span class="math notranslate nohighlight">\(y=f_{\theta}(x)\)</span> は気温とアイスクリームの売り上げの関係性をモデル化したものとなる．そして，後述するが，未知の入力 <span class="math notranslate nohighlight">\(x'\)</span> に対して対応する出力 <span class="math notranslate nohighlight">\(y'\)</span> が関数から得られるので，未知の画像中の対象の名前や気温からアイスクリームの売り上げを <strong>予測</strong> できる．</p>
+<p>このような気温から売り上げを予測する問題のように機械学習に解かせたい問題のことを <strong>タスク</strong> と呼び，その種類は <strong>分類</strong> と <strong>回帰</strong> に大まかに分けることができる．分類は，言葉の通り，入力 <span class="math notranslate nohighlight">\(x\)</span> に対応する <strong>属性</strong> を割り当てるタスクである．属性は<strong>クラス</strong>，<strong>ラベル</strong>とも呼ばれ，具体的には，上図のように，画像から犬を分類するようなタスクとなる．一方で，<strong>回帰</strong> はある入力 <span class="math notranslate nohighlight">\(x\)</span> からその入力に対応する連続値の出力 <span class="math notranslate nohighlight">\(y\)</span> を予測するタスクである．<span class="math notranslate nohighlight">\(x\)</span> と <span class="math notranslate nohighlight">\(y\)</span> を身長と体重，数学とプログラミングの成績，第12回のような気温とアイスクリームの売り上げで考えたときの，<span class="math notranslate nohighlight">\(x\)</span> から <span class="math notranslate nohighlight">\(y\)</span> の予測は回帰タスクの代表例である．</p>
+<p>そして，機械学習技術のおもしろさはこれらのタスクを解くための関数 <span class="math notranslate nohighlight">\(f_{\theta}\)</span> をデータから統計的に求めることにある．
+求める方法は，<strong>教師あり学習</strong> と <strong>教師なし学習</strong> の二つに大まかに分類できる．これらの設定の違いは，タスクの正解データ（<strong>教師データ</strong>）が利用できるか否かの違いであり，どのような情報から関数 <span class="math notranslate nohighlight">\(f_{\theta}\)</span> を学習するかがポイントとなる．</p>
+<ul class="simple">
+<li><p>教師あり学習では，タスクの正解データが利用できる．モデルの予測 <span class="math notranslate nohighlight">\(y\)</span> と正解データの違いを元に関数 <span class="math notranslate nohighlight">\(f_{\theta}\)</span> を修正する．
+<img alt="" src="../../_images/supervised.png" /></p></li>
+<li><p>教師なし学習では，タスクの正解データが利用できない．モデル自らが与えられたデータの構造や特性を分析し，タスクに必要な情報を取り出すよう学習される．
+<img alt="" src="../../_images/unsupervised.png" /></p></li>
+</ul>
+<p>このようにタスク（分類 / 回帰…）をどのように解くか（教師あり / 教師なし）が機械学習において重要な前提条件となる．
+本講義では，機械学習の基礎として <strong>線形回帰（Linear Regression）</strong> という技術をPythonを使って実装することを試みる．
+線形回帰は教師あり学習の一種であり，名前の通り，回帰タスクを解くアルゴリズムである．
+また最初の図で示したように，機械学習モデル <span class="math notranslate nohighlight">\(f_{\theta}\)</span> は関数の作り方次第で柔軟に設計することができ，パラメータ化の方法や数が異なるだけで入出力の対応関係をモデル化するという観点でみると線形回帰もニューラルネットワークも本質的には同じである．</p>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>上記の機械学習の説明は非常に簡略化された説明であり，具体例も限定的である点に留意されたい．機械学習については専門科目または<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/advanced_materials.html#id3">別ページ</a>に参考資料を記載したので機械学習に興味がある学生は参照されたい．</p>
+</div>
+</section>
+<section id="id4">
+<h2>線形回帰<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>前述したように，線形回帰の <strong>回帰（Regression）</strong> とはある入力 <span class="math notranslate nohighlight">\(x\)</span> からその入力に対応する連続値の出力 <span class="math notranslate nohighlight">\(y\)</span> を予測するタスクであり，線形回帰のモデル <span class="math notranslate nohighlight">\(f_{\theta}\)</span> を求めるために，<span class="math notranslate nohighlight">\(x\)</span>に対応する正解データ <span class="math notranslate nohighlight">\(y\)</span> を利用する教師あり学習を行う．まずは，第2回と同様に <span class="math notranslate nohighlight">\(y=2x + 1\)</span> の方程式を例にしながら，回帰タスクを解くための関数 <span class="math notranslate nohighlight">\(f_{\theta}\)</span> の説明をする．</p>
+<p>このとき，線形回帰のゴールは未知の値 <span class="math notranslate nohighlight">\(x'\)</span> が与えられ，そのときの <span class="math notranslate nohighlight">\(y\)</span> の値を求めることである（例えば右図の赤線の関数を求める）．関数の形 <span class="math notranslate nohighlight">\(y=ax+b\)</span> と関数の傾き <span class="math notranslate nohighlight">\(a\)</span> と切片 <span class="math notranslate nohighlight">\(b\)</span> がそれぞれ <span class="math notranslate nohighlight">\(a=2\)</span> と <span class="math notranslate nohighlight">\(b=1\)</span> が既知の場合，計算は容易である（<span class="math notranslate nohighlight">\(y=2x+1\)</span>の場合，<span class="math notranslate nohighlight">\(x'=10\)</span>ならば対応する<span class="math notranslate nohighlight">\(y\)</span>は<span class="math notranslate nohighlight">\(21\)</span>）．しかしながら，もしこれらの <span class="math notranslate nohighlight">\(a,b\)</span> がわからなかったらどうだろうか？また左図のようにデータに当てはまる関数はいくつも引くことができる．もっとも良い関数はどのように決定すれば良いだろうか？</p>
+<p><img alt="" src="../../_images/linear_regression.png" /></p>
+<p>この関数を求めるために，線形回帰では，<strong>線形</strong> とあるように線形回帰では以下に示すような入力とパラメータ <span class="math notranslate nohighlight">\(\theta=\{a,b\}\)</span> が線形の関係性を持つ関数，</p>
+<div class="math notranslate nohighlight">
+\[
+f_{\theta}(x) = ax + b,
+\]</div>
+<p>を仮定して，データ <span class="math notranslate nohighlight">\((x,y)\)</span> からパラメータ <span class="math notranslate nohighlight">\(\theta=\{a,b\}\)</span> を求めることでタスクを解くための関数 <span class="math notranslate nohighlight">\(f_{\theta}\)</span> を統計的に求める．そのために，教師あり学習の一種であると述べたように入力 <span class="math notranslate nohighlight">\(x\)</span> と対応する出力 <span class="math notranslate nohighlight">\(y\)</span> のペア <span class="math notranslate nohighlight">\((x,y)\)</span> のデータ集合を利用する（ただし，<span class="math notranslate nohighlight">\(a,b\)</span>はわからない）．線形回帰では計算された <span class="math notranslate nohighlight">\(a,b\)</span> によって決まる関数と各データの差を最小化するようにパラメータ <span class="math notranslate nohighlight">\(a,b\)</span> を求める（発展的な内容だが，これは解析的に計算することができる）．そして，一度，パラメータを求めてしまえば，未知の入力 <span class="math notranslate nohighlight">\(x'\)</span> が与えられたとしてもそのときの <span class="math notranslate nohighlight">\(y\)</span> の値を求めることができるという仕組みである．また計算されたパラメータ <span class="math notranslate nohighlight">\(a,b\)</span> は，これらは入力 <span class="math notranslate nohighlight">\(x\)</span> と出力 <span class="math notranslate nohighlight">\(y\)</span> 間の関係性を示しており，データの背後に潜む関係性をペア <span class="math notranslate nohighlight">\((x,y)\)</span> から求めたとも言える．</p>
+<p><span class="math notranslate nohighlight">\(y=2x + 1\)</span>という例では利用場面をイメージすることが難しいだろうが，<span class="math notranslate nohighlight">\(y\)</span>と<span class="math notranslate nohighlight">\(x\)</span>をそれぞれ，身長と体重，数学とプログラミングの成績，第12回のような気温とアイスクリームの売り上げなどで考えると実用例が見えてくる．当日の気温<span class="math notranslate nohighlight">\(x\)</span>から売り上げ<span class="math notranslate nohighlight">\(y\)</span>が予測できれば，在庫管理も多少容易になるだろう．最初の画像生成を行うアルゴリズムとは見た目のインパクトのギャップがあるが，前述したように，高度な機械学習アルゴリズムであってもパターンを何らかのパラメータとして表現し，データから学習することは線形回帰と同じである．また，線形回帰は機械学習の基礎であり，機械学習の教科書では必ずと言っていいほど記載されているアルゴリズムであるため，Pythonによる機械学習プログラミングの第一歩として線形回帰を体験してほしい．</p>
+<p>以降，その <span class="math notranslate nohighlight">\(a,b\)</span> をPythonを使って求める．</p>
+</section>
+<section id="scikit-learn">
+<h2>Scikit-Learnによる線形回帰<a class="headerlink" href="#scikit-learn" title="Permalink to this headline">#</a></h2>
+<p>本講義は，以下の二つのライブラリを用いる．</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://numpy.org">Numpy</a>は複数の値を持つデータ間の計算をサポートするライブラリである．発展的な内容であるが，ベクトルや行列の計算が容易である．特に，逆行列の計算や固有値計算など線形代数で学んだ演算が手厚くサポートされている．公式ドキュメントの<a class="reference external" href="https://numpy.org/learn/">Learn</a>という項目に基礎的な使い方がまとまっている．</p></li>
+<li><p><a class="reference external" href="https://scikit-learn.org/stable/">Scikit-Learn</a>は，本講義で扱う回帰だけでなく，分類，クラスタリング，次元削減など様々な機械学習やデータ分析のアルゴリズムが数多く実装されているライブラリである．詳しくは公式ドキュメントの<a class="reference external" href="https://scikit-learn.org/stable/auto_examples/index.html#general-examples">Examples</a>という項目に代表的なアルゴリズムのサンプルコードがまとまっている．</p></li>
+</ul>
+<p>NumpyとScikit-Learnは日本語で読める多くの書籍やWebページもあるので各自検索されたい．</p>
+<p>前回前々回から多くのライブラリが紹介され混乱するかと思うが，前回の講義でも述べたようにこれらのライブラリのすべての機能を把握している必要はなく，必要に応じて適切に検索して活用してほしい．</p>
+<section id="id5">
+<h3>準備<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>まずは本講義のプログラムで必要なライブラリをインポートとデータをダウンロードする．ライブラリの説明とインポート方法は <a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/12/introduction_to_data_analysis.html#python">第12回の講義</a> を参照されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> <span class="c1"># numpyのimport</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> <span class="c1"># 可視化のためのmatplotlibのimport．詳しくは第12回を参照</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># matplotlibの日本語の設定．詳しくは第12回を参照</span>
+<span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meirio&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p>実行環境によっては上記のMatplotlibの日本語の設定がうまくいかない場合があります．代替手段として，<code class="docutils literal notranslate"><span class="pre">japanize-matplotlib</span></code>ライブラリを使って日本語化する方法があります．詳細は第12回の<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/12/introduction_to_data_analysis.html#matplotlib">タイトルなどが文字化けする場合</a>をご参照ください．</p>
+<p>追記：<code class="docutils literal notranslate"><span class="pre">japanize-matplotlib</span></code>をインポート後に上記の<code class="docutils literal notranslate"><span class="pre">rcParams</span></code>によるフォントの変更を行うと日本語化ができないことがあるそうです．両者の日本語化を同時に行わないようにしてください．</p>
+</div>
+<p>以下のセルでデータをダウンロードする．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/14/data/data.npy
+<span class="o">!</span>wget https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/14/data/target.npy
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>データの読み込み<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>続いて，線形回帰に用いるデータ <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> を作成する．今回はNumpyによるデータ読み込み関数 <code class="docutils literal notranslate"><span class="pre">np.load</span></code>関数から先ほどダウンロードしたデータを読み込む．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;data.npy&#39;</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s1">&#39;target.npy&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>読み込まれたデータ <code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> はそれぞれ入力されるデータと入力に対応する目標出力である．前述の例と照らし合わせると，<code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> の各要素は入出力のペア <span class="math notranslate nohighlight">\((x,y)\)</span> に該当し，このペアが <span class="math notranslate nohighlight">\(N\)</span> 個（今回は<span class="math notranslate nohighlight">\(N=30\)</span>）含まれていることになる．</p>
+<p>以下のセルで確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.        ],
+       [0.03448276],
+       [0.06896552],
+       [0.10344828],
+       [0.13793103],
+       [0.17241379],
+       [0.20689655],
+       [0.24137931],
+       [0.27586207],
+       [0.31034483],
+       [0.34482759],
+       [0.37931034],
+       [0.4137931 ],
+       [0.44827586],
+       [0.48275862],
+       [0.51724138],
+       [0.55172414],
+       [0.5862069 ],
+       [0.62068966],
+       [0.65517241],
+       [0.68965517],
+       [0.72413793],
+       [0.75862069],
+       [0.79310345],
+       [0.82758621],
+       [0.86206897],
+       [0.89655172],
+       [0.93103448],
+       [0.96551724],
+       [1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.00336195],
+       [1.03005238],
+       [1.36318086],
+       [1.11537301],
+       [1.09168302],
+       [1.30051601],
+       [1.40539285],
+       [1.42723979],
+       [1.63878499],
+       [1.47311363],
+       [1.60954637],
+       [1.65122269],
+       [1.726774  ],
+       [2.05340564],
+       [2.03357146],
+       [2.02038577],
+       [2.03971773],
+       [1.95621527],
+       [2.10546272],
+       [2.2790195 ],
+       [2.52384041],
+       [2.48606695],
+       [2.57296159],
+       [2.68623724],
+       [2.68973201],
+       [2.64155146],
+       [2.81280669],
+       [2.75291451],
+       [2.93954453],
+       [2.91164229]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>実行環境によっては一部省略されるが <code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> 共に数値の集合が出力されたかと思う．これが今回の線形回帰で扱うデータになる．</p>
+<p>また発展的な内容であるが，これらのデータは<span class="math notranslate nohighlight">\(30\)</span>個の要素を持つベクトル（=<span class="math notranslate nohighlight">\(30\)</span>行<span class="math notranslate nohighlight">\(1\)</span>列の行列）として保存されている．これは<code class="docutils literal notranslate"><span class="pre">名前.shape</span></code>で確認できる．以下のセルを実行されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;X.shape: </span><span class="si">{</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">, y.shape: </span><span class="si">{</span><span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>X.shape: (30, 1), y.shape: (30, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>また，読み込まれたデータはNumpyの<code class="docutils literal notranslate"><span class="pre">array</span></code>と呼ばれるデータ型で管理される．データ型は <code class="docutils literal notranslate"><span class="pre">type(名前)</span></code> でわかる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;type(X): </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">)</span><span class="si">}</span><span class="s1">, type(y): </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">y</span><span class="p">)</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>type(X): &lt;class &#39;numpy.ndarray&#39;&gt;, type(y): &lt;class &#39;numpy.ndarray&#39;&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>ここまでで利用するデータの読み込みが完了した．Numpyについてもう少し詳しく知りたい受講者は後述する 【発展】Numpyの使い方 を参考にされたい．</p>
+</section>
+<section id="id7">
+<h3>データの可視化<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>第12回でも述べたようにデータをグラフなどを用いて視覚的に表示してみることは非常に重要である．特に，前述の数値だけではデータ <code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> の関連性はわからない．ここでも matplotlib を用いて <code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> を可視化する．matplotlibの使い方は<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/12/introduction_to_data_analysis.html#matplotlib">第12回の資料</a>を確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;観測されたデータ&#39;</span><span class="p">)</span> <span class="c1"># 散布図のプロット</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;xとyの観測値と関連性&#39;</span><span class="p">)</span> <span class="c1"># タイトルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="c1"># x軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="c1"># y軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x10d373f28&gt;
+</pre></div>
+</div>
+<img alt="../../_images/introduction_to_machine_learning_22_1.png" src="../../_images/introduction_to_machine_learning_22_1.png" />
+</div>
+</div>
+<p>データの可視化を見ると正の相関があり，<code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> の間には，最初の例のように，<span class="math notranslate nohighlight">\(y=ax+b\)</span> の関係性が潜んでいるように思える．</p>
+</section>
+<section id="id8">
+<h3>Scikit-Learnによる線形回帰の学習<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>では，実際に，<strong>Scikit-Learn</strong> という機械学習のライブラリを用いて，<code class="docutils literal notranslate"><span class="pre">X</span></code> と<code class="docutils literal notranslate"><span class="pre">y</span></code> のペアからなるデータから <span class="math notranslate nohighlight">\(y=ax+b\)</span> の <span class="math notranslate nohighlight">\(a\)</span> と <span class="math notranslate nohighlight">\(b\)</span> を計算することを試みる．</p>
+<p>Scikit-Learnで線形回帰を実行するためには <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスをインポートする必要がある．以下のセルで実行する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>インポートした <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> クラスをインスタンス化し，(<code class="docutils literal notranslate"><span class="pre">X,y</span></code>)のペアをインスタンスメソッド <code class="docutils literal notranslate"><span class="pre">fit</span></code> に渡すと計算できる．クラスについては <a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/10/application.html">第10回の講義</a> を復習されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>インスタンス <code class="docutils literal notranslate"><span class="pre">reg</span></code> のインスタンスメソッド <code class="docutils literal notranslate"><span class="pre">reg.fit(X,</span> <span class="pre">y)</span></code> の処理で <code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> から計算された傾きと切片がインスタンス変数に格納される．傾き <span class="math notranslate nohighlight">\(a\)</span> と切片 <span class="math notranslate nohighlight">\(b\)</span> はそれぞれ<code class="docutils literal notranslate"><span class="pre">coef_</span></code>と<code class="docutils literal notranslate"><span class="pre">intercept_</span></code>という名前で管理され，第10回で学んだように <code class="docutils literal notranslate"><span class="pre">.</span></code> でアクセスできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;傾き a = </span><span class="si">{</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="si">}</span><span class="s1">, 切片 b = </span><span class="si">{</span><span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>傾き a = [[2.00937943]], 切片 b = [0.97335419]
+</pre></div>
+</div>
+</div>
+</div>
+<p>傾きと切片をみると <code class="docutils literal notranslate"><span class="pre">2</span></code> と <code class="docutils literal notranslate"><span class="pre">1</span></code> に近い値が得られたことがわかり，数値データの集合からデータの背後に潜む <span class="math notranslate nohighlight">\(y=ax+b\)</span> で表現される関係性をパラメータ <span class="math notranslate nohighlight">\(a, b\)</span> の線形回帰から求めることができた．</p>
+</section>
+<section id="id9">
+<h3>結果の確認<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>最後に計算された傾きと切片をプロットしてみよう．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">y_</span><span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;観測されたデータ&#39;</span><span class="p">)</span> <span class="c1"># 散布図のプロット</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;線形回帰によって得られた関数&#39;</span><span class="p">)</span> <span class="c1"># 直線のプロット</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;LinearRegressionの結果&#39;</span><span class="p">)</span> <span class="c1"># タイトルの追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="c1"># x軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="c1"># y軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x163fca390&gt;
+</pre></div>
+</div>
+<img alt="../../_images/introduction_to_machine_learning_32_1.png" src="../../_images/introduction_to_machine_learning_32_1.png" />
+</div>
+</div>
+<p>このように，ライブラリを使うと非常に簡単に機械学習・データ分析のアルゴリズムを利用することができ，とても便利な仕組みである．しかし，ここまでの用意されたデータを元にセルを実行しただけではプログラミング感なくゼロから始めるプログラミングの講義が終了してしまう．そこで，前述の線形回帰のプログラムを，</p>
+<ol class="simple">
+<li><p>Numpyでベクトルや行列を定義し計算を実行する → 【発展】Numpyの使い方</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">np.load</span></code>関数で読み込む代わりにNumpyの関数を使って自分で生成する →【発展】データの生成</p></li>
+<li><p>自分で生成したデータを使ってScikit-Learnによる線形回帰を実行する →【発展】Scikit-Learnを利用して生成したデータから線形回帰を解く</p></li>
+<li><p>Scikit-Learnの代わりに自身で線形回帰の計算を実行する →【発展】Scikit-Learnを利用せずに線形回帰を解く</p></li>
+</ol>
+<p>の4つの手順に分けて紐解く資料を用意した．線形代数を学んでいない学生も受講しているため，発展的な内容として位置付けたが，ぜひ最後まで実行してみてほしい．</p>
+<div class="admonition-scikit-learn admonition">
+<p class="admonition-title">Scikit-Learnを用いた線形回帰のまとめ</p>
+<ul class="simple">
+<li><p>Scikit-Learnは機械学習のアルゴリズムがまとめられたライブラリである</p></li>
+<li><p>Scikit-Learnの<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスで線形回帰を実行できる</p></li>
+<li><p>ライブラリを利用するためは実装された機能の仕様を調べる必要がある</p></li>
+</ul>
+</div>
+</section>
+</section>
+<section id="numpy">
+<h2>【発展】 Numpyの使い方<a class="headerlink" href="#numpy" title="Permalink to this headline">#</a></h2>
+<p>前述したように，Numpyは複数の値を持つベクトルや行列を計算するためのライブラリである．ここでは後述する内容を理解するためにNumpyの必要最低限の使い方を紹介する．</p>
+<section id="id10">
+<h3>Numpyによるベクトルの定義<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>線形回帰や機械学習に限らず，データを扱う場面では，複数の値を持つベクトルや行列を扱うことが多々ある．今回の線形回帰の例でも複数の <span class="math notranslate nohighlight">\((x,y)\)</span> のデータからパラメータ <span class="math notranslate nohighlight">\(a,b\)</span> を計算する必要があり，このとき，複数の<span class="math notranslate nohighlight">\((x,y)\)</span>を保存したデータは行列として扱う必要がある．また，前回の講義ではPandasの<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>を用いて行と列から構成されるデータ構造を扱った．<code class="docutils literal notranslate"><span class="pre">DataFrame</span></code>は条件に基づく値の操作や統計量の算出を直感的に行えるが，例えば，行列計算をしようと思うと一手間必要となる．</p>
+<p>このような場面で便利なのがNumpyの<code class="docutils literal notranslate"><span class="pre">array</span></code>というデータ型である．先ほどはNumpyの<code class="docutils literal notranslate"><span class="pre">array</span></code>型を<code class="docutils literal notranslate"><span class="pre">type</span></code>関数で確認するのみだったが，以降のセルで<code class="docutils literal notranslate"><span class="pre">array</span></code>型を使うと容易にベクトルや行列の計算が簡単に行えることを確認されたい．</p>
+<p>では，まずは，要素を一列に並べた一次元配列としてベクトル <span class="math notranslate nohighlight">\(\mathbf{a}=[1,2,3]\)</span> を定義しよう（本講義資料では，ベクトルは小文字で太字で，行列は大文字で太字で記述する）．ベクトルや行列は以下で定義できる．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">名前</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">要素</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>まずは Numpyを<code class="docutils literal notranslate"><span class="pre">import</span></code>する．慣習上，<code class="docutils literal notranslate"><span class="pre">np</span></code>と短縮系で<code class="docutils literal notranslate"><span class="pre">import</span></code>する（復習→<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/12/introduction_to_data_analysis.html#python">モジュールのインポート</a>）</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ベクトルを定義する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 2, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記のように，Numpyでは要素としてリスト（またはタプル）を与えて定義する．<code class="docutils literal notranslate"><span class="pre">type</span></code>関数でデータの型を確認されたい（復習→<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/02/variables_and_data_types.html#id8">変数の型と名前</a>）．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>numpy.ndarray
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，ベクトル内の要素数を<code class="docutils literal notranslate"><span class="pre">名前.shape</span></code>で確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(3,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>3つの要素が<code class="docutils literal notranslate"><span class="pre">a</span></code>に含まれていることがわかる．</p>
+<p>厳密にはNumpyには一次元に要素を並べた一次元配列によるベクトル形式とこれまでに学んだ縦ベクトル・横ベクトル（=行ベクトル・列ベクトル）形式がある．受講者にとっては後者のベクトルの表記の方が親しみがあるだろう．Numpyで縦ベクトル・横ベクトルを作成する．</p>
+<p>以下のセルのように <code class="docutils literal notranslate"><span class="pre">[]</span></code> を使って定義すると横ベクトル版の <span class="math notranslate nohighlight">\(\mathbf{a}=[1,2,3]\)</span> が定義できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]])</span>
+<span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2, 3]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，縦ベクトル <span class="math notranslate nohighlight">\(\mathbf{a}=[1,2,3]^\top\)</span> を作成する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">c</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1],
+       [2],
+       [3]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>慣れるまではわかりにくいだろうが，<code class="docutils literal notranslate"><span class="pre">shape</span></code>でベクトルの形状を確認しながらプログラミングすると良い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;a.shape: </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">, b.shape: </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">, c.shape: </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>a.shape: (3,), b.shape: (1, 3), c.shape: (3, 1)
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記のセルのようにベクトルの形状を確認すると定義したベクトルの違いがわかる．<code class="docutils literal notranslate"><span class="pre">a</span></code>は複数の値を一次元に並べただけに対して，<code class="docutils literal notranslate"><span class="pre">b</span></code>と<code class="docutils literal notranslate"><span class="pre">c</span></code>は行方向または列方向に値を並べたデータになっていることがわかる．</p>
+</section>
+<section id="id11">
+<h3>Numpyによる行列の定義<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>続いて，同様に<code class="docutils literal notranslate"><span class="pre">np.array</span></code>を利用して行列を作成する．作成すると言っても<code class="docutils literal notranslate"><span class="pre">np.array</span></code>の要素の与え方が異なるだけである．以下の行列</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}\mathbf{A} = \begin{bmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{bmatrix}\end{split}\]</div>
+<p>は次のセルで定義できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1, 2],
+       [3, 4]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>値が2行2列のデータ型に格納されていることがわかる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(2, 2)
+</pre></div>
+</div>
+</div>
+</div>
+<p>同様に，<code class="docutils literal notranslate"><span class="pre">A.shape</span></code>とすると行列の行数と列数が取得できる．</p>
+</section>
+<section id="id12">
+<h3>Numpyによる行列計算<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<p>ベクトルと行列の定義の次は線形代数で学んだ行列計算をNumpyを用いて実装することを試みる．まずはじめに，次の行列 <span class="math notranslate nohighlight">\(\mathbf{A}, \mathbf{B}\)</span> を定義する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{A} = \begin{bmatrix}
+1 &amp; 2 \\
+3 &amp; 4 \\
+\end{bmatrix},
+\mathbf{B} = \begin{bmatrix}
+5 &amp; 6 \\
+7 &amp; 8 \\
+\end{bmatrix} \\
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]])</span>
+<span class="n">B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">]])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>定義された行列の<code class="docutils literal notranslate"><span class="pre">shape</span></code>や中身の要素は各自確認されたい．以下のセルで行列の和 <span class="math notranslate nohighlight">\(\mathbf{A} + \mathbf{B}\)</span> を計算する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">+</span> <span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[ 6,  8],
+       [10, 12]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>引き算も <code class="docutils literal notranslate"><span class="pre">-</span></code> の演算子で計算できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">-</span> <span class="n">B</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-4, -4],
+       [-4, -4]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>行列の積  <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\)</span> を計算しよう．行列 <span class="math notranslate nohighlight">\(\mathbf{A}, \mathbf{B}\)</span> はそれぞれ2行2列の行列なので， <span class="math notranslate nohighlight">\(\mathbf{A}\)</span> の列数と <span class="math notranslate nohighlight">\(\mathbf{B}\)</span> の行数が等しいので行列の積  <span class="math notranslate nohighlight">\(\mathbf{A}\mathbf{B}\)</span> が計算できる．行列の積は <code class="docutils literal notranslate"><span class="pre">np.dot</span></code>関数や<code class="docutils literal notranslate"><span class="pre">np.matmul</span></code>関数で計算できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[19, 22],
+       [43, 50]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">matmul</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[19, 22],
+       [43, 50]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>プログラミングでも線形代数で学んだ計算のルールは同じである．そのため，行数と列数によってはエラーとなることに注意されたい．繰り返しとなるが<code class="docutils literal notranslate"><span class="pre">shape</span></code>でベクトルや行列の形状を把握しておくことが大切である．以降は逆行列など本講義に関連するNumpyの機能をいくつか紹介するが数多くサポートされている行列計算の一部である．線形代数で学んだ計算のほとんどはNumpyで実装可能なので復習も兼ねて各自で調べてみることをおすすめする．</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>NumpyだけでなくPythonには数学関連のライブラリが多くある．特に，<a class="reference external" href="https://www.sympy.org/en/index.html">Sympy</a>はシンボルとして計算式を定義でき，直感的に数式をプログラミングできる．具体例の計算やグラフの可視化が容易であり，抽象的な大学数学を学ぶ助けとなるはずである．</p>
+</div>
+</section>
+</section>
+<section id="id13">
+<h2>【発展】 データの生成<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h2>
+<p>Numpyの必要最低限の基礎を紹介した後は，<code class="docutils literal notranslate"><span class="pre">np.load</span></code>関数で事前に用意したデータを利用する代わりに自身でデータを生成することを試みる．後述するように，データ数（<code class="docutils literal notranslate"><span class="pre">N</span></code>），傾き（<code class="docutils literal notranslate"><span class="pre">a</span></code>），切片（<code class="docutils literal notranslate"><span class="pre">b</span></code>），変動量（<code class="docutils literal notranslate"><span class="pre">noise_scale</span></code>）を制御することができ，線形回帰の特性をデータを変更することから確認できるようになる．</p>
+<p>先ほどの例と同様に，ここでは第12回の講義のように複数個（<span class="math notranslate nohighlight">\(N\)</span>個）の <span class="math notranslate nohighlight">\((x,y)\)</span> のペアデータが利用できること，各データの入出力間には <span class="math notranslate nohighlight">\(y=2x+1\)</span> という関係性があると仮定し，Numpyを用いて以下の手順で生成する．</p>
+<p>まずはデータの個数の定義する．ここでは <span class="math notranslate nohighlight">\(N=30\)</span> とする．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">30</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，個数 <code class="docutils literal notranslate"><span class="pre">N</span></code> に応じたデータをNumpyの <code class="docutils literal notranslate"><span class="pre">linspace</span></code> 関数を利用して作成する．<code class="docutils literal notranslate"><span class="pre">numpy</span></code> は <code class="docutils literal notranslate"><span class="pre">np</span></code> としてインポートしたので以下のように呼び出すことができる．<code class="docutils literal notranslate"><span class="pre">linspace</span></code>関数のサンプルコードは後述したので確認されたい．</p>
+<p>実際に，<span class="math notranslate nohighlight">\(0\)</span> から <span class="math notranslate nohighlight">\(1\)</span> の範囲で <span class="math notranslate nohighlight">\(N=30\)</span> 個の値を持つベクトルを作成する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># xの値</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>値を確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.        , 0.03448276, 0.06896552, 0.10344828, 0.13793103,
+       0.17241379, 0.20689655, 0.24137931, 0.27586207, 0.31034483,
+       0.34482759, 0.37931034, 0.4137931 , 0.44827586, 0.48275862,
+       0.51724138, 0.55172414, 0.5862069 , 0.62068966, 0.65517241,
+       0.68965517, 0.72413793, 0.75862069, 0.79310345, 0.82758621,
+       0.86206897, 0.89655172, 0.93103448, 0.96551724, 1.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Numpyでは <code class="docutils literal notranslate"><span class="pre">名前.shape</span></code> とすると要素数がわかる．今回は <span class="math notranslate nohighlight">\(N=30\)</span> 個の値を持つ一次元に並べられたベクトルなので <code class="docutils literal notranslate"><span class="pre">(30,)</span></code> と表示される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(30,)
+</pre></div>
+</div>
+</div>
+</div>
+<p>最後に <code class="docutils literal notranslate"><span class="pre">X</span></code> に対応する <code class="docutils literal notranslate"><span class="pre">y</span></code> を作成する．ただし，一般的には気温など観測値にノイズが載る（ここでは <code class="docutils literal notranslate"><span class="pre">y</span></code> が観測値）．これを <code class="docutils literal notranslate"><span class="pre">Numpy</span></code> の <code class="docutils literal notranslate"><span class="pre">random</span></code> モジュールの <code class="docutils literal notranslate"><span class="pre">randn</span></code> 関数を用いて乱数を生成することでノイズを表現する．まずはノイズが乗っていないデータ <code class="docutils literal notranslate"><span class="pre">y_gt</span></code> を生成する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_gt</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># y=2x+1の真の値</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，ノイズが付加された出力 <code class="docutils literal notranslate"><span class="pre">y</span></code> を作成する．<code class="docutils literal notranslate"><span class="pre">noise_scale</span></code>変数はノイズの大きさを示す．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noise_scale</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">noise_scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="c1"># 一定のノイズがのった観測データ</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>中身を確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_gt</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.        , 1.06896552, 1.13793103, 1.20689655, 1.27586207,
+       1.34482759, 1.4137931 , 1.48275862, 1.55172414, 1.62068966,
+       1.68965517, 1.75862069, 1.82758621, 1.89655172, 1.96551724,
+       2.03448276, 2.10344828, 2.17241379, 2.24137931, 2.31034483,
+       2.37931034, 2.44827586, 2.51724138, 2.5862069 , 2.65517241,
+       2.72413793, 2.79310345, 2.86206897, 2.93103448, 3.        ])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.23268992, 1.09328792, 1.37566952, 1.25244598, 1.46846051,
+       1.38595508, 1.30958562, 1.50467266, 1.51413006, 1.66394272,
+       1.69127968, 1.6672608 , 1.83155964, 1.90616816, 1.87278307,
+       1.85469926, 2.02060748, 2.0967034 , 2.20452892, 2.21268937,
+       2.25974265, 2.51284585, 2.31401295, 2.42603364, 2.73490752,
+       2.47330278, 2.74920767, 2.87153228, 2.86202016, 2.91854217])
+</pre></div>
+</div>
+</div>
+</div>
+<p>ノイズが付加されたため異なる値であることがわかる．ここまでで線形回帰で利用するデータの生成は完了であるが，上記の処理をこの後複数回呼び出す必要があるため関数化しておく．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">make_data</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">noise_scale</span><span class="p">):</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span> <span class="c1"># xの値</span>
+    <span class="n">y_gt</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span> <span class="c1"># y=ax+bの真の値</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">noise_scale</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="c1"># 一定のノイズがのった観測データ</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_gt</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="linspace">
+<h3>補足：<code class="docutils literal notranslate"><span class="pre">linspace</span></code>関数の説明<a class="headerlink" href="#linspace" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">linspace</span></code> 関数は引数としてスタートの値，最後の値，個数を与える．以下の例のように，<span class="math notranslate nohighlight">\(0\)</span> から <span class="math notranslate nohighlight">\(10\)</span> の範囲で <span class="math notranslate nohighlight">\(4\)</span> 個の値をもつベクトルを作成できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.          3.33333333  6.66666667 10.        ]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id14">
+<h3>補足：乱数の生成<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">np.random.randn</span></code> は <strong>正規分布</strong> から引数として与えられる個数だけ乱数を生成する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">random_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">random_value</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.48415107  0.54830665 -1.7151413 ]
+</pre></div>
+</div>
+</div>
+</div>
+<p>そのため，<code class="docutils literal notranslate"><span class="pre">noise_scale=0.1</span></code>より<code class="docutils literal notranslate"><span class="pre">noise_scale</span> <span class="pre">*</span> <span class="pre">np.random.randn(N)</span></code> は <span class="math notranslate nohighlight">\(0.1\)</span>倍した <span class="math notranslate nohighlight">\(N\)</span> 個の乱数を正規分布から生成する処理となる．</p>
+</section>
+</section>
+<section id="id15">
+<h2>【発展】 Scikit-Learnを利用して生成したデータから線形回帰を解く<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h2>
+<p>先ほどの例と同様にScikit-Learnを利用して線形回帰を解く．ただし，<code class="docutils literal notranslate"><span class="pre">np.load</span></code>関数で得られたデータ <code class="docutils literal notranslate"><span class="pre">X</span></code>と<code class="docutils literal notranslate"><span class="pre">y</span></code>ではなく自身で生成したデータ <code class="docutils literal notranslate"><span class="pre">X</span></code>と<code class="docutils literal notranslate"><span class="pre">y</span></code>に対して行う．<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスの使い方は先ほどと同様であるが，入力前にデータを加工する必要があるので注意されたい（これは実装された<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスの仕様によるものである）．</p>
+<p>再度，線形回帰の前提について復習しておくと，今から線形回帰 <code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> を用いて，<span class="math notranslate nohighlight">\((x,y)\)</span> から <span class="math notranslate nohighlight">\(y=ax+b\)</span> の <span class="math notranslate nohighlight">\(a\)</span> と <span class="math notranslate nohighlight">\(b\)</span> を計算することを試みる．前述のセルで作成したデータで考えると，<span class="math notranslate nohighlight">\(x\)</span> は <code class="docutils literal notranslate"><span class="pre">X</span></code>，<span class="math notranslate nohighlight">\(y\)</span> は <code class="docutils literal notranslate"><span class="pre">y</span></code> に対応する．ノイズが含まれた数値の集合データである <code class="docutils literal notranslate"><span class="pre">X</span></code> と <code class="docutils literal notranslate"><span class="pre">y</span></code> の情報のみ我々が利用することができ，データを生成したときに利用した <code class="docutils literal notranslate"><span class="pre">y_gt</span></code>, <code class="docutils literal notranslate"><span class="pre">a=2</span></code>, <code class="docutils literal notranslate"><span class="pre">b=1</span></code> という情報は一切知ることができないということに注意されたい．</p>
+<section id="id16">
+<h3>データの生成と加工<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
+<p>まずは【発展】データ生成で作成した <code class="docutils literal notranslate"><span class="pre">make_data</span></code> 関数を用いてデータを生成する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_gt</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，作成されたデータ <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> は一次元配列のベクトル（復習→Numpyの基礎）であるため<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスの仕様に従い縦ベクトルへ変換する．これはこれまでの説明のように，<span class="math notranslate nohighlight">\(y=ax+b\)</span> という線形結合の式で表現されるモデルを利用しているためである．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code>の説明は後述する．</p>
+</section>
+<section id="id17">
+<h3>線形回帰モデルの当てはめ<a class="headerlink" href="#id17" title="Permalink to this headline">#</a></h3>
+<p>作成したデータで線形回帰を行うために，再度，先ほどの<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code> クラスをインスタンス化し，(<code class="docutils literal notranslate"><span class="pre">X,y</span></code>)のペアをインスタンスメソッド <code class="docutils literal notranslate"><span class="pre">fit</span></code> に渡す処理を再度行う．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">reg</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id18">
+<h3>結果の確認と可視化<a class="headerlink" href="#id18" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;傾き a = </span><span class="si">{</span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span><span class="si">}</span><span class="s1">, 切片 b = </span><span class="si">{</span><span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>傾き a = [[2.04974084]], 切片 b = [0.98197603]
+</pre></div>
+</div>
+</div>
+</div>
+<p>傾きと切片をみると，データを生成するときに設定した <code class="docutils literal notranslate"><span class="pre">2</span></code> と <code class="docutils literal notranslate"><span class="pre">1</span></code> に近い値が得られたことがわかる．この結果はデータの関係性，データ数 <span class="math notranslate nohighlight">\(N\)</span>，ノイズの大きさなどの要因で変化するので一度自分で確かめてみると良い．</p>
+<p>値を確認するだけでなく実際に <code class="docutils literal notranslate"><span class="pre">X</span></code> に対して計算することでグラフのプロットを試みる．計算された値がノイズがない真の関係性 <span class="math notranslate nohighlight">\(y=2x+1\)</span> に近いことを確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">X</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;観測されたデータ&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_gt</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ノイズがない真の関係性&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;線形回帰によって得られた関数&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;LinearRegressionの結果&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1640b2a20&gt;
+</pre></div>
+</div>
+<img alt="../../_images/introduction_to_machine_learning_104_1.png" src="../../_images/introduction_to_machine_learning_104_1.png" />
+</div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスの中身はScikit-Learnの<a class="reference external" href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LinearRegression.html">リファレンスページ</a>へアクセスし，ページ中にある <a class="reference external" href="https://github.com/scikit-learn/scikit-learn/blob/36958fb24/sklearn/linear_model/_base.py#L529">SOURCE</a> からGitHub上で公開されているコードを見ることができる．中身を見るとこれまでの講義で学んだ<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/04/conditional_branch.html">条件分岐</a>，<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/08/functions_and_scope.html">関数</a>，<a class="reference external" href="https://ground-zero-programming.github.io/zero-pro2022-public/docs/10/application.html">クラス</a>といった機能で書かれていることがわかる．ゼロから学ぶプログラミングが，このようなプログラムを読み解けるヒントになるだけでなく，自身でソフトウェアを開発して公開するきっかけになれば幸いである．</p>
+</div>
+</section>
+<section id="np-newaxis">
+<h3>補足：<code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code><a class="headerlink" href="#np-newaxis" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">np.newaxis</span></code>は名前の通り軸を追加する変数である．軸を追加するとは (30,) のベクトルを (30,1) の縦ベクトルに変換する処理である．実際に以下の例で確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ベクトル a の中身は </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> であり，形状は </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> である．&#39;</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;newaxisしたベクトル b の中身は </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> であり，形状は </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> である．&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ベクトル a の中身は [0.   1.25 2.5  3.75 5.  ] であり，形状は (5,) である．
+newaxisしたベクトル b の中身は [[0.  ]
+ [1.25]
+ [2.5 ]
+ [3.75]
+ [5.  ]] であり，形状は (5, 1) である．
+</pre></div>
+</div>
+</div>
+</div>
+<p>Numpyによるベクトルの定義で用いた例を使うと以下のセルとなる．縦ベクトルなるように再度ベクトルを定義することなく変換できていることがわかる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;ベクトル a の中身は </span><span class="si">{</span><span class="n">a</span><span class="si">}</span><span class="s1"> であり，形状は </span><span class="si">{</span><span class="n">a</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> である．&#39;</span><span class="p">)</span>
+
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;newaxisしたベクトル b の中身は </span><span class="si">{</span><span class="n">b</span><span class="si">}</span><span class="s1"> であり，形状は </span><span class="si">{</span><span class="n">b</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s1"> である．&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ベクトル a の中身は [1 2 3] であり，形状は (3,) である．
+newaxisしたベクトル b の中身は [[1]
+ [2]
+ [3]] であり，形状は (3, 1) である．
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id19">
+<h2>【発展】 Scikit-Learnを利用せずに線形回帰を解く<a class="headerlink" href="#id19" title="Permalink to this headline">#</a></h2>
+<p>利用するだけなら，Scikit-Learnは便利なライブラリである．ここでは，敢えて，便利なライブラリを使わず，数式に基づいて線形回帰を解く方法を紹介する．</p>
+<p>そのために，線形回帰の解析解は以下の閉形式で導出できることを利用する．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{W} = \left( \mathbf{X}^T \mathbf{X} \right)^{-1} \mathbf{X}^T \mathbf{y}
+\]</div>
+<p>この式は <strong>正規方程式（Normal Equation）</strong> と呼ばれる．正規方程式は最小二乗法と呼ばれる予測値と目標の出力値（目的変数）間の差から導出できる．最小二乗法のアイデアは差を二乗誤差誤差として定義し，最小となるパラメータを偏微分から求める．より簡単にいうと，高校で学んだ関数の最小値を求めるときと同じように，関数をパラメータで微分し，0となるようなパラメータを求めている．発展的な内容であるため詳細な式の導出までは説明しないが，線形代数を受講した学生ならば，上記の正規方程式とデータ <span class="math notranslate nohighlight">\(\mathbf{X}, \mathbf{y}\)</span>がわかっていれば，傾きと切片のパラメータである <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> の計算は容易であるはずである．</p>
+<section id="id20">
+<h3>データの生成と加工<a class="headerlink" href="#id20" title="Permalink to this headline">#</a></h3>
+<p>先ほどの【発展】Scikit-Learnを利用して生成したデータから線形回帰を解くと同様に，以下のようにデータを生成・修正する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">y_gt</span> <span class="o">=</span> <span class="n">make_data</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X_</span> <span class="o">=</span> <span class="n">X_</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">y</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ここで，切片 <span class="math notranslate nohighlight">\(b\)</span> を作成するために以下の処理を行う．<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>クラスでは内部で以下と同等の処理をおこなっている．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">X_</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">))))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の処理の意味は，式で書くと，<span class="math notranslate nohighlight">\(y=ax+b\)</span> を <span class="math notranslate nohighlight">\(y=ax_0+bx_1\)</span> （ただし，<span class="math notranslate nohighlight">\(x_0=x, x_1=1\)</span>）という形で書き換えている．これは傾きと切片を同じ <span class="math notranslate nohighlight">\(\mathbf{W}\)</span> という行列で表現するためにである．そのため，インデキシングを用いて修正前の行列 <code class="docutils literal notranslate"><span class="pre">X_</span></code> と修正後の行列 <code class="docutils literal notranslate"><span class="pre">X</span></code> の5番目のデータ (index=4) を参照すると以下のようになっている．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">X_</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[0.13793103]
+[0.13793103 1.        ]
+</pre></div>
+</div>
+</div>
+</div>
+<p><span class="math notranslate nohighlight">\(x_0\)</span>, <span class="math notranslate nohighlight">\(x_1\)</span>が<span class="math notranslate nohighlight">\(x_0=x, x_1=1\)</span>となっていることがわかる．ここまででデータの準備は完了である．</p>
+<section id="np-hstack">
+<h4>補足：<code class="docutils literal notranslate"><span class="pre">np.hstack</span></code><a class="headerlink" href="#np-hstack" title="Permalink to this headline">#</a></h4>
+<p><code class="docutils literal notranslate"><span class="pre">np.hstack</span></code>関数の処理を以下のコードで確認されたい．まず元々の<span class="math notranslate nohighlight">\(x_0\)</span>を作成．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">M</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">M</span><span class="p">)</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">[:,</span><span class="n">np</span><span class="o">.</span><span class="n">newaxis</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">b</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0.  ],
+       [1.25],
+       [2.5 ],
+       [3.75],
+       [5.  ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，すべて <code class="docutils literal notranslate"><span class="pre">1</span></code> が格納された <code class="docutils literal notranslate"><span class="pre">M</span></code> 個の要素を持つベクトルを作成する．これは<code class="docutils literal notranslate"><span class="pre">np.ones</span></code>で作成できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">M</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>作成した <code class="docutils literal notranslate"><span class="pre">b</span></code> と <code class="docutils literal notranslate"><span class="pre">c</span></code> を <code class="docutils literal notranslate"><span class="pre">np.hstack</span></code> で結合する．ただし，</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">b</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">0.</span>  <span class="p">],</span>
+          <span class="p">[</span><span class="mf">1.25</span><span class="p">],</span>
+          <span class="p">[</span><span class="mf">2.5</span> <span class="p">],</span>
+          <span class="p">[</span><span class="mf">3.75</span><span class="p">],</span>
+          <span class="p">[</span><span class="mf">5.</span>  <span class="p">]])</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">array</span><span class="p">([[</span><span class="mf">1.</span><span class="p">],</span>
+           <span class="p">[</span><span class="mf">1.</span><span class="p">],</span>
+           <span class="p">[</span><span class="mf">1.</span><span class="p">],</span>
+           <span class="p">[</span><span class="mf">1.</span><span class="p">],</span>
+           <span class="p">[</span><span class="mf">1.</span><span class="p">]])</span>
+</pre></div>
+</div>
+<p>である．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">d</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">hstack</span><span class="p">((</span><span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記のサンプルコードから <code class="docutils literal notranslate"><span class="pre">b</span></code>と<code class="docutils literal notranslate"><span class="pre">c</span></code>の結合が実現でき， <span class="math notranslate nohighlight">\(y=ax_0+bx_1\)</span> （ただし，<span class="math notranslate nohighlight">\(x_0=x, x_1=1\)</span>）が実装できたことがわかる．</p>
+</section>
+</section>
+<section id="id21">
+<h3>正規方程式からの解析解の導出<a class="headerlink" href="#id21" title="Permalink to this headline">#</a></h3>
+<p>線形回帰の解析解は以下で導出できた．</p>
+<div class="math notranslate nohighlight">
+\[
+\mathbf{W} = \left( \mathbf{X}^T \mathbf{X} \right)^{-1} \mathbf{X}^T \mathbf{y}
+\]</div>
+<p>プログラムコードの可読性の観点から，上記の式を以下のように分割して計算する．</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\mathbf{W}_1 = \left( \mathbf{X}^T \mathbf{X} \right)^{-1} \\
+\mathbf{W}_2 = \mathbf{X}^T \mathbf{y} \\
+\mathbf{W} = \mathbf{W}_1 \mathbf{W}_2
+\end{split}\]</div>
+<p>まず，<span class="math notranslate nohighlight">\(\mathbf{W}_1\)</span> を計算する．以下のコードで実装できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W_1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>続いて，<span class="math notranslate nohighlight">\(\mathbf{W}_2\)</span> を計算する．以下のコードで実装できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W_2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>最後に，<span class="math notranslate nohighlight">\(\mathbf{W}\)</span> を計算する．以下のコードで実装できる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">W_1</span><span class="p">,</span> <span class="n">W_2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の処理は１行で書くこともできる．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">X</span><span class="p">)),</span> <span class="n">np</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="id22">
+<h4>補足：行列の転置<a class="headerlink" href="#id22" title="Permalink to this headline">#</a></h4>
+<p>Numpyでは，行列の転置は <code class="docutils literal notranslate"><span class="pre">行列.T</span></code> でできる．以下のサンプルコードで確認されたい．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">A</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1],
+       [2, 3]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span><span class="o">.</span><span class="n">T</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 2],
+       [1, 3]])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id23">
+<h4>補足：逆行列の計算<a class="headerlink" href="#id23" title="Permalink to this headline">#</a></h4>
+<p>逆行列の計算は <code class="docutils literal notranslate"><span class="pre">np.linalg.inv</span></code> 関数を利用すれば良い．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">A</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]])</span>
+<span class="n">A_inv</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">A</span><span class="p">)</span>
+<span class="n">A_inv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[-1.5,  0.5],
+       [ 1. ,  0. ]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition caution">
+<p class="admonition-title">Caution</p>
+<p><code class="docutils literal notranslate"><span class="pre">np.linalg.inv</span></code>では逆行列が存在しない特異行列の場合はエラーとなるので注意されたい．また，発展的な内容であるが，本講義で用いたデータの <span class="math notranslate nohighlight">\(\mathbf{X}\)</span> は小さい行列であるが，データによっては非常に巨大な行列となる．このように，正規方程式からの線形回帰は逆行列の計算を含むため特異行列や巨大な行列のときは適さない．</p>
+</div>
+</section>
+</section>
+<section id="id24">
+<h3>傾きと切片の確認<a class="headerlink" href="#id24" title="Permalink to this headline">#</a></h3>
+<p>計算された <code class="docutils literal notranslate"><span class="pre">W</span></code> について，傾きと切片を確認する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.95688468],
+       [0.98424191]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>上記の結果からわかるように，傾きと切片の参照はインデキシングが必要である．以下のように参照する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">coef</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">coef</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.95688468])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intercept</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">intercept</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.98424191])
+</pre></div>
+</div>
+</div>
+</div>
+<p>再度，<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>の結果を出力する．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">coef_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.04974084]])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg</span><span class="o">.</span><span class="n">intercept_</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.98197603])
+</pre></div>
+</div>
+</div>
+</div>
+<p>結果からもわかるように，<code class="docutils literal notranslate"><span class="pre">LinearRegression</span></code>の結果と近い値が得られることがわかった．</p>
+</section>
+<section id="id25">
+<h3>結果のプロット<a class="headerlink" href="#id25" title="Permalink to this headline">#</a></h3>
+<p>最後に，計算された結果をグラフでプロットする．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">W</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">X_</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;観測されたデータ&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">y_gt</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;--&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;ノイズがない真の関係性&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X_</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;g&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;線形回帰によって得られた関数&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;正規方程式の結果&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;x&#39;</span><span class="p">)</span> <span class="c1"># x軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;y&#39;</span><span class="p">)</span> <span class="c1"># y軸のラベルを追加</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x164132860&gt;
+</pre></div>
+</div>
+<img alt="../../_images/introduction_to_machine_learning_152_1.png" src="../../_images/introduction_to_machine_learning_152_1.png" />
+</div>
+</div>
+<p>Scikit-Learnを用いずに線形回帰を実行することができた．Pythonは機械学習だけでなく高度なアルゴリズムを提供するライブラリが提供されており便利なプログラミング言語である．しかしながら，言い換えると，機能の使い方さえ調べてしまえば，中身のアルゴリズムを理解せずとも誰でも利用できてしまう．Pythonの第一歩としてのゼロからはじめるプログラミングにおいては，これらの機能を利用できるだけ十分なレベルに到達しているが，受講者の皆さんにはぜひ内部のアルゴリズムまで調べて，<strong>ライブラリを用いず</strong> 自身で <strong>ゼロから</strong> 実装してみることを推奨する．このような経験は線形代数・微積分・確率統計など大学数学を学ぶモチベーションとなるだけでなく，皆さんがこれから学ぶプログラミング，数学，加えて専門科目の理解をより深めてくれるはずである．</p>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/14"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../13/exercise_introduction_to_data_analysis.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">第13回：データ分析入門（演習）</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../15/exercise_introduction_to_machine_learning.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">第15回：機械学習入門（演習）</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
