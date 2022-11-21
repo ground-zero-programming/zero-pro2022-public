@@ -431,7 +431,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   はじめに
+   内容
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -625,7 +625,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   はじめに
+   内容
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -812,7 +812,7 @@ title="Print to PDF"
 <h1>第14回：機械学習入門（講義）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>担当：相澤宏旭</p>
 <section id="id2">
-<h2>はじめに<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2>内容<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>第12回目の講義でPythonを用いてデータを読み込み，可視化し，そしてデータの説明する統計量を算出した．平均や分散といった統計量もデータの性質を我々が分析するうえで重要な手がかりとなるが，このような手がかりをコンピュータ自らがデータから学ぶことができないだろうか？そして，データと手がかりから対象の性質を予測することはできないだろうか？このような動機のもと，<strong>機械学習（Machine Learning）</strong> と呼ばれる研究分野は <strong>人工知能（Artificial Intelligence）</strong> の一分野として発展してきた．</p>
 <p>特に，近年，機械学習技術の進展は著しい．突然だが，ゼロからはじめるプログラミングのサポートページの左上の猫の画像（もしくは静止画とした下の図）をみてほしい．実は，この画像は機械学習技術によってゼロから描き出された画像である．具体的には，<a class="reference external" href="https://huggingface.co/spaces/stabilityai/stable-diffusion">Stable Diffusion</a>と呼ばれる <strong>ニューラルネットワーク</strong> でモデル化された言語から画像を生成する機械学習アルゴリズムで生成している（今回の画像の例では，Enter your prompt に <strong>a painting of a cat programming in front of a laptop computer</strong> と言葉を与えた）．現在の機械学習技術はコンピュータは大量のデータから猫とコンピュータの知識・手がかりを学習し，これらを組み合わせることで画像を描き出すことができるまでに至っている．</p>
 <p><img alt="" src="../../_images/gen_cats.png" /></p>
@@ -820,7 +820,12 @@ title="Print to PDF"
 <p class="admonition-title">手軽に試せる機械学習技術</p>
 <p>新しい最新の機械学習技術は<a class="reference external" href="https://arxiv.org/">arXiv</a>と呼ばれる論文のプレプリントのリポジトリで日々公開されている．ここで公開されている論文を読み解き実装するのは大変であるが，論文によってはPythonのライブラリとして手法をGitHubで公開していたり，<a class="reference external" href="https://huggingface.co/">Hugging Face</a>と呼ばれるサービスで気軽に試すことができる．</p>
 </div>
-<p>このように非常にエキサイティングな研究分野であるが，その仕組みは複雑である．本講義のレベル上，簡略化された説明となってしまうが，まずは機械学習の雰囲気を掴もう．</p>
+<p>このように非常にエキサイティングな研究分野であるが，その仕組みは複雑である．本講義のレベル上，簡略化された説明となってしまうが，まずは機械学習の雰囲気を掴もう．具体的には本講義資料で以下を学ぶ．</p>
+<ul class="simple">
+<li><p>機械学習の概要を学ぶ．</p></li>
+<li><p>線形回帰をScikit-Learnで実装する．</p></li>
+<li><p>Numpyのみで線形回帰を実装する．</p></li>
+</ul>
 </section>
 <section id="id3">
 <h2>機械学習<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
@@ -1053,7 +1058,7 @@ f_{\theta}(x) = ax + b,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x10d373f28&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x10e7df0f0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/introduction_to_machine_learning_22_1.png" src="../../_images/introduction_to_machine_learning_22_1.png" />
@@ -1115,7 +1120,7 @@ f_{\theta}(x) = ax + b,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x163fca390&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x161480390&gt;
 </pre></div>
 </div>
 <img alt="../../_images/introduction_to_machine_learning_32_1.png" src="../../_images/introduction_to_machine_learning_32_1.png" />
@@ -1473,12 +1478,12 @@ f_{\theta}(x) = ax + b,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.23268992, 1.09328792, 1.37566952, 1.25244598, 1.46846051,
-       1.38595508, 1.30958562, 1.50467266, 1.51413006, 1.66394272,
-       1.69127968, 1.6672608 , 1.83155964, 1.90616816, 1.87278307,
-       1.85469926, 2.02060748, 2.0967034 , 2.20452892, 2.21268937,
-       2.25974265, 2.51284585, 2.31401295, 2.42603364, 2.73490752,
-       2.47330278, 2.74920767, 2.87153228, 2.86202016, 2.91854217])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.92105961, 1.15973011, 1.23761033, 1.09957741, 1.18525871,
+       1.12144951, 1.40202388, 1.48734232, 1.44555123, 1.67110602,
+       1.70262493, 1.67487651, 1.74818366, 1.85983813, 1.93284174,
+       1.93336123, 2.02813262, 2.20183862, 2.16338451, 2.33886264,
+       2.20059305, 2.64409875, 2.50819628, 2.44197843, 2.6397221 ,
+       2.64388742, 2.88110065, 2.90062222, 2.8822686 , 3.09281733])
 </pre></div>
 </div>
 </div>
@@ -1523,7 +1528,7 @@ f_{\theta}(x) = ax + b,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[-0.48415107  0.54830665 -1.7151413 ]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 0.3614052  -0.80052532  0.27267596]
 </pre></div>
 </div>
 </div>
@@ -1577,7 +1582,7 @@ f_{\theta}(x) = ax + b,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>傾き a = [[2.04974084]], 切片 b = [0.98197603]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>傾き a = [[2.07717739]], 切片 b = [0.96323996]
 </pre></div>
 </div>
 </div>
@@ -1601,7 +1606,7 @@ f_{\theta}(x) = ax + b,
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1640b2a20&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x16156aa58&gt;
 </pre></div>
 </div>
 <img alt="../../_images/introduction_to_machine_learning_104_1.png" src="../../_images/introduction_to_machine_learning_104_1.png" />
@@ -1881,8 +1886,8 @@ newaxisしたベクトル b の中身は [[1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.95688468],
-       [0.98424191]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.96955321],
+       [1.01209117]])
 </pre></div>
 </div>
 </div>
@@ -1896,7 +1901,7 @@ newaxisしたベクトル b の中身は [[1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.95688468])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.96955321])
 </pre></div>
 </div>
 </div>
@@ -1909,7 +1914,7 @@ newaxisしたベクトル b の中身は [[1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.98424191])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.01209117])
 </pre></div>
 </div>
 </div>
@@ -1922,7 +1927,7 @@ newaxisしたベクトル b の中身は [[1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.04974084]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[2.07717739]])
 </pre></div>
 </div>
 </div>
@@ -1934,7 +1939,7 @@ newaxisしたベクトル b の中身は [[1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.98197603])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.96323996])
 </pre></div>
 </div>
 </div>
@@ -1961,7 +1966,7 @@ newaxisしたベクトル b の中身は [[1]
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x164132860&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.legend.Legend at 0x1615e98d0&gt;
 </pre></div>
 </div>
 <img alt="../../_images/introduction_to_machine_learning_152_1.png" src="../../_images/introduction_to_machine_learning_152_1.png" />
