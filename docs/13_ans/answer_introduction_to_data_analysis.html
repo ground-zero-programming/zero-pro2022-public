@@ -1,0 +1,1256 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>第13回：データ分析入門（解答） &#8212; ゼロから始めるプログラミング</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" href="../../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script src="../../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../../_static/cat_mov.gif" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">ゼロから始めるプログラミング</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../../intro.html">
+                    ゼロから始めるプログラミング
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  講義の教材
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../01/introduction_and_setup.html">
+   第1回：イントロダクションとGoogle Colaboratoryの導入
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../02/variables_and_data_types.html">
+   第2回：変数とデータ型（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../03/exercise_variables_and_data_types.html">
+   第3回：変数とデータ型（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../04/conditional_branch.html">
+   第4回：条件分岐（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../05/exercise_conditional_branch.html">
+   第5回：条件分岐（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../06/loops.html">
+   第6回：繰り返し処理（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../07/exercise_loops.html">
+   第7回：繰り返し処理（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../08/functions_and_scope.html">
+   第8回：関数とスコープ（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../09/exercise_functions_and_scope.html">
+   第9回：関数とスコープ（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../10/application.html">
+   第10回：アプリケーションの作成（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../11/exercise_application.html">
+   第11回：アプリケーションの作成（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../12/introduction_to_data_analysis.html">
+   第12回：データ分析入門（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../13/exercise_introduction_to_data_analysis.html">
+   第13回：データ分析入門（演習）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../14/introduction_to_machine_learning.html">
+   第14回：機械学習入門（講義）
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../15/exercise_introduction_to_machine_learning.html">
+   第15回：機械学習入門（演習）
+  </a>
+ </li>
+</ul>
+<p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  補足情報
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../exam.html">
+   期末試験に関する情報
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../submission/submission.html">
+   課題提出方法
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../advanced_materials.html">
+   さらに勉強したい人へ
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../references.html">
+   参考文献
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://colab.research.google.com/github/ground-zero-programming/zero-pro2022-public/blob/main/docs/13_ans/answer_introduction_to_data_analysis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Colab"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../../_static/images/logo_colab.png">
+  </span>
+<span class="headerbtn__text-container">Colab</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/ground-zero-programming/zero-pro2022-public/issues/new?title=Issue%20on%20page%20%2Fdocs/13_ans/answer_introduction_to_data_analysis.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../../_sources/docs/13_ans/answer_introduction_to_data_analysis.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   演習１
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     演習1-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     演習1-2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     演習1-3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     演習1-4
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   演習2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   演習３
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   演習4：発展課題
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     演習4-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     演習4-2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     演習4-3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     演習4-4
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>第13回：データ分析入門（解答）</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   演習１
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     演習1-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     演習1-2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     演習1-3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     演習1-4
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id7">
+   演習2
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   演習３
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id9">
+   演習4：発展課題
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     演習4-1
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     演習4-2
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     演習4-3
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     演習4-4
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1>第13回：データ分析入門（解答）<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>担当：古居彬</p>
+<section id="id2">
+<h2>演習１<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>本演習では，講義資料と同じく <a class="reference external" href="http://kogolab.chillout.jp/elearn/icecream/index.html">アイスクリーム屋さんで学ぶ楽しい統計学</a> というサイトの架空のデータを用いる（ただしデータの種類は少し異なる）．</p>
+<p>まずは以下のセルを実行し，データをダウンロードしよう．
+ダウンロードしたデータは <code class="docutils literal notranslate"><span class="pre">data</span></code> フォルダ内に <code class="docutils literal notranslate"><span class="pre">ice_cream_kadai.csv</span></code> という名前で保存される．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir data
+<span class="o">!</span>wget -P data https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/13/data/ice_cream_kadai.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mkdir: data: File exists
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+</div>
+</div>
+<p>本ファイルには，アイスクリーム屋の店舗別の平均客数と，駅からの距離（単位は [m] ）のデータが入っている．</p>
+<div class="highlight-csv notranslate"><div class="highlight"><pre><span></span>店舗, 駅からの距離, 平均客数
+1, 10, 795
+2, 1200, 213
+3, 500, 465
+...
+</pre></div>
+</div>
+<p>このデータに対して，MatplotlibやPandasを用いて解析を行う．
+適宜，これら外部ライブラリをインポートしながら以下の演習課題に解答せよ．</p>
+<section id="id3">
+<h3>演習1-1<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
+<p>上記ファイル <code class="docutils literal notranslate"><span class="pre">ice_cream_kadai.csv</span></code> を読み込み，PandasのDataFrameとして変数 <code class="docutils literal notranslate"><span class="pre">df</span></code> に格納せよ．また， <code class="docutils literal notranslate"><span class="pre">df</span></code> の中身を表示し，正しく読み込めていることを確認せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/ice_cream_kadai.csv&#39;</span><span class="p">)</span> 
+
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>店舗</th>
+      <th>駅からの距離</th>
+      <th>平均客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1</td>
+      <td>10</td>
+      <td>795</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1200</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>500</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4</td>
+      <td>50</td>
+      <td>694</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>740</td>
+      <td>403</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>6</td>
+      <td>30</td>
+      <td>782</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>7</td>
+      <td>10</td>
+      <td>769</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>8</td>
+      <td>360</td>
+      <td>561</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>9</td>
+      <td>150</td>
+      <td>692</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>930</td>
+      <td>361</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>620</td>
+      <td>385</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>12</td>
+      <td>65</td>
+      <td>723</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id4">
+<h3>演習1-2<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code> のうち，「駅からの距離」が <code class="docutils literal notranslate"><span class="pre">500</span></code> 以上の行だけを抽出して表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;駅からの距離&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>店舗</th>
+      <th>駅からの距離</th>
+      <th>平均客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>2</td>
+      <td>1200</td>
+      <td>213</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>500</td>
+      <td>465</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5</td>
+      <td>740</td>
+      <td>403</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>10</td>
+      <td>930</td>
+      <td>361</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>11</td>
+      <td>620</td>
+      <td>385</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h3>演習1-3<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code> のうち，「駅からの距離」が <code class="docutils literal notranslate"><span class="pre">500</span></code> 以上の行について，「平均客数」だけを抜き出して表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;駅からの距離&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">500</span><span class="p">][</span><span class="s1">&#39;平均客数&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1     213
+2     465
+4     403
+9     361
+10    385
+Name: 平均客数, dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h3>演習1-4<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code> のうち，「平均客数」が <code class="docutils literal notranslate"><span class="pre">500</span></code> 未満の行について，「駅からの距離」の <strong>最大値</strong>，<strong>最小値</strong>，<strong>平均値</strong> をそれぞれ計算し，表示せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;最大値：</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;平均客数&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">][</span><span class="s1">&#39;駅からの距離&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;最小値：</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;平均客数&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">][</span><span class="s1">&#39;駅からの距離&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">min</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;平均値：</span><span class="si">{</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;平均客数&#39;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">500</span><span class="p">][</span><span class="s1">&#39;駅からの距離&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>最大値：1200
+最小値：500
+平均値：798.0
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="id7">
+<h2>演習2<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code> について，「駅からの距離」と「平均客数」の間の関係を散布図として出力せよ．
+ただし，図タイトル，x軸とy軸のタイトルを必ず付けること．
+それ以外に，グラフを見やすくする工夫を自分なりに考えて加えてよい．</p>
+<p>グラフ中で日本語フォントを利用するため，以下のセルをあらかじめ実行しておくこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">matplotlib</span> <span class="kn">import</span> <span class="n">rcParams</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.family&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;sans-serif&#39;</span>
+<span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Hiragino Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Yu Gothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Meirio&#39;</span><span class="p">,</span> <span class="s1">&#39;Takao&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAexGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;IPAPGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;VL PGothic&#39;</span><span class="p">,</span> <span class="s1">&#39;Noto Sans CJK JP&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><strong>出力例</strong></p>
+<p><img alt="" src="../../_images/kadai2_sample1.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;駅からの距離&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="s1">&#39;平均客数&#39;</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;駅からの距離と平均客数の関係&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;駅からの距離（m）&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;平均客数（人）&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/answer_introduction_to_data_analysis_15_0.png" src="../../_images/answer_introduction_to_data_analysis_15_0.png" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h2>演習３<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">df</span></code> について，「駅からの距離」と「平均客数」の間の相関係数を計算し，表示せよ．
+また，<strong>説明</strong> と書かれたMarkdownセルに，演習2の散布図と本演習で算出した相関係数の結果から，何が読み取れるか考えて自分なりに考察を書くこと．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="n">df</span><span class="p">[[</span><span class="s1">&#39;駅からの距離&#39;</span><span class="p">,</span> <span class="s1">&#39;平均客数&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>駅からの距離</th>
+      <th>平均客数</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>駅からの距離</th>
+      <td>1.000000</td>
+      <td>-0.979522</td>
+    </tr>
+    <tr>
+      <th>平均客数</th>
+      <td>-0.979522</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p><strong>説明</strong></p>
+<p>…</p>
+</section>
+<section id="id9">
+<h2>演習4：発展課題<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
+<p>これ以降は発展的な演習課題となります．
+解くことは必須ではありませんが，ぜひチャレンジしてみてください．</p>
+<p>演習4では，気象庁のオープンデータから取得した東広島市の1979年〜2021年までの月別平均気温のデータを用いる．
+本データは，<code class="docutils literal notranslate"><span class="pre">higashi-hiroshima-temps.csv</span></code> という CSVファイルに保存されている．</p>
+<p>まずは以下のセルを実行し，当該ファイルをダウンロードして <code class="docutils literal notranslate"><span class="pre">data</span></code> フォルダに格納せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>mkdir data
+<span class="o">!</span>wget -P data https://raw.githubusercontent.com/ground-zero-programming/zero-pro2022-public/main/docs/13/data/higashi-hiroshima-temps.csv
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>mkdir: data: File exists
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>zsh:1: command not found: wget
+</pre></div>
+</div>
+</div>
+</div>
+<p>次に，以下のセルを実行して <code class="docutils literal notranslate"><span class="pre">higashi-hiroshima-temps.csv</span></code> の内容を <code class="docutils literal notranslate"><span class="pre">df_temps</span></code> というDataFrameに格納せよ．</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df_temps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/higashi-hiroshima-temps.csv&#39;</span><span class="p">)</span> 
+
+<span class="n">df_temps</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>年</th>
+      <th>月</th>
+      <th>平均気温</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1979</td>
+      <td>1</td>
+      <td>2.9</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1979</td>
+      <td>2</td>
+      <td>4.1</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1979</td>
+      <td>3</td>
+      <td>5.9</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1979</td>
+      <td>4</td>
+      <td>11.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1979</td>
+      <td>5</td>
+      <td>14.8</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>521</th>
+      <td>2022</td>
+      <td>6</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>522</th>
+      <td>2022</td>
+      <td>7</td>
+      <td>25.8</td>
+    </tr>
+    <tr>
+      <th>523</th>
+      <td>2022</td>
+      <td>8</td>
+      <td>26.6</td>
+    </tr>
+    <tr>
+      <th>524</th>
+      <td>2022</td>
+      <td>9</td>
+      <td>23.1</td>
+    </tr>
+    <tr>
+      <th>525</th>
+      <td>2022</td>
+      <td>10</td>
+      <td>15.4</td>
+    </tr>
+  </tbody>
+</table>
+<p>526 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>上記の出力結果から分かるように，本データは <code class="docutils literal notranslate"><span class="pre">年</span></code>，<code class="docutils literal notranslate"><span class="pre">月</span></code>，<code class="docutils literal notranslate"><span class="pre">平均気温</span></code> の3つの列から構成されており，1979年1月〜2022年10月までの平均気温が行方向に続いている．</p>
+<p>以降，この <code class="docutils literal notranslate"><span class="pre">df_temps</span></code> を用いて演習課題に解答すること．
+グラフを描画する際は，タイトルや軸ラベルなど，必要な情報を含めること．</p>
+<section id="id10">
+<h3>演習4-1<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df_temps</span></code> から各年の11月の平均気温だけを抽出し，線グラフを描画せよ．
+なお，グラフの横軸は年，縦軸は平均気温とする．</p>
+<p><strong>出力例</strong></p>
+<p><img alt="" src="../../_images/kadai4-1_sample1.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df_temps</span><span class="p">[</span><span class="n">df_temps</span><span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">11</span><span class="p">][</span><span class="s1">&#39;年&#39;</span><span class="p">],</span> <span class="n">df_temps</span><span class="p">[</span><span class="n">df_temps</span><span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">11</span><span class="p">][</span><span class="s1">&#39;平均気温&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="mi">11</span><span class="si">}</span><span class="s1">月の平均気温の推移&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;年&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;平均気温（℃）&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/answer_introduction_to_data_analysis_27_0.png" src="../../_images/answer_introduction_to_data_analysis_27_0.png" />
+</div>
+</div>
+</section>
+<section id="id11">
+<h3>演習4-2<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>以下の仕様の関数を作成せよ．</p>
+<p>関数名：       <code class="docutils literal notranslate"><span class="pre">plot_temps</span></code> <br>
+引数：         <code class="docutils literal notranslate"><span class="pre">df</span></code>, <code class="docutils literal notranslate"><span class="pre">year</span></code>, <code class="docutils literal notranslate"><span class="pre">month</span></code> <br>
+処理の内容：    引数で渡されたDataFrame <code class="docutils literal notranslate"><span class="pre">df</span></code> に対し，<code class="docutils literal notranslate"><span class="pre">year</span></code> 年以降の <code class="docutils literal notranslate"><span class="pre">month</span></code> 月の平均気温を線グラフで出力する．</p>
+<p>※グラフの横軸は年，縦軸は平均気温とする．<br>
+※プログラムには，関数の呼び出し命令文を含めること（引数 <code class="docutils literal notranslate"><span class="pre">df</span></code> には <code class="docutils literal notranslate"><span class="pre">df_temps</span></code> を渡し，<code class="docutils literal notranslate"><span class="pre">year</span></code> と <code class="docutils literal notranslate"><span class="pre">month</span></code> は任意に設定して良い）．</p>
+<p><strong>実行例と出力例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 2000年以降の11月の平均気温を出力したい場合</span>
+<span class="n">plot_temps</span><span class="p">(</span><span class="n">df_temps</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="" src="../../_images/kadai4-2_sample1.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+
+<span class="k">def</span> <span class="nf">plot_temps</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">year</span><span class="p">,</span> <span class="n">month</span><span class="p">):</span>
+    <span class="n">condition</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;年&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">year</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">month</span><span class="p">)</span>
+    <span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">condition</span><span class="p">][</span><span class="s1">&#39;年&#39;</span><span class="p">]</span>
+    <span class="n">Y</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">condition</span><span class="p">][</span><span class="s1">&#39;平均気温&#39;</span><span class="p">]</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s1">年以降の</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s1">月の平均気温の推移&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;年&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;平均気温（℃）&#39;</span><span class="p">);</span>
+
+<span class="n">plot_temps</span><span class="p">(</span><span class="n">df_temps</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="mi">11</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/answer_introduction_to_data_analysis_29_0.png" src="../../_images/answer_introduction_to_data_analysis_29_0.png" />
+</div>
+</div>
+</section>
+<section id="id12">
+<h3>演習4-3<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<p>以下の仕様の関数を作成せよ．</p>
+<p>関数名：       <code class="docutils literal notranslate"><span class="pre">plot_temps_multi</span></code> <br>
+引数：         <code class="docutils literal notranslate"><span class="pre">df</span></code>, <code class="docutils literal notranslate"><span class="pre">months</span></code> <br>
+処理の内容：    DataFrame <code class="docutils literal notranslate"><span class="pre">df</span></code> に対し，リスト <code class="docutils literal notranslate"><span class="pre">months</span></code> に格納された複数の月の平均気温をそえぞれ線グラフで重ねて出力する．</p>
+<p>※グラフの横軸は年，縦軸は平均気温とする．各線グラフは色分けし，グラフ中に凡例を示すこと．<br>
+※プログラムには，関数の呼び出し命令文を含めること（引数 <code class="docutils literal notranslate"><span class="pre">df</span></code> には <code class="docutils literal notranslate"><span class="pre">df_temps</span></code> を渡し，<code class="docutils literal notranslate"><span class="pre">year</span></code> と <code class="docutils literal notranslate"><span class="pre">month</span></code> は任意に設定して良い）．</p>
+<p><strong>実行例と出力例</strong></p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># 1月, 4月, 9月, 12月の線グラフを重ねて表示する．</span>
+<span class="n">plot_temps</span><span class="p">(</span><span class="n">df_temps</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><img alt="" src="../../_images/kadai4-3_sample1.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="k">def</span> <span class="nf">plot_temps_multi</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">months</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">months</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="p">][</span><span class="s1">&#39;年&#39;</span><span class="p">],</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="p">][</span><span class="s1">&#39;平均気温&#39;</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s1">月&#39;</span><span class="p">)</span>
+        
+    <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;月別平均気温の推移&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;年&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;平均気温（℃）&#39;</span><span class="p">);</span>
+
+<span class="n">plot_temps_multi</span><span class="p">(</span><span class="n">df_temps</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">12</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/answer_introduction_to_data_analysis_31_0.png" src="../../_images/answer_introduction_to_data_analysis_31_0.png" />
+</div>
+</div>
+</section>
+<section id="id13">
+<h3>演習4-4<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">df_temps</span></code> の1月〜12月の各月について，全ての年に対する「平均気温」の平均と標準偏差を計算せよ．</p>
+<p>また，横軸を「月」，縦軸を「平均気温」の平均とする棒グラフを描画せよ．
+このとき，棒グラフには「平均気温」の標準偏差をエラーバー（誤差範囲）として付与すること．</p>
+<p><strong>エラーバー（誤差範囲）の付け方</strong></p>
+<p>棒グラフにエラーバーを付ける際には，引数 <code class="docutils literal notranslate"><span class="pre">yerr</span></code> に誤差範囲を定義する値のリスト（例：標準偏差や標準誤差など）を渡せば良い．</p>
+<p>例えば，変数 <code class="docutils literal notranslate"><span class="pre">Y_std</span></code> に誤差範囲を定義する値のリストが入っている場合は，以下のように書く．</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">Y</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">Y_std</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>出力例</strong></p>
+<p><img alt="" src="../../_images/kadai4-4_sample1.png" /></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># 解答例</span>
+<span class="n">months</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">))</span>
+<span class="n">year_mean</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">year_sd</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">months</span><span class="p">:</span>
+    <span class="n">year_mean</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_temps</span><span class="p">[</span><span class="n">df_temps</span><span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="p">][</span><span class="s1">&#39;平均気温&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span>
+    <span class="n">year_sd</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df_temps</span><span class="p">[</span><span class="n">df_temps</span><span class="p">[</span><span class="s1">&#39;月&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">m</span><span class="p">][</span><span class="s1">&#39;平均気温&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">())</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">months</span><span class="p">,</span> <span class="n">year_mean</span><span class="p">,</span> <span class="n">yerr</span><span class="o">=</span><span class="n">year_sd</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">13</span><span class="p">)))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;各月の平均気温の平均&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;月&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;平均気温（℃）&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../../_images/answer_introduction_to_data_analysis_33_0.png" src="../../_images/answer_introduction_to_data_analysis_33_0.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./docs/13_ans"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By Hiroaki Aizawa & Akira Furui<br/>
+  
+      &copy; Copyright 2022 (CC BY 4.0).<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
