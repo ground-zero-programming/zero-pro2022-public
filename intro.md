@@ -5,6 +5,7 @@
 担当教員：相澤宏旭，古居彬
 
 ````{card} お知らせ
+- 2022年度ゼロから始めるプログラミングは終了しました（2022/11/30）
 - [【重要】期末試験に関する情報](docs/exam.md) を追加しました（2022/11/15）
 - [課題提出方法](docs/submission/submission.md) と [さらに勉強したい人へ](docs/advanced_materials.md) を追加しました（2022/10/06）
 - 本ページを公開しました（2022/10/02）
@@ -46,7 +47,7 @@
 | [第12回：データ分析入門（講義）](docs/12/introduction_to_data_analysis.ipynb) | [Play](https://web.microsoftstream.com/video/248c5345-586a-4bb5-b5ab-de644181c553) | - | - |
 | [第13回：データ分析入門（演習）](docs/13/exercise_introduction_to_data_analysis.ipynb)  | - | <del>11/24</del> | [Open](docs/13_ans/answer_introduction_to_data_analysis.ipynb) |
 | [第14回：機械学習入門（講義）](docs/14/introduction_to_machine_learning.ipynb) | [Play](https://web.microsoftstream.com/video/ed86794f-aee2-431a-88bd-24c2a6a1164a) | - | - |
-| [第15回：機械学習入門（演習）](docs/15/exercise_introduction_to_machine_learning.ipynb)  | - | 11/30 | 12/1公開 |
+| [第15回：機械学習入門（演習）](docs/15/exercise_introduction_to_machine_learning.ipynb)  | - | <del>11/30</del> | [Open](docs/15_ans/answer_introduction_to_machine_learning.ipynb) |
 
 ## 講義スケジュール
 
